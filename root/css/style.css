@@ -1,27 +1,30 @@
 /* CONTENTS
 
 1. Colour, Font weight, Defaults 
-2. Typography 
+2. Typography (inc. Link styling)
 3. Buttons 
 4. Header and Main Navigation 
 5. Footers 
 6. Sections 
-    6.1 Course displays 
+    6.1 Index Page Banner
+    6.2 Course displays 
+7. Inputs/Forms
 */
 
 /* DEFAULTS */
 
 /* Light mode colours */
-:root[data-theme="light"]{
+:root{
 
     --clr-background: #fefefe;
     --clr-bg-midtone: #d1d1d1; /* Light grey */
     --clr-text: #150a03;
-    --clr-main: #ff7b00; /* Bright orange */
-    --clr-secondary: #ffcf9d; /* Lighter orange */
+    --clr-main: rgba(255, 123, 00, 1);/*#ff7b00;  Bright orange */
+    --clr-secondary-midtone: rgba(255, 123, 00, 0.5);
+    --clr-secondary-light: rgba(255, 123, 00, 0.25);/*#ffcf9d; Lighter orange*/
 
     --clr-error: #9f1818; /* Red */
-    --clr-success: #72faff; /* Blue */
+    --clr-success: #03b0b6; /* Blue */
 }
 
 /* Dark mode colours */
@@ -52,38 +55,282 @@
     margin: 0;
 }
 
+html {text-size-adjust:100%;-webkit-text-size-adjust:100%;-moz-text-size-adjust:100%;}
+
+img{
+    width:100%;
+}
+
 /* TYPOGRAPHY */
+
+h1, h2, h3, h4, h5, p, small{
+    font-family: "Poppins";
+}
 
 h1, h2, h3, h4, h5 {
     font-weight: var(--fw-bold);
 }
 
 /* Font scale factor: 1.250 */
-h1 {
-    font-size: 3.053rem; /* 48.8px */
+
+h1 {font-size: 2.489rem; }
+
+h2 {font-size: 2.074rem; }
+
+h3 {font-size: 1.728rem; }
+
+h4 {font-size: 1.440rem; }
+
+h5 {font-size: 1.200rem; }
+
+p {font-size: 1rem; }
+
+small {font-size: 0.833rem; }
+
+/* Links */
+
+a{
+    font-family: "Poppins";
 }
 
-h2 {
-    font-size: 2.442rem; /* 39.04px */
+a:link{
+    text-decoration-style: dotted;
+    color: var(--clr-main);
 }
 
-h3 {
-    font-size: 1.954rem; /* 31.2px */
+a:visited{
+    text-decoration-style: dotted;
+    color: var(--clr-main);
 }
 
-h4 {
-    font-size: 1.563rem; /* 24.96px */
+a:hover{
+    text-decoration-style: solid;
+    color:var(--clr-success);
 }
 
-h5 {
-    font-size: 1.250rem; /* 20px */
+a:active{
+    text-decoration-style: solid;
+    color:var(--clr-success);
 }
 
-p {
-    font-size: 1rem; /* 16px */
-    font-weight: var(--fw-reg);
+/* BUTTONS */
+
+button{
+
+    border-radius: 0.1em;
+    padding: 0.5rem;
+
+    font-weight: var(--fw-bold);
 }
 
-small {font-size: 0.800rem; /* 12.8px */}
+.primary-button{
+    
+    color: var(--clr-background);
+    background-color: var(--clr-main);
+    border: 2px solid transparent;
+}
+
+.secondary-button{
+
+    color: var(--clr-main);
+    background-color: white;
+    border: 2px solid var(--clr-main);
+}
+
+/* HEADER & MAIN NAVIGATION */
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    z-index: 50;
+    position:sticky;
+    top: 0;
+
+    width: 100%;
+
+    background-color: var(--clr-background);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgb(0 0 0 / 0.5);
+}
+
+header div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+header div * {
+    padding: 1rem;
+}
+
+nav ul{
+    list-style: none;
+    font-family: "Poppins";
+}
+
+/* FOOTER */
+
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    
+    padding: 2vw;
+
+    background-color: var(--clr-secondary-midtone);
+}
+
+footer nav ul li{
+    float: left;
+
+    padding: 2vw;
+}
+
+/* SECTIONS */
+
+/* Home Page Banner */
+
+.hero-image{
+    height: 100vh;
+}
+
+.hero-image img{
+    height: 100%;
+    object-fit: cover; /* Crop image if too big */
+}
+
+.image-text-position-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    z-index: 10;
+
+    width: 100%;
+    height: 100%;
+}
+
+.image-text-box{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    max-width: 95%;
+    padding: 3rem;
+
+    background-color: var(--clr-background);
+    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgb(0 0 0 / 0.33);
+
+    text-align: center;
+
+}
+
+.image-text-box *{
+    padding: 0.75rem;
+}
+
+/* Course Cards */
+
+.course-collection{
+    display: grid;
+
+    grid-template-columns: 1fr 1fr; /* Two even columns */
+    gap: 2vw;
+
+    padding: 2vw;
+    margin: 2vw;
+
+    border-radius: 0.5rem;
+
+    text-align: center;
+
+}
+
+.course-collection h2,  
+.course-collection a{
+   grid-column: span 2;
+}
+
+.course-card{
+    padding: 0.5rem;
+    background-color: var(--clr-secondary);
+    box-shadow: 0.1rem 0.1rem 0.1rem 0.01rem rgb(0 0 0 / 0.33);
+}
+
+.course-card img {
+    aspect-ratio: 2/1;
+}
+
+.course-card .card-info{
+    background-color: var(--clr-background);
+    align-self: end;
+}
+
+.stacked{
+    display: grid;
+}
+
+.stacked * {
+    grid-column: 1 / 2;
+    grid-row: 1/ 2;
+
+}
+
+
+@media screen and (min-width: 800px) {
+    .course-collection{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }
+
+    .course-collection h2, 
+    .course-collection a{
+        grid-column: span 4;
+    }
+    
+}
+
+/* Directory */
+
+.link-directory{
+    display: grid;
+    grid-template-columns: 1fr;
+    background-color: var(--clr-secondary-light);
+
+    text-align: left;
+
+    padding: 2vw;
+}
+
+.link-directory h2{
+    grid-column: span 1;
+}
+
+@media screen and (min-width: 800px) {
+
+    .link-directory{
+        --directory-columns: 4;
+        grid-template-columns: repeat(var(--directory-columns), 1fr);
+    }
+
+    .link-directory h3{
+        align-self: center;
+        grid-column: span var(--directory-columns);
+    }
+    
+}
+
+/* INPUTS */
+
+.search-bar{
+    
+}
 
 
