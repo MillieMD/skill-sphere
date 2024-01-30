@@ -1,0 +1,89 @@
+/* CONTENTS
+
+1. Colour, Font weight, Defaults 
+2. Typography 
+3. Buttons 
+4. Header and Main Navigation 
+5. Footers 
+6. Sections 
+    6.1 Course displays 
+*/
+
+/* DEFAULTS */
+
+/* Light mode colours */
+:root[data-theme="light"]{
+
+    --clr-background: #fefefe;
+    --clr-bg-midtone: #d1d1d1; /* Light grey */
+    --clr-text: #150a03;
+    --clr-main: #ff7b00; /* Bright orange */
+    --clr-secondary: #ffcf9d; /* Lighter orange */
+
+    --clr-error: #9f1818; /* Red */
+    --clr-success: #72faff; /* Blue */
+}
+
+/* Dark mode colours */
+:root[data-theme="dark"]{
+
+    --clr-background: #150a03;
+    --clr-bg-midtone: #333333; /* Middle grey */
+    --clr-text: #fefefe;
+    --clr-main: #ff7b00; /* Bright orange */
+    --clr-secondary: ; /* Darker orange */
+
+    --clr-error: #9f1818; /* Red */
+    --clr-success: #72faff; /* Blue */
+}
+
+/* Font weights */
+:root{
+    
+    --fw-bold: 700;
+    --fw-reg: 400;
+    --fw-light: 200;
+}
+
+*, *:before, *::after{
+    box-sizing: border-box;
+
+    padding: 0;
+    margin: 0;
+}
+
+/* TYPOGRAPHY */
+
+h1, h2, h3, h4, h5 {
+    font-weight: var(--fw-bold);
+}
+
+/* Font scale factor: 1.250 */
+h1 {
+    font-size: 3.053rem; /* 48.8px */
+}
+
+h2 {
+    font-size: 2.442rem; /* 39.04px */
+}
+
+h3 {
+    font-size: 1.954rem; /* 31.2px */
+}
+
+h4 {
+    font-size: 1.563rem; /* 24.96px */
+}
+
+h5 {
+    font-size: 1.250rem; /* 20px */
+}
+
+p {
+    font-size: 1rem; /* 16px */
+    font-weight: var(--fw-reg);
+}
+
+small {font-size: 0.800rem; /* 12.8px */}
+
+
