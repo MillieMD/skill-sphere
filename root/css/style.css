@@ -180,6 +180,28 @@ header{
     box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgb(0 0 0 / 0.5);
 }
 
+/* Change header on different screen sizes */
+
+#mobile-header{
+    display: flex;
+}
+
+#desktop-header{
+    display: none;
+}
+
+@media screen and (min-width: 950px) {
+
+    #mobile-header{
+        display: none;
+    }
+    
+    #desktop-header{
+        display: flex;
+    }
+ 
+}
+
 header div{
     display: flex;
     flex-direction: row;
