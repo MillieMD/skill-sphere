@@ -30,5 +30,5 @@ We are always open to suggestions, and aim to constantly improve the site as we 
 ---
 ## Technologies
 
-Front-end: HTML, CSS, JavaScript
+Front-end: HTML, CSS, JavaScript  
 Back-end: mySQL Database, SQL
