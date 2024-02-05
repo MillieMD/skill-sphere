@@ -294,7 +294,8 @@ footer nav ul li{
 
 /* Course Cards */
 
-.course-collection{
+/* Horizontal, on home page and ... */
+.course-collection-horizontal{
     display: grid;
 
     grid-template-columns: 1fr 1fr; /* Two even columns */
@@ -309,9 +310,21 @@ footer nav ul li{
 
 }
 
-.course-collection h2,  
-.course-collection a{
+.course-collection-horizontal h2,  
+.course-collection-horizontal a{
    grid-column: span 2;
+}
+
+.course-collection-vertical{
+    display: grid;
+    gap: 2vw;
+
+    padding: 2vw;
+    margin: 2vw;
+
+    border-radius: 0.5rem;
+    
+    text-align: center;
 }
 
 .course-card{
@@ -341,13 +354,22 @@ footer nav ul li{
 
 
 @media screen and (min-width: 800px) {
-    .course-collection{
+    .course-collection-horizontal{
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 
-    .course-collection h2, 
-    .course-collection a{
+    .course-collection-horizontal h2, 
+    .course-collection-horizontal a{
         grid-column: span 4;
+    }
+
+    .course-collection-vertical{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .course-collection-vertical h2, 
+    .course-collection-vertical a{
+        grid-column: span 2;
     }
     
 }
@@ -378,6 +400,27 @@ footer nav ul li{
     .link-directory h3{
         align-self: center;
         grid-column: span var(--directory-columns);
+    }
+    
+}
+
+/* Profile */
+
+.profile{
+    display: grid;
+    justify-items: center;
+    text-align: center;
+}
+
+@media screen and (min-width: 800px){
+    
+    .profile{
+        grid-template-columns: 1fr 2fr;
+        margin: 5vw;
+    }
+
+    .profile #user-info{
+        grid-row: span 2;
     }
     
 }
