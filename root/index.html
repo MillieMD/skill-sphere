@@ -43,11 +43,48 @@
 
         <h1> Skill Sphere </h1>
 
-        <a href = "javascript:void(0)" title = "Browse Categories">
-            <img src="hamburger-icon.svg" alt="">
-        </a>
+        <button class = "invisible-button" onclick = "showSideNav()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
     
     </header>
+
+    <div class = "side-nav" id = "mobile-nav">
+
+        <button class="invisible-button" onclick = "hideSideNav()">
+
+            <i class = "fa-solid fa-xmark"></i>
+
+        </button>
+
+        <div>
+            
+            <nav>
+
+                <ul>
+
+                    <li> <a> Browse Categories </a> </li>
+
+                </ul>
+
+            </nav>
+
+            <nav>
+
+                <ul>
+
+                    <li> <a> Log In </a> </li>
+                    <li> <a> Register </a> </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+    
+    </div>
+
+    <div class = "dark-overlay" id = "overlay"></div>
 
     <main id = "main">
 
@@ -274,6 +311,39 @@
         </nav>
 
     </footer>
+
+    <script src = "https://kit.fontawesome.com/d90c26d2f3.js" crossorigin="anonymous"></script>
+    <!-- Reveals side nav on mobile -->
+    <script>
+
+        let nav = document.getElementById("mobile-nav");
+        let overlay = document.getElementById("overlay");
+
+        function showSideNav(){
+
+            
+            nav.style.display = "flex";
+            
+            nav.style.transform = "translateX(0%)";
+            nav.setAttribute("aria-hidden", "false");
+
+            overlay.style.display = "inline";
+
+        }
+
+        function hideSideNav(){
+
+            nav.style.transform = "translateX(100%)";
+            nav.setAttribute("aria-hidden", "true");
+
+            overlay.style.display = "none";
+            nav.style.display = "none";
+
+        }
+
+
+
+    </script>
     
 </body>
 </html>
