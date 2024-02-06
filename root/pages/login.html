@@ -15,13 +15,15 @@
 </head>
 <body>
 
+    <a href="#main" class="skip-link" id="skip-link" tabindex="0"> Skip to main content </a>
+
     <header id = "desktop-header"> <!-- Header for sizes over : 950px-->
 
         <div>
 
             <a href = "../index.html"><h1> Skill Sphere </h1></a>
 
-            <a href = "#"> <button class = "secondary-button"> Browse Categories </button> </a>
+            <a href = "#"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a>
 
             <input type = "text" class = "search-bar" placeholder="Search for courses...">
 
@@ -29,8 +31,8 @@
 
         <div> 
 
-            <a href = "login.html"><button class = "secondary-button"> Log in </button></a>
-            <a href = "register.html"><button class = "primary-button"> Register </button></a>
+            <a href = "login.html"><button class = "secondary-button" tabindex="-1"> Log in </button></a>
+            <a href = "register.html"><button class = "primary-button" tabindex="-1"> Register </button></a>
 
         </div>
 
@@ -46,7 +48,7 @@
     
     </header>
 
-    <main>
+    <main id = "main">
 
         <section id="login">
 

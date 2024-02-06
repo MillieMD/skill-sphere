@@ -221,6 +221,27 @@ nav ul{
     font-family: "Poppins";
 }
 
+/* Navigation Skip Link */
+
+.skip-link{
+    top:0;
+    left:0;
+    z-index: 100; /* Always be the top most element*/
+    position: absolute;
+
+    transform: translateY(-100%);
+    background-color: var(--clr-background);
+    color:var(--clr-main);
+
+    transition: transform 0.3s;
+
+    padding: 1rem 1rem; 
+}
+
+.skip-link:focus{
+    transform: translateY(0%);
+}
+
 /* FOOTER */
 
 footer{
@@ -366,6 +387,10 @@ footer nav ul li{
 
 .link-directory h2{
     grid-column: span 1;
+}
+
+.link-directory p{
+    color: var(--clr-text);
 }
 
 @media screen and (min-width: 800px) {
