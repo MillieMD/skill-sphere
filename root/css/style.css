@@ -80,6 +80,8 @@ img{
 
 h1, h2, h3, h4, h5, p, small{
     font-family: "Poppins";
+    max-width: 80ch;
+    margin: 0 auto;
 }
 
 h1, h2, h3, h4, h5 {
@@ -101,6 +103,10 @@ h5 {font-size: 1.200rem; }
 p {font-size: 1rem; }
 
 small {font-size: 0.833rem; }
+
+.center-text{
+    text-align: center;
+}
 
 /* Links */
 
@@ -269,6 +275,13 @@ footer nav ul li{
 
 /* SECTIONS */
 
+/* General */
+
+.center-elements{
+    align-items: center;
+    align-content: center;
+}
+
 /* Home Page Banner */
 
 .hero-image{
@@ -407,6 +420,55 @@ footer nav ul li{
     
 }
 
+<<<<<<< Updated upstream
+=======
+/* Profile */
+
+.profile{
+    display: grid;
+    justify-items: center;
+    text-align: center;
+}
+
+@media screen and (min-width: 800px){
+    
+    .profile{
+        grid-template-columns: 1fr 2fr;
+        margin: 5vw;
+    }
+
+    .profile #user-info{
+        grid-row: span 2;
+    }
+    
+}
+
+.badge-container{
+    --badge-columns: 3;
+    display: grid;
+    grid-template-columns: repeat(var(--badge-columns), 1fr);
+    gap: 1vw;
+
+    margin: 1rem;
+
+}
+
+/* About Page */
+
+.team-carousel{
+
+    display: grid;
+    text-align: center;
+
+}
+
+@media screen and (min-width: 950px){
+    .team-carousel{
+        grid-template-columns: repeat(6, 1fr);
+    }
+}
+
+>>>>>>> Stashed changes
 /* INPUTS */
 
 form{
