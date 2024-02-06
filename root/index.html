@@ -23,7 +23,8 @@
 
             <a href = "index.html"><h1> Skill Sphere </h1></a>
 
-            <a href = "#"> <button class = "secondary-button"> Browse Categories </button> </a>
+            <!-- Button underneath link is not in tab order, so keyboard users aren't focusing same element twice -->
+            <a href = "#"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a> 
 
             <input type = "text" class = "search-bar" placeholder="Search for courses...">
 
@@ -31,8 +32,8 @@
 
         <div> 
 
-            <a href = "pages/login.html"><button class = "secondary-button"> Log in </button></a>
-            <a href = "pages/register.html"><button class = "primary-button"> Register </button></a>
+            <a href = "pages/login.html"><button class = "secondary-button" tabindex="-1"> Log in </button></a>
+            <a href = "pages/register.html"><button class = "primary-button" tabindex="-1"> Register </button></a>
 
         </div>
 
