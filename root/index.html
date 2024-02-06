@@ -15,13 +15,16 @@
 </head>
 <body>
 
+    <a href="#main" class="skip-link" id="skip-link" tabindex="0"> Skip to main content </a>
+
     <header id = "desktop-header"> <!-- Header for sizes over : 950px-->
 
         <div>
 
             <a href = "index.html"><h1> Skill Sphere </h1></a>
 
-            <a href = "#"> <button class = "secondary-button"> Browse Categories </button> </a>
+            <!-- Button underneath link is not in tab order, so keyboard users aren't focusing same element twice -->
+            <a href = "#"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a> 
 
             <input type = "text" class = "search-bar" placeholder="Search for courses...">
 
@@ -29,8 +32,8 @@
 
         <div> 
 
-            <a href = "pages/login.html"><button class = "secondary-button"> Log in </button></a>
-            <a href = "pages/register.html"><button class = "primary-button"> Register </button></a>
+            <a href = "pages/login.html"><button class = "secondary-button" tabindex="-1"> Log in </button></a>
+            <a href = "pages/register.html"><button class = "primary-button" tabindex="-1"> Register </button></a>
 
         </div>
 
@@ -46,7 +49,7 @@
     
     </header>
 
-    <main>
+    <main id = "main">
 
         <section class = "hero-image" id = "sign-up-banner">
             <img src="img/desert.png" alt="">
@@ -179,6 +182,8 @@
             </div>
 
             <a href = "#"> View Profile</a>
+            <!-- Takes user to their own profile - link to be added using php -->
+
 
         </section>
 
@@ -192,11 +197,9 @@
 
                 <ul>
 
-                    <li> Python </li>
-                    <li> Java </li>
-                    <li> C# </li>
-                    <li></li>
-                    <li></li>
+                    <li> <a href = "#"> <p> Python </p> </a> </li>
+                    <li> <a href = "#"> <p>  Java </p> </a> </li>
+                    <li> <a href = "#"> <p> C# </p> </a> </li>
 
                 </ul>
 
@@ -208,8 +211,8 @@
 
                 <ul>
 
-                    <li> Finance </li>
-                    <li> Management </li>
+                    <li> <a href = "#"> <p> Finance </p> </a> </li>
+                    <li> <a href = "#"> <p>  Management </p> </a> </li>
 
                 </ul>
 
@@ -221,11 +224,11 @@
 
                 <ul>
 
-                    <li> Watercolour Painting </li>
-                    <li> Still life Drawing </li>
-                    <li> Oil Painting </li>
-                    <li> Art History </li>
-                    <li> Creative Writing </li>
+                    <li> <a href = "#"> <p>  Watercolour Painting </p> </a> </li>
+                    <li> <a href = "#"> <p>  Still life Drawing </p> </a> </li>
+                    <li> <a href = "#"> <p>  Oil Painting </p> </a> </li>
+                    <li> <a href = "#"> <p>  Art History </p> </a> </li>
+                    <li> <a href = "#"> <p>  Creative Writing </p> </a> </li>
 
                 </ul>
 
@@ -237,9 +240,9 @@
 
                 <ul>
 
-                    <li> Graphic Artist </li>
-                    <li> Front-End Developer </li>
-                    <li> Games Programming </li>
+                    <li> <a href = "#"> <p>  Graphic Artist </p> </a> </li>
+                    <li> <a href = "#"> <p>  Front-End Developer </p> </a> </li>
+                    <li> <a href = "#"> <p>  Games Programming </p> </a> </li>
 
                 </ul>
 
@@ -260,11 +263,11 @@
 
             <ul>
 
-                <a><li> About </li></a>
-                <a><li> Contact Us </li></a>
-                <a><li> Copyright </li></a>
-                <a><li> Privacy Policy </li></a>
-                <a><li> Sitemap </li></a>
+                <li><a> About </a> </li>
+                <li><a> Contact Us </a> </li>
+                <li><a> Copyright </a> </li>
+                <li><a> Privacy Policy </a> </li>
+                <li><a> Sitemap </a> </li>
 
             </ul>
 
