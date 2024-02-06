@@ -2,13 +2,16 @@
 
 1. Colour, Font weight, Defaults 
 2. Typography (inc. Link styling)
-3. Buttons 
-4. Header and Main Navigation 
-5. Footers 
-6. Sections 
+3. Icons
+4. Buttons 
+5. Header and Main Navigation 
+6. Footers 
+7. Sections 
     6.1 Index Page Banner
-    6.2 Course displays 
-7. Inputs/Forms
+    6.2 Course displays
+    6.3 Link Directory 
+    6.4 Profile
+8. Inputs/Forms
 */
 
 /* DEFAULTS */
@@ -25,6 +28,7 @@
 
     --clr-error: #9f1818; /* Red */
     --clr-success: #03b0b6; /* Blue */
+    --clr-star: #ffbb00;
 }
 
 /* Dark mode colours */
@@ -126,6 +130,12 @@ a:hover{
 a:active{
     text-decoration-style: solid;
     color:var(--clr-success);
+}
+
+/* ICONS */
+
+.fa-star{
+    color: var(--clr-star);
 }
 
 /* BUTTONS */
