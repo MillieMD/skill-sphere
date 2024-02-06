@@ -450,6 +450,16 @@ footer nav ul li{
     
 }
 
+.badge-container{
+    --badge-columns: 3;
+    display: grid;
+    grid-template-columns: repeat(var(--badge-columns), 1fr);
+    gap: 1vw;
+
+    margin: 1rem;
+
+}
+
 /* INPUTS */
 
 form{
