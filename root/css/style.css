@@ -566,7 +566,32 @@ form{
 
 form input{
 
+    background-color: var(--clr-bg-midtone);
+
+    border-radius: 0.5rem;
+    border: 2px solid var(--clr-text);
+
+    padding: 0.3rem;
     margin-bottom: 1.5rem;
+
+    color: var(--clr-text);
+
+    caret-color: var(--clr-text);
+}
+
+form input:placeholder-shown{
+
+    background-color: var(--clr-bg-midtone);
+
+    border-radius: 0.5rem;
+    border: 2px dotted var(--clr-text);
+
+    padding: 0.3rem;
+    margin-bottom: 1.5rem;
+
+    color: var(--clr-text);
+
+    caret-color: var(--clr-text);
 }
 
 .search-bar{
