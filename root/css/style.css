@@ -352,6 +352,10 @@ footer a h3{
     color: var(--clr-text);
 }
 
+footer a p{
+    color: var(--clr-text);
+}
+
 footer nav ul li{
     float: left;
 
@@ -562,11 +566,21 @@ form{
     justify-content: center;
     align-items: center;
 
+    margin: 0 auto;
+    padding: 5vw;
+    border-radius: 2rem;
+
+    background-color: var(--clr-bg-midtone);
+
+    width: fit-content;
+
+    box-shadow: var(--shdw-small);
+
 }
 
 form input{
 
-    background-color: var(--clr-bg-midtone);
+    background-color: var(--clr-background);
 
     border-radius: 0.5rem;
     border: 2px solid var(--clr-text);
@@ -581,7 +595,7 @@ form input{
 
 form input:placeholder-shown{
 
-    background-color: var(--clr-bg-midtone);
+    background-color: var(--clr-background);
 
     border-radius: 0.5rem;
     border: 2px dotted var(--clr-text);
