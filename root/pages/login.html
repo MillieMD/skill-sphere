@@ -40,13 +40,50 @@
 
     <header id = "mobile-header"> <!-- Header for sizes under : 950px-->
 
-        <h1> Skill Sphere </h1>
+        <a href = "../index.html"><h1> Skill Sphere </h1> </a>
 
-        <a href = "javascript:void(0)" title = "Browse Categories">
-            <img src="hamburger-icon.svg" alt="">
-        </a>
+        <button class = "invisible-button" onclick = "showSideNav()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
     
     </header>
+
+    <div class = "side-nav" id = "mobile-nav">
+
+        <button class="invisible-button" onclick = "hideSideNav()">
+
+            <i class = "fa-solid fa-xmark"></i>
+
+        </button>
+
+        <div>
+            
+            <nav>
+
+                <ul>
+
+                    <li> <a> Browse Categories </a> </li>
+
+                </ul>
+
+            </nav>
+
+            <nav>
+
+                <ul>
+
+                    <li> <a href = "login.html"> Log In </a> </li>
+                    <li> <a href = "register.html"> Register </a> </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+    
+    </div>
+
+    <div class = "dark-overlay" id = "overlay"></div>
 
     <main id = "main">
 
@@ -97,6 +134,9 @@
     
     <!-- Basic Client Side Validation -->
     <script src = "../js/clientSideAccountValidation.js"></script>
+    <script src = "https://kit.fontawesome.com/d90c26d2f3.js" crossorigin="anonymous"></script>
+    <!-- Reveals side nav on mobile -->
+    <script src = "../js/mobileHeader.js"></script>
 
 </body>
 </html>
