@@ -446,10 +446,11 @@ footer nav ul li{
 }
 
 .course-card{
-    padding: 0.5rem;
+    padding: 1rem;
 
     background-color: var(--clr-bg-midtone);
     box-shadow: var(--shdw-small);
+    border-radius: 1rem;
 }
 
 .course-card img {
