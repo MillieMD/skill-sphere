@@ -62,6 +62,8 @@ html {
     text-size-adjust:100%;
     -webkit-text-size-adjust:100%;
     -moz-text-size-adjust:100%;
+
+    overflow-x: hidden;
 }
 
 body{
@@ -162,6 +164,17 @@ button{
     color: var(--clr-success);
 }
 
+.invisible-button{
+    border: none;
+    background-color: transparent;
+    color: var(--clr-main);
+}
+
+.invisible-button:hover{
+    cursor: pointer;
+    color: var(--clr-success);
+}
+
 /* HEADER & MAIN NAVIGATION */
 
 header{
@@ -184,6 +197,7 @@ header{
 
 #mobile-header{
     display: flex;
+    padding: 1vw;
 }
 
 #desktop-header{
@@ -219,6 +233,45 @@ header a h1{
 nav ul{
     list-style: none;
     font-family: "Poppins";
+}
+
+.side-nav{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    height: 100vh;
+    width: 73vw;
+
+    z-index: 75;
+    top: 0;
+    right: 0;
+    position: fixed;
+
+    background-color: var(--clr-background);
+
+    transform: translateX(100%);
+    transition: ease-in-out 0.5s;
+}
+
+.side-nav div{
+    display: flex;
+    flex-direction: column;
+    height:  100%;
+    justify-content: space-between;
+
+    padding: 5vw;
+}
+
+.dark-overlay{
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+
+    z-index: 74; /* Just below side nav*/
+
+    background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Navigation Skip Link */
@@ -291,6 +344,7 @@ footer nav ul li{
 
     width: 100%;
     height: 100%;
+
 }
 
 .image-text-box{
@@ -301,6 +355,7 @@ footer nav ul li{
 
     max-width: 95%;
     padding: 3rem;
+    margin: 1rem;
 
     background-color: var(--clr-background);
     box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgb(0 0 0 / 0.33);
