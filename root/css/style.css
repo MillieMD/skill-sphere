@@ -17,32 +17,57 @@
 /* DEFAULTS */
 
 /* Light mode colours */
-:root{
+@media (prefers-color-scheme: light){
 
-    --clr-background: #fefefe;
-    --clr-bg-midtone: #d1d1d1; /* Light grey */
-    --clr-text: #150a03;
-    --clr-main: rgba(255, 123, 00, 1);/*#ff7b00;  Bright orange */
-    --clr-secondary-midtone: rgba(255, 123, 00, 0.5);
-    --clr-secondary-light: rgba(255, 123, 00, 0.25);/*#ffcf9d; Lighter orange*/
+    :root{
 
-    --clr-error: #9f1818; /* Red */
-    --clr-success: #03b0b6; /* Blue */
-    --clr-star: #ffbb00;
+        --clr-background: #fefefe;
+        --clr-bg-midtone: #f5f5f5; /* Light grey */
+
+        --clr-text: #150a03;
+
+        --clr-main: rgba(255, 123, 00, 1);/*#ff7b00;  Bright orange */
+        --clr-secondary-midtone: rgba(255, 123, 00, 0.5);
+        --clr-secondary-light: rgba(255, 123, 00, 0.25);/* Lighter orange*/
+
+        --clr-error: #9f1818; /* Red */
+        --clr-success: #03b0b6; /* Blue */
+        --clr-star: #ffbb00;
+
+        /* Shadows */
+        --shdw-small: 0 0 8px 1px rgb(0 0 0 / 0.25);
+        --shdw-large: 0.1rem 0.1rem 0.1rem 0.1rem rgb(0 0 0 / 0.33);
+    }
+
 }
 
-/* Dark mode colours */
-:root[data-theme="dark"]{
+@media (prefers-color-scheme: dark){
+    
+    /* Dark mode colours */
+    :root{
 
-    --clr-background: #150a03;
-    --clr-bg-midtone: #333333; /* Middle grey */
-    --clr-text: #fefefe;
-    --clr-main: #ff7b00; /* Bright orange */
-    --clr-secondary: ; /* Darker orange */
+        --clr-background: #150a03;
+        --clr-bg-midtone: #111111; /* Middle grey */
 
-    --clr-error: #9f1818; /* Red */
-    --clr-success: #72faff; /* Blue */
+        --clr-text: #fefefe;
+        
+        --clr-main: #ff7b00; /* Bright orange */
+        --clr-secondary-midtone: #ffa048af; /* Dark orange */
+        --clr-secondary-light: #ff7b0038; /* Darker orange*/
+
+        --clr-error: #9f1818; /* Red */
+        --clr-success: #72faff; /* Blue */
+        --clr-star: #ffbb00;
+
+        /* Shadows */
+        --shdw-small: 0 0 8px 1px rgb(255 255 255 / 0.25);
+        --shdw-large: 0.1rem 0.1rem 0.1rem 0.1rem rgb(255 255 255 / 0.33);
 }
+
+}
+
+
+
 
 /* Font weights */
 :root{
@@ -76,6 +101,8 @@ body{
     justify-content: space-between;
 
     min-height: 100%;
+
+    background-color: var(--clr-background);
 }
 
 img{
@@ -86,6 +113,7 @@ img{
 
 h1, h2, h3, h4, h5, p, small{
     font-family: "Poppins";
+    color: var(--clr-text)
 }
 
 h1, h2, h3, h4, h5 {
@@ -165,7 +193,7 @@ button{
 .secondary-button{
 
     color: var(--clr-main);
-    background-color: white;
+    background-color: var(--clr-bg-midtone);
     border: 2px solid;
 }
 
@@ -200,7 +228,7 @@ header{
     width: 100%;
 
     background-color: var(--clr-background);
-    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgb(0 0 0 / 0.5);
+    box-shadow: var(--shdw-large);
 }
 
 /* Change header on different screen sizes */
@@ -368,7 +396,7 @@ footer nav ul li{
     margin: 1rem;
 
     background-color: var(--clr-background);
-    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgb(0 0 0 / 0.33);
+    box-shadow: var(--shdw-small);
 
     text-align: center;
 
@@ -415,8 +443,9 @@ footer nav ul li{
 
 .course-card{
     padding: 0.5rem;
-    background-color: var(--clr-secondary);
-    box-shadow: 0.1rem 0.1rem 0.1rem 0.01rem rgb(0 0 0 / 0.33);
+
+    background-color: var(--clr-bg-midtone);
+    box-shadow: var(--shdw-small);
 }
 
 .course-card img {
@@ -424,7 +453,7 @@ footer nav ul li{
 }
 
 .course-card .card-info{
-    background-color: var(--clr-background);
+    background-color: var(--clr-bg-midtone);
     align-self: end;
 }
 
