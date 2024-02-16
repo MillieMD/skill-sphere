@@ -149,7 +149,7 @@ a:link{
 
 a:visited{
     text-decoration-style: dotted;
-    color: var(--clr-main);
+    color: var(--clr-success);
 }
 
 a:hover{
@@ -176,6 +176,13 @@ button{
     padding: 0.5rem;
 
     font-weight: var(--fw-bold);
+    
+    transition: all ease-in-out 0.2s;
+}
+
+button:hover{
+    transform: scale(1.1);
+
 }
 
 .primary-button{
@@ -399,6 +406,8 @@ footer nav ul li{
     padding: 3rem;
     margin: 1rem;
 
+    border-radius: 1rem;
+
     background-color: var(--clr-background);
     box-shadow: var(--shdw-small);
 
@@ -451,6 +460,14 @@ footer nav ul li{
     background-color: var(--clr-bg-midtone);
     box-shadow: var(--shdw-small);
     border-radius: 1rem;
+
+    transition: all ease-in-out 0.2s;
+
+}
+
+.course-card:hover{
+    transform: scale(1.1);
+    box-shadow: var(--shdw-large);
 }
 
 .course-card img {
