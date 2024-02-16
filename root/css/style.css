@@ -458,7 +458,7 @@ footer nav ul li{
     padding: 1rem;
 
     background-color: var(--clr-bg-midtone);
-    box-shadow: var(--shdw-small);
+    box-shadow: var(--shdw-large);
     border-radius: 1rem;
 
     transition: all ease-in-out 0.2s;
@@ -467,7 +467,7 @@ footer nav ul li{
 
 .course-card:hover{
     transform: scale(1.1);
-    box-shadow: var(--shdw-large);
+    box-shadow: var(--shdw-small);
 }
 
 .course-card img {
