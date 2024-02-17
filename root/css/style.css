@@ -2,43 +2,72 @@
 
 1. Colour, Font weight, Defaults 
 2. Typography (inc. Link styling)
-3. Buttons 
-4. Header and Main Navigation 
-5. Footers 
-6. Sections 
+3. Icons
+4. Buttons 
+5. Header and Main Navigation 
+6. Footers 
+7. Sections 
     6.1 Index Page Banner
-    6.2 Course displays 
-7. Inputs/Forms
+    6.2 Course displays
+    6.3 Link Directory 
+    6.4 Profile
+8. Inputs/Forms
 */
 
 /* DEFAULTS */
 
 /* Light mode colours */
-:root{
+@media (prefers-color-scheme: light){
 
-    --clr-background: #fefefe;
-    --clr-bg-midtone: #d1d1d1; /* Light grey */
-    --clr-text: #150a03;
-    --clr-main: rgba(255, 123, 00, 1);/*#ff7b00;  Bright orange */
-    --clr-secondary-midtone: rgba(255, 123, 00, 0.5);
-    --clr-secondary-light: rgba(255, 123, 00, 0.25);/*#ffcf9d; Lighter orange*/
+    :root{
 
-    --clr-error: #9f1818; /* Red */
-    --clr-success: #03b0b6; /* Blue */
+        --clr-background: #f5f5f5; /* Light grey */
+        --clr-bg-midtone: #fefefe; 
+
+        --clr-text: #150a03;
+
+        --clr-main: rgba(255, 123, 00, 1);/*#ff7b00;  Bright orange */
+        --clr-secondary-midtone: rgba(255, 123, 00, 0.5);
+        --clr-secondary-light: rgba(255, 123, 00, 0.25);/* Lighter orange*/
+
+        --clr-error: #9f1818; /* Red */
+        --clr-success: #03b0b6; /* Blue */
+        --clr-star: #ffbb00;
+
+        /* Shadows */
+        --shdw-small: 0 0 8px 1px rgb(0 0 0 / 0.25);
+        --shdw-large: 0.1rem 0.1rem 0.1rem 0.1rem rgb(0 0 0 / 0.33);
+    }
+
 }
 
-/* Dark mode colours */
-:root[data-theme="dark"]{
+@media (prefers-color-scheme: dark){
+    
+    /* Dark mode colours */
+    :root{
 
-    --clr-background: #150a03;
-    --clr-bg-midtone: #333333; /* Middle grey */
-    --clr-text: #fefefe;
-    --clr-main: #ff7b00; /* Bright orange */
-    --clr-secondary: ; /* Darker orange */
+        --clr-background: #150a03;
+        --clr-bg-midtone: #111111; /* Middle grey */
 
-    --clr-error: #9f1818; /* Red */
-    --clr-success: #72faff; /* Blue */
+        --clr-text: #fefefe;
+        
+        --clr-main: #ff7b00; /* Bright orange */
+        --clr-secondary-midtone: #ffa048af; /* Dark orange */
+        --clr-secondary-light: #ff7b0038; /* Darker orange*/
+
+        --clr-error: #9f1818; /* Red */
+        --clr-success: #72faff; /* Blue */
+        --clr-star: #ffbb00;
+
+        /* Shadows */
+        --shdw-small: 0 0 8px 1px rgb(255 255 255 / 0.25);
+        --shdw-large: 0.1rem 0.1rem 0.1rem 0.1rem rgb(255 255 255 / 0.33);
 }
+
+}
+
+
+
 
 /* Font weights */
 :root{
@@ -72,6 +101,8 @@ body{
     justify-content: space-between;
 
     min-height: 100%;
+
+    background-color: var(--clr-background);
 }
 
 img{
@@ -82,6 +113,7 @@ img{
 
 h1, h2, h3, h4, h5, p, small{
     font-family: "Poppins";
+    color: var(--clr-text)
 }
 
 h1, h2, h3, h4, h5 {
@@ -117,7 +149,7 @@ a:link{
 
 a:visited{
     text-decoration-style: dotted;
-    color: var(--clr-main);
+    color: var(--clr-success);
 }
 
 a:hover{
@@ -130,6 +162,12 @@ a:active{
     color:var(--clr-success);
 }
 
+/* ICONS */
+
+.fa-star{
+    color: var(--clr-star);
+}
+
 /* BUTTONS */
 
 button{
@@ -138,6 +176,13 @@ button{
     padding: 0.5rem;
 
     font-weight: var(--fw-bold);
+    
+    transition: all ease-in-out 0.2s;
+}
+
+button:hover{
+    transform: scale(1.1);
+
 }
 
 .primary-button{
@@ -155,7 +200,7 @@ button{
 .secondary-button{
 
     color: var(--clr-main);
-    background-color: white;
+    background-color: var(--clr-bg-midtone);
     border: 2px solid;
 }
 
@@ -189,8 +234,8 @@ header{
 
     width: 100%;
 
-    background-color: var(--clr-background);
-    box-shadow: 0.1rem 0.1rem 0.1rem 0.1rem rgb(0 0 0 / 0.5);
+    background-color: var(--clr-bg-midtone);
+    box-shadow: var(--shdw-large);
 }
 
 /* Change header on different screen sizes */
@@ -314,6 +359,10 @@ footer a h3{
     color: var(--clr-text);
 }
 
+footer a p{
+    color: var(--clr-text);
+}
+
 footer nav ul li{
     float: left;
 
@@ -357,8 +406,10 @@ footer nav ul li{
     padding: 3rem;
     margin: 1rem;
 
+    border-radius: 1rem;
+
     background-color: var(--clr-background);
-    box-shadow: 0.2rem 0.2rem 0.2rem 0.2rem rgb(0 0 0 / 0.33);
+    box-shadow: var(--shdw-small);
 
     text-align: center;
 
@@ -370,7 +421,8 @@ footer nav ul li{
 
 /* Course Cards */
 
-.course-collection{
+/* Horizontal, on home page and ... */
+.course-collection-horizontal{
     display: grid;
 
     grid-template-columns: 1fr 1fr; /* Two even columns */
@@ -385,15 +437,37 @@ footer nav ul li{
 
 }
 
-.course-collection h2,  
-.course-collection a{
+.course-collection-horizontal h2,  
+.course-collection-horizontal a{
    grid-column: span 2;
 }
 
+.course-collection-vertical{
+    display: grid;
+    gap: 2vw;
+
+    padding: 2vw;
+    margin: 2vw;
+
+    border-radius: 0.5rem;
+    
+    text-align: center;
+}
+
 .course-card{
-    padding: 0.5rem;
-    background-color: var(--clr-secondary);
-    box-shadow: 0.1rem 0.1rem 0.1rem 0.01rem rgb(0 0 0 / 0.33);
+    padding: 1rem;
+
+    background-color: var(--clr-bg-midtone);
+    box-shadow: var(--shdw-large);
+    border-radius: 1rem;
+
+    transition: all ease-in-out 0.2s;
+
+}
+
+.course-card:hover{
+    transform: scale(1.1);
+    box-shadow: var(--shdw-small);
 }
 
 .course-card img {
@@ -401,7 +475,7 @@ footer nav ul li{
 }
 
 .course-card .card-info{
-    background-color: var(--clr-background);
+    background-color: var(--clr-bg-midtone);
     align-self: end;
 }
 
@@ -417,13 +491,22 @@ footer nav ul li{
 
 
 @media screen and (min-width: 800px) {
-    .course-collection{
+    .course-collection-horizontal{
         grid-template-columns: 1fr 1fr 1fr 1fr;
     }
 
-    .course-collection h2, 
-    .course-collection a{
+    .course-collection-horizontal h2, 
+    .course-collection-horizontal a{
         grid-column: span 4;
+    }
+
+    .course-collection-vertical{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .course-collection-vertical h2, 
+    .course-collection-vertical a{
+        grid-column: span 2;
     }
     
 }
@@ -462,6 +545,46 @@ footer nav ul li{
     
 }
 
+/* Profile */
+
+#user-info{
+    box-shadow: var(--shdw-small);
+    border-radius: 1rem;
+    background-color: var(--clr-bg-midtone);
+    padding: 1rem;
+
+    height: fit-content;
+}
+
+.profile{
+    display: grid;
+    justify-items: center;
+    text-align: center;
+}
+
+@media screen and (min-width: 800px){
+    
+    .profile{
+        grid-template-columns: 1fr 2fr;
+        margin: 5vw;
+    }
+
+    .profile #user-info{
+        grid-row: span 2;
+    }
+    
+}
+
+.badge-container{
+    --badge-columns: 3;
+    display: grid;
+    grid-template-columns: repeat(var(--badge-columns), 1fr);
+    gap: 1vw;
+
+    margin: 1rem;
+
+}
+
 /* INPUTS */
 
 form{
@@ -470,11 +593,46 @@ form{
     justify-content: center;
     align-items: center;
 
+    margin: 0 auto;
+    padding: 5vw;
+    border-radius: 2rem;
+
+    background-color: var(--clr-bg-midtone);
+
+    width: fit-content;
+
+    box-shadow: var(--shdw-small);
+
 }
 
 form input{
 
+    background-color: var(--clr-background);
+
+    border-radius: 0.5rem;
+    border: 2px solid var(--clr-text);
+
+    padding: 0.3rem;
     margin-bottom: 1.5rem;
+
+    color: var(--clr-text);
+
+    caret-color: var(--clr-text);
+}
+
+form input:placeholder-shown{
+
+    background-color: var(--clr-background);
+
+    border-radius: 0.5rem;
+    border: 2px dotted var(--clr-text);
+
+    padding: 0.3rem;
+    margin-bottom: 1.5rem;
+
+    color: var(--clr-text);
+
+    caret-color: var(--clr-text);
 }
 
 .search-bar{
