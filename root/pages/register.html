@@ -11,7 +11,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-    <title> Skill Sphere - Create Accont </title>
+    <title> Skill Sphere - Create Account </title>
+    <link href = "../img/logo-small-light.svg" rel = "icon" media = "prefers-color-scheme: light">
+    <link href = "../img/logo-small-dark.svg" rel = "icon" media = "prefers-color-scheme: dark">
 </head>
 <body>
 
@@ -40,13 +42,50 @@
 
     <header id = "mobile-header"> <!-- Header for sizes under : 950px-->
 
-        <h1> Skill Sphere </h1>
+        <a href = "../index.html"><h1> Skill Sphere </h1> </a>
 
-        <a href = "javascript:void(0)" title = "Browse Categories">
-            <img src="hamburger-icon.svg" alt="">
-        </a>
+        <button class = "invisible-button" onclick = "showSideNav()">
+            <i class="fa-solid fa-bars"></i>
+        </button>
     
     </header>
+
+    <div class = "side-nav" id = "mobile-nav">
+
+        <button class="invisible-button" onclick = "hideSideNav()">
+
+            <i class = "fa-solid fa-xmark"></i>
+
+        </button>
+
+        <div>
+            
+            <nav>
+
+                <ul>
+
+                    <li> <a> Browse Categories </a> </li>
+
+                </ul>
+
+            </nav>
+
+            <nav>
+
+                <ul>
+
+                    <li> <a href = "login.html"> Log In </a> </li>
+                    <li> <a href = "register.html"> Register </a> </li>
+
+                </ul>
+
+            </nav>
+
+        </div>
+    
+    </div>
+
+    <div class = "dark-overlay" id = "overlay"></div>
 
     <main id = "main">
 
@@ -57,23 +96,23 @@
                 <h1> Create Account </h1>
 
                 <label for = "email"> <p> Email: </p> </label>
-                <input type = "email" name = "email"  class = "text-input" id = "email">
+                <input type = "email" name = "email"  class = "text-input" id = "email" placeholder="email@email.com">
 
                 <label for = "username"> <p> Username: </p> </label>
-                <input type = "text" name = "username"  class = "text-input" id = "username">
+                <input type = "text" name = "username"  class = "text-input" id = "username" placeholder = "Username">
 
                 <label for = "pass"> <p> Password: </p> </label>
-                <input type="password" name="pass" class = "text-input" id = "pass">
+                <input type="password" name="pass" class = "text-input" id = "pass" placeholder="Password">
 
                 <label for = "pass"> <p> Confirm Password: </p> </label>
-                <input type="password" name="pass" class = "text-input" id = "confirm-pass">
+                <input type="password" name="pass" class = "text-input" id = "confirm-pass" placeholder="Confirm Password">
 
                 <p id = "warning" clas = "warning"></p>
 
                 <button type = "button" onclick = "registerChecks()" class = "primary-button"> Create Account </button>
                 <!-- loginChecks() is located injs/ clientSideAccountValidation.js -->
 
-                <p> Already have an account? <a href = "login.html">Register Now</a></p>
+                <p> Already have an account? <a href = "login.html"> Log in</a></p>
 
             </form>
 
@@ -103,6 +142,9 @@
 
     <!-- Basic Client Side Validation -->
     <script src = "../js/clientSideAccountValidation.js"> </script>
+    <script src = "https://kit.fontawesome.com/d90c26d2f3.js" crossorigin="anonymous"></script>
+    <!-- Reveals side nav on mobile -->
+    <script src = "../js/mobileHeader.js"></script>
 
     
 </body>
