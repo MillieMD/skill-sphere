@@ -4,14 +4,16 @@
 2. Typography (inc. Link styling)
 3. Icons
 4. Buttons 
-5. Header and Main Navigation 
-6. Footers 
-7. Sections 
-    6.1 Index Page Banner
-    6.2 Course displays
-    6.3 Link Directory 
-    6.4 Profile
-8. Inputs/Forms
+5. Sections 
+    5.1 General/ Utilities
+    5.1 Navigation
+    5.2 Header
+    5.3 Footer
+    5.4 Home Page Hero Image
+    5.5 Course cards
+    5.6 Link Directory 
+    5.7 Profile
+6. Inputs/Forms
 */
 
 /* DEFAULTS */
@@ -41,10 +43,9 @@
 
 }
 
-/* Dark mode colours */
 @media (prefers-color-scheme: dark){
     
-
+    /* Dark mode colours */
     :root{
 
         --clr-background: #150a03;
@@ -62,18 +63,17 @@
 
         /* Shadows */
         --shdw-small: 0 0 8px 1px rgb(255 255 255 / 0.25);
-        --shdw-large: 0.1rem 0.1rem 0.1rem 0.1rem rgb(255 255 255 / 0.33);
+        --shdw-large: 0 0 0.1rem 0.1rem rgb(255 255 255 / 0.33);
 }
 
 }
 
+/* Font weights */
 :root{
     
     --fw-bold: 700;
     --fw-reg: 400;
     --fw-light: 200;
-
-    --mobile-breakpoint: 800px;
 }
 
 *, *:before, *::after{
@@ -112,13 +112,11 @@ img{
 
 h1, h2, h3, h4, h5, p, small{
     font-family: "Poppins";
-    max-width: 80ch;
     color: var(--clr-text)
 }
 
 h1, h2, h3, h4, h5 {
     font-weight: var(--fw-bold);
-    padding: 1em 0 0.5em 0;
 }
 
 /* Font scale factor: 1.250 */
@@ -137,34 +135,32 @@ p {font-size: 1rem; }
 
 small {font-size: 0.833rem; }
 
-.center-text{
-    text-align: center;
-}
-
 /* Links */
 
 a{
     font-family: "Poppins";
+    color:var(--clr-text);
 }
 
 a:link{
     text-decoration-style: dotted;
-    color: var(--clr-main);
+    text-decoration-color: var(--clr-main);
 }
 
 a:visited{
     text-decoration-style: dotted;
-    color: var(--clr-success);
+    text-decoration-color: var(--clr-main);
+
 }
 
 a:hover{
     text-decoration-style: solid;
-    color:var(--clr-success);
+    text-decoration-color: var(--clr-success);
 }
 
 a:active{
     text-decoration-style: solid;
-    color:var(--clr-success);
+    text-decoration-color: var(--clr-success);
 }
 
 /* ICONS */
@@ -225,7 +221,108 @@ button:hover{
     color: var(--clr-success);
 }
 
-/* HEADER & MAIN NAVIGATION */
+/* === SECTIONS === */
+
+/* UTILITIES */
+
+.centre-self{
+    margin: 0 auto;
+}
+
+.centre-content{
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.grid{
+    display: grid;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+/* Devasting... attr() cannot be used to specify variables :( */
+@media screen and (min-width: 900px){
+
+    .grid[data-direction = "horizontal"]{
+        grid-template-columns: repeat(4, 1fr);
+
+    }
+
+    .grid[data-direction = "veritcal"]{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+}
+
+.card{
+
+    background-color: var(--clr-bg-midtone);
+    box-shadow: var(--shdw-large);
+    border-radius: 1rem;
+
+    transition: all ease-in-out 0.2s;
+
+    padding: 1rem;
+
+}
+
+/* Card goes "up" */
+.card[hover = "true"]:hover{
+
+    transform: scale(1.1);
+    box-shadow: var(--shdw-small);
+
+}
+
+.stacked{
+    display: grid;
+}
+
+.stacked * {
+    grid-column: 1 / 2;
+    grid-row: 1/ 2;
+
+}
+
+/* NAVIGATION */
+
+nav ul{
+    list-style: none;
+    font-family: "Poppins";
+}
+
+.skip-link{
+    top:0;
+    left:0;
+    z-index: 100; /* Always be the top most element*/
+    position: absolute;
+
+    transform: translateY(-100%);
+    background-color: var(--clr-background);
+    color:var(--clr-main);
+
+    transition: transform 0.3s;
+
+    padding: 1rem 1rem; 
+}
+
+.skip-link:focus{
+    transform: translateY(0%);
+}
+
+/* HEADER */
 
 header{
     display: flex;
@@ -276,15 +373,6 @@ header div * {
     padding: 1rem;
 }
 
-header a h1{
-    color: var(--clr-text);
-}
-
-nav ul{
-    list-style: none;
-    font-family: "Poppins";
-}
-
 .side-nav{
     display: flex;
     flex-direction: column;
@@ -324,27 +412,6 @@ nav ul{
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-/* Navigation Skip Link */
-
-.skip-link{
-    top:0;
-    left:0;
-    z-index: 100; /* Always be the top most element*/
-    position: absolute;
-
-    transform: translateY(-100%);
-    background-color: var(--clr-background);
-    color:var(--clr-main);
-
-    transition: transform 0.3s;
-
-    padding: 1rem 1rem; 
-}
-
-.skip-link:focus{
-    transform: translateY(0%);
-}
-
 /* FOOTER */
 
 footer{
@@ -360,69 +427,9 @@ footer{
     background-color: var(--clr-secondary-midtone);
 }
 
-footer a h3{
-    color: var(--clr-text);
-}
-
-footer a p{
-    color: var(--clr-text);
-}
-
 footer nav ul li{
     float: left;
-
     padding: 2vw;
-}
-
-/* SECTIONS */
-
-/* Utilities */
-
-.centre{
-    align-items: center;
-    align-content: center;
-
-    margin: 0 auto;
-}
-
-.flex-row{
-    display: flex;
-    flex-direction: row;
-}
-
-.flex-col{
-    display: flex;
-    flex-direction: column;
-}
-
-/* Makes a grid where the maximum rows are flexibly specified by the  */
-.grid[max-cols]{
-    display: grid;
-}
-
-@media screen and (min-width: var(--mobile-breakpoint)){
-
-    .grid[max-cols]{
-        grid-template-rows: repeat(attr(max-cols), 1fr);
-
-    }
-    
-}
-
-.card{
-
-    background-color: var(--clr-bg-midtone);
-    box-shadow: var(--shdw-large);
-    border-radius: 1rem;
-
-}
-
-/* Card goes "up" */
-.card[hover = "true"]:hover{
-
-    transform: scale(1.1);
-    box-shadow: var(--shdw-small);
-
 }
 
 /* Home Page Banner */
@@ -451,21 +458,11 @@ footer nav ul li{
 }
 
 .image-text-box{
-    display: flex;
-    flex-direction: column;
     justify-content: space-between;
-    align-items: center;
 
     max-width: 95%;
     padding: 3rem;
     margin: 1rem;
-
-    border-radius: 1rem;
-
-    background-color: var(--clr-background);
-    box-shadow: var(--shdw-small);
-
-    text-align: center;
 
 }
 
@@ -475,138 +472,39 @@ footer nav ul li{
 
 /* Course Cards */
 
-/* Horizontal, on home page and ... */
-.course-collection-horizontal{
-    display: grid;
-
-    grid-template-columns: 1fr 1fr; /* Two even columns */
-    gap: 2vw;
-
-    padding: 2vw;
-    margin: 2vw;
-
-    border-radius: 0.5rem;
-
-    text-align: center;
-
-}
-
-.course-collection-horizontal h2,  
-.course-collection-horizontal a{
-   grid-column: span 2;
-}
-
-.course-collection-vertical{
-    display: grid;
-    gap: 2vw;
-
-    padding: 2vw;
-    margin: 2vw;
-
-    border-radius: 0.5rem;
-    
-    text-align: center;
-}
-
-.course-card{
+.course-{
     padding: 1rem;
-
-    background-color: var(--clr-bg-midtone);
-    box-shadow: var(--shdw-large);
-    border-radius: 1rem;
 
     transition: all ease-in-out 0.2s;
 
 }
 
-.course-card:hover{
-    transform: scale(1.1);
-    box-shadow: var(--shdw-small);
-}
-
-.course-card img {
+.course img {
     aspect-ratio: 2/1;
 }
 
-.course-card .card-info{
+.course .card-info{
     background-color: var(--clr-bg-midtone);
     align-self: end;
-}
-
-.stacked{
-    display: grid;
-}
-
-.stacked * {
-    grid-column: 1 / 2;
-    grid-row: 1/ 2;
-
-}
-
-
-@media screen and (min-width: 800px) {
-    .course-collection-horizontal{
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-    }
-
-    .course-collection-horizontal h2, 
-    .course-collection-horizontal a{
-        grid-column: span 4;
-    }
-
-    .course-collection-vertical{
-        grid-template-columns: 1fr 1fr;
-    }
-
-    .course-collection-vertical h2, 
-    .course-collection-vertical a{
-        grid-column: span 2;
-    }
-    
 }
 
 /* Directory */
 
 .link-directory{
-    display: grid;
-    grid-template-columns: 1fr;
     background-color: var(--clr-secondary-light);
-
     text-align: left;
-
     padding: 2vw;
 }
 
-.link-directory h2{
-    grid-column: span 1;
-}
 
 .link-directory p{
     color: var(--clr-text);
 }
 
-@media screen and (min-width: 800px) {
 
-    .link-directory{
-        --directory-columns: 4;
-        grid-template-columns: repeat(var(--directory-columns), 1fr);
-    }
-
-    .link-directory h3{
-        align-self: center;
-        grid-column: span var(--directory-columns);
-    }
-    
-}
-
-/* Profile */
+/* PROFILE */
 
 #user-info{
-    box-shadow: var(--shdw-small);
-    border-radius: 1rem;
-    background-color: var(--clr-bg-midtone);
-    padding: 1rem;
-
     height: fit-content;
 }
 
@@ -639,78 +537,8 @@ footer nav ul li{
 
 }
 
-/* Profile */
 
-#user-info{
-    box-shadow: var(--shdw-small);
-    border-radius: 1rem;
-    background-color: var(--clr-bg-midtone);
-    padding: 1rem;
-
-    height: fit-content;
-}
-
-.profile{
-    display: grid;
-    justify-items: center;
-    text-align: center;
-}
-
-@media screen and (min-width: 800px){
-    
-    .profile{
-        grid-template-columns: 1fr 2fr;
-        margin: 5vw;
-    }
-
-    .profile #user-info{
-        grid-row: span 2;
-    }
-    
-}
-
-.badge-container{
-    --badge-columns: 3;
-    display: grid;
-    grid-template-columns: repeat(var(--badge-columns), 1fr);
-    gap: 1vw;
-
-    margin: 1rem;
-
-}
-
-/* Profile */
-
-.profile{
-    display: grid;
-    justify-items: center;
-    text-align: center;
-}
-
-@media screen and (min-width: 800px){
-    
-    .profile{
-        grid-template-columns: 1fr 2fr;
-        margin: 5vw;
-    }
-
-    .profile #user-info{
-        grid-row: span 2;
-    }
-    
-}
-
-.badge-container{
-    --badge-columns: 3;
-    display: grid;
-    grid-template-columns: repeat(var(--badge-columns), 1fr);
-    gap: 1vw;
-
-    margin: 1rem;
-
-}
-
-/* About Page */
+/* ABOUT */
 
 .team-carousel{
 
