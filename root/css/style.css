@@ -131,7 +131,10 @@ h4 {font-size: 1.440rem; }
 
 h5 {font-size: 1.200rem; }
 
-p {font-size: 1rem; }
+p {
+    font-size: 1rem; 
+
+}
 
 small {font-size: 0.833rem; }
 
@@ -233,6 +236,8 @@ button:hover{
     align-items: center;
     align-content: center;
     justify-content: center;
+    vertical-align: middle;
+    
     text-align: center;
 }
 
@@ -351,7 +356,7 @@ header{
     display: none;
 }
 
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 900px) {
 
     #mobile-header{
         display: none;
@@ -514,7 +519,7 @@ footer nav ul li{
     text-align: center;
 }
 
-@media screen and (min-width: 800px){
+@media screen and (min-width: 900px){
     
     .profile{
         grid-template-columns: 1fr 2fr;
@@ -549,7 +554,7 @@ footer nav ul li{
 
 }
 
-@media screen and (min-width: 950px){
+@media screen and (min-width: 900px){
     .team-carousel{
         flex-direction: row;
     }
@@ -558,28 +563,19 @@ footer nav ul li{
 /* INPUTS */
 
 form{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-
-    margin: 0 auto;
-    padding: 5vw;
 
     width: fit-content;
 }
 
-form input{
-    padding: 0.3rem;
-    margin-bottom: 1.5rem;
-}
 
 input{
-
     background-color: var(--clr-background);
 
     border-radius: 0.5rem;
     border: 2px solid var(--clr-text);
+
+    padding: 0.3rem;
+    margin-bottom: 1.5rem;
 
     color: var(--clr-text);
 
