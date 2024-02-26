@@ -11,13 +11,11 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-    <title> Skill Sphere - Create Account </title>
-    <link href = "../img/logo-small-light.svg" rel = "icon" media = "prefers-color-scheme: light">
-    <link href = "../img/logo-small-dark.svg" rel = "icon" media = "prefers-color-scheme: dark">
+    <title> Earn as you learn with Skill Sphere </title>
 </head>
 <body>
 
-    <a href="#main" class="skip-link" id="skip-link" tabindex="0"> Skip to main content </a>
+    <a href="#main" class="skip-link" id="skip-link" tabindex="1"> Skip to main content </a>
 
     <header id = "desktop-header"> <!-- Header for sizes over : 950px-->
 
@@ -25,7 +23,8 @@
 
             <a href = "../index.html"><h1> Skill Sphere </h1></a>
 
-            <a href = "#"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a>
+            <!-- Button underneath link is not in tab order, so keyboard users aren't focusing same element twice -->
+            <a href = "#"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a> 
 
             <input type = "text" class = "search-bar" placeholder="Search for courses...">
 
@@ -94,39 +93,66 @@
 
     <div class = "dark-overlay" id = "overlay"></div>
 
-    <main id = "main">
 
-        <section id="register">
+    <main id = "main"  class = "centre-self centre-content">
 
-            <form class = "flex-col card centre-content centre-self">
+        <section id = "product">
+            <h2> What is Skill Sphere? </h2>
 
-                <h1> Create Account </h1>
+                <p class = "limit-chars"> Skill Sphere is a platform to help you be the best you can be. The busy-ness of everyday life can often get in the way of our hobbies and passions -
+                but with Skill Sphere you can earn money while learning new, valuable skills, helping ease the stress of "wasting time" while learning something new.
 
-                <label for = "email"> <p> Email: </p> </label>
-                <input type = "email" name = "email"  class = "text-input" id = "email" placeholder="email@email.com">
+                <br>
 
-                <label for = "username"> <p> Username: </p> </label>
-                <input type = "text" name = "username"  class = "text-input" id = "username" placeholder = "Username">
+                For just £5/month you can enrol on unlimited courses packed to the brim with informational videos and quizzes to test your understanding </p>
+        
+        </section>
 
-                <label for = "pass"> <p> Password: </p> </label>
-                <input type="password" name="pass" class = "text-input" id = "pass" placeholder="Password">
+        <section id="team">
 
-                <label for = "pass"> <p> Confirm Password: </p> </label>
-                <input type="password" name="pass" class = "text-input" id = "confirm-pass" placeholder="Confirm Password">
+            <h2> Who is Skill Sphere? </h2>
 
-                <span>
-                <input type = "checkbox" id = "terms" name = "terms">
-                <label for="terms"> <p>I have read and agree to the <a href = terms-conditions.html> Terms & Conditions </a> </p></label>
-                </span>
+            <p class = "limit-chars"> This platform was developed as a second year university project, at the University of Huddersfield, by the following students: </p> <br>
 
-                <p id = "warning" clas = "warning"></p>
+            <div class = "team-carousel"> 
 
-                <button type = "button" onclick = "registerChecks()" class = "primary-button"> Create Account </button>
-                <!-- loginChecks() is located injs/ clientSideAccountValidation.js -->
+                <div>
 
-                <p> Already have an account? <a href = "login.html"> Log in</a></p>
+                    <p><strong> Mohammed Rahman </strong></p>
+                    <p><i> Team Leader, Head of Design </i></p>
 
-            </form>
+                </div>
+
+                <div>
+
+                    <p><strong> Millie Moorby-Davies </strong></p>
+                    <p><i> Front-end Developer </i></p>
+
+                </div>
+
+                <div>
+
+                    <p><strong> Muhammed Shakir </strong></p>
+                    <p><i> Front-end Developer</i></p>
+
+                </div>
+
+                <div>
+
+                    <p><strong> Joseph Keyworth </strong></p>
+                    <p><i> Back-end Developer </i></p>
+
+                </div>
+
+                <div>
+
+                    <p><strong> Usmaan Nadeem </strong></p>
+                    <p><i> Back-end Developer, Testing </i></p>
+
+                </div>
+
+
+            </div>
 
         </section>
 
@@ -134,7 +160,7 @@
 
     <footer>
 
-        <h3> Skill Sphere </h3>
+        <a href = "index.html"><h3> Skill Sphere </h3></a>
 
         <nav>
 
@@ -142,9 +168,9 @@
 
                 <li><a href = "about.html"> <p> About </p> </a> </li>
                 <li><a href = "contact"> <p> Contact Us </p> </a> </li>
-                <a><li> Copyright </li></a>
-                <a><li> Privacy Policy </li></a>
-                <a><li> Sitemap </li></a>
+                <li><a> Copyright </a> </li>
+                <li><a> Privacy Policy </a> </li>
+                <li><a> Sitemap </a> </li>
 
             </ul>
 
@@ -152,12 +178,10 @@
 
     </footer>
 
-    <!-- Basic Client Side Validation -->
-    <script src = "../js/clientSideAccountValidation.js"> </script>
+    <!-- Required for the star icons -->
     <script src = "https://kit.fontawesome.com/d90c26d2f3.js" crossorigin="anonymous"></script>
     <!-- Reveals side nav on mobile -->
     <script src = "../js/mobileHeader.js"></script>
-
     
 </body>
 </html>

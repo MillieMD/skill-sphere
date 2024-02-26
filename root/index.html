@@ -59,17 +59,23 @@
 
         </button>
 
-        <div>
+        <div class = "side-nav-content">
+
+            <div>
+
+                <input type = "text" placeholder="Search for courses...">
             
-            <nav>
+                <nav>
 
-                <ul>
+                    <ul>
 
-                    <li> <a> Browse Categories </a> </li>
+                        <li> <a href = "#"> Browse Categories </a> </li>
 
-                </ul>
+                    </ul>
 
-            </nav>
+                </nav>
+
+            </div>
 
             <nav>
 
@@ -98,7 +104,7 @@
 
             <div class = "image-text-position-wrapper">
 
-                <div class = "image-text-box">
+                <div class = "image-text-box card centre-content flex-col">
         
                     <h2> Earn money while you learn new skills </h2>
         
@@ -112,86 +118,90 @@
     
         </section>
 
-        <section id="recommended-courses" class = "course-collection-horizontal">
+        <section id="recommended-courses" class = "centre-content">
 
             <h2> Recommended For You </h2>
 
-            <div class="course-card stacked" id = "course-id">
+            <div  class = "grid" data-direction = "horizontal">
 
-                <img src= "img/courses/course-name.png">
+                <div class="course card stacked" hover = "true" id = "course-id">
 
-                <div id = "course-info" class = "card-info">
+                    <img src= "img/courses/course-name.png">
 
-                    <h3 id = "course-name"> Course Name </h3>
-                    <div id = "course-rating">
+                    <div id = "course-info" class = "card-info">
 
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i> <!-- fa-solid for full stars -->
-                        <i class="fa-regular fa-star"></i> 
-                        <i class="fa-regular fa-star"></i> <!-- fa-regular for empty stars -->
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
 
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i> <!-- fa-solid for full stars -->
+                            <i class="fa-regular fa-star"></i> 
+                            <i class="fa-regular fa-star"></i> <!-- fa-regular for empty stars -->
+
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
+                <div class="course card stacked" hover = "true" id = "course-id">
 
-            <div class="course-card stacked" id = "course-id">
+                    <img src= "img/courses/course-name.png">
 
-                <img src= "img/courses/course-name.png">
+                    <div id = "course-info" class = "card-info">
 
-                <div id = "course-info" class = "card-info">
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
 
-                    <h3 id = "course-name"> Course Name </h3>
-                    <div id = "course-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
 
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
+                <div class="course card stacked" hover = "true" id = "course-id">
 
-            <div class="course-card stacked" id = "course-id">
+                    <img src= "img/courses/course-name.png">
 
-                <img src= "img/courses/course-name.png">
+                    <div id = "course-info" class = "card-info">
 
-                <div id = "course-info" class = "card-info">
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
 
-                    <h3 id = "course-name"> Course Name </h3>
-                    <div id = "course-rating">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
 
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
+                <div class="course card stacked" hover = "true" id = "course-id">
 
-            <div class="course-card stacked" id = "course-id">
+                    <img src= "img/courses/course-name.png">
 
-                <img src= "img/courses/course-name.png">
+                    <div id = "course-info" class = "card-info">
 
-                <div id = "course-info" class = "card-info">
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
+                            
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
 
-                    <h3 id = "course-name"> Course Name </h3>
-                    <div id = "course-rating">
-                        
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-
+                        </div>
                     </div>
+
                 </div>
 
             </div>
@@ -201,86 +211,90 @@
         </section>
 
         <!-- Hidden if user is not logged in -->
-        <section id="your-courses" class = "course-collection-horizontal">
+        <section id="your-courses" class = "centre-content">
 
             <h2> Your Courses </h2>
 
-            <div class="course-card stacked" id = "course-id">
+            <div  class = "grid" data-direction = "horizontal">
 
-                <img src= "img/courses/course-name.png">
+                <div class="course card stacked" hover = "true" id = "course-id">
 
-                <div id = "course-info" class = "card-info">
+                    <img src= "img/courses/course-name.png">
 
-                    <h3 id = "course-name"> Course Name </h3>
-                    <div id = "course-rating">
-                                                
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        
+                    <div id = "course-info" class = "card-info">
+
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
+                                                    
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
+                <div class="course card stacked" hover = "true" id = "course-id">
 
-            <div class="course-card stacked" id = "course-id">
+                    <img src= "img/courses/course-name.png">
 
-                <img src= "img/courses/course-name.png">
+                    <div id = "course-info" class = "card-info">
 
-                <div id = "course-info" class = "card-info">
-
-                    <h3 id = "course-name"> Course Name </h3>
-                    <div id = "course-rating">
-                                                
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
+                                                    
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
+                <div class="course card stacked" hover = "true" id = "course-id">
 
-            <div class="course-card stacked" id = "course-id">
+                    <img src= "img/courses/course-name.png">
 
-                <img src= "img/courses/course-name.png">
+                    <div id = "course-info" class = "card-info">
 
-                <div id = "course-info" class = "card-info">
-
-                    <h3 id = "course-name"> Course Name </h3>
-                    <div id = "course-rating">
-                                                
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
+                                                    
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            
+                        </div>
                     </div>
+
                 </div>
 
-            </div>
+                <div class="course card stacked" hover = "true" id = "course-id">
 
-            <div class="course-card stacked" id = "course-id">
+                    <img src= "img/courses/course-name.png">
 
-                <img src= "img/courses/course-name.png">
+                    <div id = "course-info" class = "card-info">
 
-                <div id = "course-info" class = "card-info">
-
-                    <h3 id = "course-name"> Course Name </h3>
-                    <div id = "course-rating">
-               
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
+                
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            
+                        </div>
                     </div>
+
                 </div>
 
             </div>
@@ -294,6 +308,8 @@
         <section id="link-directory" class = "link-directory">
 
             <h3> Not sure where to start? </h3>
+
+            <div class = "grid" data-direction = "horizontal">
 
             <nav>
 
@@ -352,7 +368,7 @@
 
             </nav>
 
-
+        </div>
 
 
         </section>
@@ -368,7 +384,7 @@
             <ul>
 
                 <li><a href = "pages/about.html"> <p> About </p> </a> </li>
-                <li><a href = "pages/content"> <p> Contact Us </p> </a> </li>
+                <li><a href = "pages/contact"> <p> Contact Us </p> </a> </li>
                 <li><a> Copyright </a> </li>
                 <li><a> Privacy Policy </a> </li>
                 <li><a> Sitemap </a> </li>
