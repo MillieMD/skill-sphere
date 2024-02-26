@@ -93,6 +93,8 @@ html {
     -moz-text-size-adjust:100%;
 
     overflow-x: hidden;
+
+    font-family: "Poppins";
 }
 
 body{
@@ -112,7 +114,6 @@ img{
 /* == TYPOGRAPHY == */
 
 h1, h2, h3, h4, h5, p, small{
-    font-family: "Poppins";
     color: var(--clr-text)
 }
 
@@ -551,6 +552,48 @@ footer nav ul li{
 
 }
 
+/* COURSE PAGE */
+
+.course{
+
+
+
+}
+
+.course-info{
+    display: grid;
+
+    background-color: var(--clr-secondary-light);
+    margin: 1rem;
+
+    grid-template-areas:  "a a a" "b b b" "c c d";
+
+}
+
+.course-info #course-name{
+    grid-area: a;
+}
+
+/* TODO: Limit number of characters then apply readmore */
+.course-info #desc{
+    grid-area: b;
+
+
+
+}
+
+.course-info #rating{
+    grid-area: c;
+}
+
+.course-info #enrolled{
+    grid-area: d;
+}
+
+/* Module container is basically a list of drop down videos + quiz links? */
+.module-container{
+
+}
 
 /* ABOUT */
 
