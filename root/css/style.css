@@ -16,7 +16,7 @@
 6. Inputs/Forms
 */
 
-/* DEFAULTS */
+/* == DEFAULTS == */
 
 /* Light mode colours */
 @media (prefers-color-scheme: light){
@@ -37,8 +37,8 @@
         --clr-star: #ffbb00;
 
         /* Shadows */
-        --shdw-small: 0 0 8px 1px rgb(0 0 0 / 0.25);
-        --shdw-large: 0.1rem 0.1rem 0.1rem 0.1rem rgb(0 0 0 / 0.33);
+        --shdw-light: 0 0 8px 1px rgb(0 0 0 / 0.25);
+        --shdw-dark: 0.1rem 0.1rem 0.1rem 0.1rem rgb(0 0 0 / 0.33);
     }
 
 }
@@ -62,8 +62,9 @@
         --clr-star: #ffbb00;
 
         /* Shadows */
-        --shdw-small: 0 0 8px 1px rgb(255 255 255 / 0.25);
-        --shdw-large: 0 0 0.1rem 0.1rem rgb(255 255 255 / 0.33);
+        --shdw-light: 0 0 8px 4px rgb(255 255 255 / 0.25);
+        --shdw-dark: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        /* SOURCE: */
 }
 
 }
@@ -108,7 +109,7 @@ img{
     width:100%;
 }
 
-/* TYPOGRAPHY */
+/* == TYPOGRAPHY == */
 
 h1, h2, h3, h4, h5, p, small{
     font-family: "Poppins";
@@ -166,13 +167,13 @@ a:active{
     text-decoration-color: var(--clr-success);
 }
 
-/* ICONS */
+/* == ICONS == */
 
 .fa-star{
     color: var(--clr-star);
 }
 
-/* BUTTONS */
+/* == BUTTONS == */
 
 button{
 
@@ -224,22 +225,11 @@ button:hover{
     color: var(--clr-success);
 }
 
+
 /* === SECTIONS === */
 
+
 /* UTILITIES */
-
-.centre-self{
-    margin: 0 auto;
-}
-
-.centre-content{
-    align-items: center;
-    align-content: center;
-    justify-content: center;
-    vertical-align: middle;
-    
-    text-align: center;
-}
 
 .flex-row{
     display: flex;
@@ -271,10 +261,29 @@ button:hover{
     
 }
 
+.centre-self{
+    margin: 0 auto;
+}
+
+.centre-content{
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    vertical-align: middle;
+    
+    text-align: center;
+}
+
+/* Used for centering <p> */
+.limit-chars{
+    display: inline-block;
+    max-width: 80ch;
+}
+
 .card{
 
     background-color: var(--clr-bg-midtone);
-    box-shadow: var(--shdw-large);
+    box-shadow: var(--shdw-dark);
     border-radius: 1rem;
 
     transition: all ease-in-out 0.2s;
@@ -287,7 +296,7 @@ button:hover{
 .card[hover = "true"]:hover{
 
     transform: scale(1.1);
-    box-shadow: var(--shdw-small);
+    box-shadow: var(--shdw-light);
 
 }
 
@@ -342,11 +351,10 @@ header{
     width: 100%;
 
     background-color: var(--clr-bg-midtone);
-    box-shadow: var(--shdw-large);
+    box-shadow: var(--shdw-dark);
 }
 
 /* Change header on different screen sizes */
-
 #mobile-header{
     display: flex;
     padding: 1vw;
@@ -397,7 +405,7 @@ header div * {
     transition: ease-in-out 0.5s;
 }
 
-.side-nav div{
+.side-nav .side-nav-content{
     display: flex;
     flex-direction: column;
     height:  100%;
@@ -416,6 +424,7 @@ header div * {
 
     background-color: rgba(0, 0, 0, 0.5);
 }
+
 
 /* FOOTER */
 
@@ -552,6 +561,8 @@ footer nav ul li{
 
     justify-content: space-evenly;
 
+    gap: 3rem;
+
 }
 
 @media screen and (min-width: 900px){
@@ -565,8 +576,8 @@ footer nav ul li{
 form{
 
     width: fit-content;
-}
 
+}
 
 input{
     background-color: var(--clr-background);
@@ -580,6 +591,7 @@ input{
     color: var(--clr-text);
 
     caret-color: var(--clr-text);
+
 }
 
 input:placeholder-shown{
