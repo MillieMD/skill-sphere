@@ -116,11 +116,15 @@
                     <i class="fa-solid fa-star"></i>
                     <i class="fa-solid fa-star"></i>
 
+                    <br>
+
+                    <p> 700 ratings </p>
+
                 </div>
 
                 <div id="enrolled">
 
-                    <large> 5.7k </large>
+                    5.7k
 
                 </div>
 
@@ -132,25 +136,37 @@
 
                 <div class = "module" id = "module-0">
 
-                    Lesson 1 - Core Data Types
+                    Lesson 1 - Sample Video
 
                 </div>
 
-                <div class = "module" id = "module-0">
+                <div class = "module-content" id = "module-0-content">
 
-                    Lesson 1 - Core Data Types
-
-                </div>
-
-                <div class = "module" id = "module-0">
-
-                    Lesson 1 - Core Data Types
+                    <video src = ../vid/sample.mp4></video>
 
                 </div>
 
-                <div class = "module" id = "module-0">
+                <div class = "module" id = "module-1">
 
-                    Lesson 1 - Core Data Types
+                    Lesson 2 - Test 2
+
+                </div>
+
+                <div class = "module-content" id = "module-1-content">
+
+                    module 1
+
+                </div>
+
+                <div class = "module" id = "module-2">
+
+                    Lesson 3- Test 3
+
+                </div>
+
+                <div class = "module-content" id = "module-2-content">
+
+                    module 2
 
                 </div>
 
@@ -158,8 +174,57 @@
 
         </section>
 
-        <section id="reviews">
+        <section id="reviews" class = "centre-content">
 
+            <h3> Reviews </h3>
+
+            <p> Heres what the people who've taken this course have to say! </p>
+
+            <!-- REVIEW GRAPH -->
+
+            <div class="review">
+
+                Username
+
+                <div class="rating">
+
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+
+                </div>
+
+                <div class="review-content">
+
+                    I liked it
+
+                </div>
+
+            </div>
+
+            <div class="review">
+
+                Username 2
+
+                <div class="rating">
+
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+                    <i class="fa-regular fa-star"></i>
+
+                </div>
+
+                <div class="review-content">
+
+                    I didn't
+
+                </div>
+
+            </div>
 
         </section>
 
@@ -190,6 +255,31 @@
     <script src = "https://kit.fontawesome.com/d90c26d2f3.js" crossorigin="anonymous"></script>
     <!-- Reveals side nav on mobile -->
     <script src = "../js/mobileHeader.js"></script>
+
+    <script>
+        
+        const modules = document.getElementsByClassName("module");
+
+        for(let i = 0; i < modules.length; i ++){
+
+            console.log(modules[i]);
+
+            modules[i].addEventListener("click", function(){
+
+                this.classList.toggle("active-module");
+
+                var content = this.nextElementSibling;
+                if(content.style.display === "block"){
+                    content.style.display = "none";
+                }else{
+                    content.style.display = "block";
+                }
+
+            })
+        }
+
+
+    </script>
 
 </body>
 </html>

@@ -111,6 +111,10 @@ img{
     width:100%;
 }
 
+video{
+    max-width: 100%;
+}
+
 /* == TYPOGRAPHY == */
 
 h1, h2, h3, h4, h5, p, small{
@@ -487,7 +491,7 @@ footer nav ul li{
 
 /* Course Cards */
 
-.course-{
+.course{
     padding: 1rem;
 
     transition: all ease-in-out 0.2s;
@@ -554,17 +558,13 @@ footer nav ul li{
 
 /* COURSE PAGE */
 
-.course{
-
-
-
-}
-
 .course-info{
     display: grid;
 
     background-color: var(--clr-secondary-light);
     margin: 1rem;
+
+    border: 2px solid var(--clr-secondary-midtone);
 
     grid-template-areas:  "a a a" "b b b" "c c d";
 
@@ -584,14 +584,61 @@ footer nav ul li{
 
 .course-info #rating{
     grid-area: c;
+
+    font-weight: var(--fw-light);
+
 }
 
 .course-info #enrolled{
+
+    font-size: 2rem;
+    font-weight: var(--fw-bold);
+
     grid-area: d;
 }
 
-/* Module container is basically a list of drop down videos + quiz links? */
+/* Module container is an accordian menu, module-content are the panels, module are the buttons */
 .module-container{
+
+    background-color: var(--clr-bg-midtone);
+    border: 1px solid var(--clr-text); /* CHANGE */
+
+
+
+}
+
+.module-container .module{
+
+    border: 1px solid var(--clr-text);
+
+}
+
+.module-content{
+    display: none;
+}
+
+.review{
+
+    float: left;
+    text-align: left;
+
+    background-color: var(--clr-secondary-light);
+
+    min-width: 50%;
+
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 0.5rem;
+
+}
+
+.review .course-owner{
+
+    float: right;
+    text-align: right;
+
+    background-color: var(--clr-bg-midtone);
+
 
 }
 
