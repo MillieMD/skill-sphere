@@ -566,7 +566,7 @@ footer nav ul li{
 
     border: 2px solid var(--clr-secondary-midtone);
 
-    grid-template-areas:  "a a a" "b b b" "c c d";
+    grid-template-areas:  "a a a" "b b b" "c c d" "e e e";
 
 }
 
@@ -595,6 +595,33 @@ footer nav ul li{
     font-weight: var(--fw-bold);
 
     grid-area: d;
+}
+
+.course-info #tags{
+
+    grid-area: e;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 0.5rem;
+}
+
+.tag{
+    background-color: var(--clr-secondary-midtone);
+    border: 1px solid var(--clr-main);
+
+    color: var(--clr-text);
+
+    text-decoration: dotted var(--clr-main);
+
+    margin: 0.25rem;
+    padding: 0.1rem
+
+
 }
 
 /* Module container is an accordian menu, module-content are the panels, module are the buttons */
@@ -641,6 +668,17 @@ footer nav ul li{
 
     background-color: var(--clr-bg-midtone);
 
+
+}
+
+@media screen and (min-width: 950px){
+
+    .course-info{
+
+        max-width: 30rem;
+        float: right;
+
+    }
 
 }
 
