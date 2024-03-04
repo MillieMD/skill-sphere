@@ -109,6 +109,7 @@ body{
 
 img{
     width:100%;
+    object-fit: contain;
 }
 
 video{
@@ -558,6 +559,10 @@ footer nav ul li{
 
 /* COURSE PAGE */
 
+.course-bg-banner{
+    display: none;
+}
+
 .course-info{
     display: grid;
 
@@ -626,12 +631,8 @@ footer nav ul li{
 
 /* Module container is an accordian menu, module-content are the panels, module are the buttons */
 .module-container{
-
     background-color: var(--clr-bg-midtone);
     border: 1px solid var(--clr-text); /* CHANGE */
-
-
-
 }
 
 .module-container .module{
@@ -640,10 +641,28 @@ footer nav ul li{
 
 }
 
-.module-content{
-    display: none;
+/* Chevron indicator from font-awesome */
+.module-container .module::after{
+    content: url("../img/chevron-down-solid.svg");
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    float: right;
 
-    padding: 1rem;
+    transition: 0.5s ease-in-out;
+    margin: 0.2rem;
+}
+
+/* Rotate to point down on active module */
+.module-container .active-module::after{
+    transform: rotate(-90deg);
+
+}
+
+.module-content{
+    transition: all 0.3s ease-in-out;
+    overflow:hidden;
+    max-height: 0;
 }
 
 .review{
@@ -673,11 +692,35 @@ footer nav ul li{
 
 @media screen and (min-width: 950px){
 
+    .course-bg-banner{
+        display: block;
+    }
+
+    .course-page{
+
+        display: grid;
+        grid-template-areas: "lessons course-info" "reviews course-info";
+        grid-template-columns: 2fr 1fr;
+
+    }
+
     .course-info{
 
         max-width: 30rem;
         float: right;
 
+        grid-area: course-info;
+
+    }
+
+    .module-container{
+
+        grid-area: lessons;
+
+    }
+
+    .reviews{
+        grid-area: reviews;
     }
 
 }

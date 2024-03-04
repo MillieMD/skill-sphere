@@ -96,7 +96,14 @@
 
     <main id = "main">
 
-        <section id="course" class = "course centre-content">
+        <section id="course" class = "course-page centre-content centre-self">
+
+            <!-- Hidden on mobile
+            <div class = "course-bg-banner">
+
+                <img src = "../img/banner.png">
+
+            </div> -->
 
             <div class = "course-info" id="course-info">
                 
@@ -146,109 +153,114 @@
 
             </div>
 
-            <h3> Lessons </h3>
+            <div id="modules">
 
-            <div class = "module-container" id="modules">
+                <h3> Lessons </h3>
 
-                <div class = "module" id = "module-0">
+                <div class = "module-container">
 
-                    Lesson 1 - Sample Video
+                    <div class = "module" id = "module-0">
 
-                </div>
-
-                <div class = "module-content" id = "module-0-content">
-
-                    <video src = ../vid/sample.mp4 controls controlslist="play timeline volume"></video>
-
-                </div>
-
-                <div class = "module" id = "module-1">
-
-                    Lesson 2 - Sample Quiz
-
-                </div>
-
-                <div class = "module-content" id = "module-1-content">
-
-                    <div class="quiz-info">
-
-                        This quiz will asses your knowledge from module 1
+                        Lesson 1 - Sample Video
 
                     </div>
 
-                    <button class = "primary-button"> Take Quiz </button>
+                    <div class = "module-content" id = "module-0-content">
+
+                        <video src = ../vid/sample.mp4 controls controlslist="play timeline volume"></video>
+
+                    </div>
+
+                    <div class = "module" id = "module-1">
+
+                        Lesson 2 - Sample Quiz
+
+                    </div>
+
+                    <div class = "module-content" id = "module-1-content">
+
+                        <div class="quiz-info">
+
+                            This quiz will assess your knowledge from module 1
+
+                        </div>
+
+                        <button class = "primary-button"> Take Quiz </button>
+
+                    </div>
+
+                    <div class = "module" id = "module-2">
+
+                        Lesson 3- Test 3
+
+                    </div>
+
+                    <div class = "module-content" id = "module-2-content">
+
+                        It all works!
+
+                    </div>
 
                 </div>
 
-                <div class = "module" id = "module-2">
+            </div>
 
-                    Lesson 3- Test 3
+            <div id="reviews" class = "reviews">
 
+                <h3> Reviews </h3>
+    
+                <p> Heres what the people who've taken this course have to say! </p>
+    
+                <!-- REVIEW GRAPH -->
+    
+                <div class="review">
+    
+                    Username
+    
+                    <div class="rating">
+    
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+    
+                    </div>
+    
+                    <div class="review-content">
+    
+                        I liked it
+    
+                    </div>
+    
                 </div>
-
-                <div class = "module-content" id = "module-2-content">
-
-                    It all works!
-
+    
+                <div class="review">
+    
+                    Username 2
+    
+                    <div class="rating">
+    
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+                        <i class="fa-regular fa-star"></i>
+    
+                    </div>
+    
+                    <div class="review-content">
+    
+                        I didn't
+    
+                    </div>
+    
                 </div>
-
+    
             </div>
 
         </section>
 
-        <section id="reviews" class = "centre-content">
-
-            <h3> Reviews </h3>
-
-            <p> Heres what the people who've taken this course have to say! </p>
-
-            <!-- REVIEW GRAPH -->
-
-            <div class="review">
-
-                Username
-
-                <div class="rating">
-
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-
-                </div>
-
-                <div class="review-content">
-
-                    I liked it
-
-                </div>
-
-            </div>
-
-            <div class="review">
-
-                Username 2
-
-                <div class="rating">
-
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-solid fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-                    <i class="fa-regular fa-star"></i>
-
-                </div>
-
-                <div class="review-content">
-
-                    I didn't
-
-                </div>
-
-            </div>
-
-        </section>
 
     </main>
 
@@ -291,11 +303,11 @@
                 this.classList.toggle("active-module");
 
                 var content = this.nextElementSibling;
-                if(content.style.display === "block"){
-                    content.style.display = "none";
-                }else{
-                    content.style.display = "block";
-                }
+                if (content.style.maxHeight) {
+                    content.style.maxHeight = null;
+                } else {
+                    content.style.maxHeight = content.scrollHeight + "px";
+                } 
 
             })
         }
