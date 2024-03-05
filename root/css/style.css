@@ -559,8 +559,8 @@ footer nav ul li{
 
 /* COURSE PAGE */
 
-.course-bg-banner{
-    display: none;
+.course-page{
+    padding: 5%;
 }
 
 .course-info{
@@ -568,27 +568,28 @@ footer nav ul li{
 
     background-color: var(--clr-secondary-light);
     margin: 1rem;
+    padding: 2%;
 
     border: 2px solid var(--clr-secondary-midtone);
 
-    grid-template-areas:  "a a a" "b b b" "c c d" "e e e";
+    grid-template-areas:  "name name name" "desc desc desc" "rating rating enrolled" "tags tags tags";
 
 }
 
 .course-info #course-name{
-    grid-area: a;
+    grid-area: name;
 }
 
 /* TODO: Limit number of characters then apply readmore */
 .course-info #desc{
-    grid-area: b;
+    grid-area: desc;
 
 
 
 }
 
 .course-info #rating{
-    grid-area: c;
+    grid-area: rating;
 
     font-weight: var(--fw-light);
 
@@ -599,12 +600,12 @@ footer nav ul li{
     font-size: 1.5rem;
     font-weight: var(--fw-bold);
 
-    grid-area: d;
+    grid-area: enrolled;
 }
 
 .course-info #tags{
 
-    grid-area: e;
+    grid-area: tags;
 
     display: flex;
     justify-content: center;
@@ -680,47 +681,79 @@ footer nav ul li{
 
 }
 
-.review .course-owner{
+/* Star rating mechanism */
 
-    float: right;
-    text-align: right;
-
-    background-color: var(--clr-bg-midtone);
-
-
+.star-rating {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.star-rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.star-rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+}
+.star-rating:not(:checked) > label:before {
+    content: url(../img/star-regular.svg);
+}
+.star-rating > input:checked ~ label {
+    color: #ffc700;    
+}
+.star-rating:not(:checked) > label:hover,
+.star-rating:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.star-rating > input:checked + label:hover,
+.star-rating > input:checked + label:hover ~ label,
+.star-rating > input:checked ~ label:hover,
+.star-rating > input:checked ~ label:hover ~ label,
+.star-rating > label:hover ~ input:checked ~ label {
+    color: #c59b08;
 }
 
+/* Desktop tweaks */
 @media screen and (min-width: 950px){
-
-    .course-bg-banner{
-        display: block;
-    }
 
     .course-page{
 
         display: grid;
-        grid-template-areas: "lessons course-info" "reviews course-info";
-        grid-template-columns: 2fr 1fr;
+        grid-template-areas: "course-info course-info" "lessons reviews";
+        grid-template-columns: 3fr 1fr;
+        row-gap: 1rem;
+        column-gap: 5rem;
+
+        align-items: start;
+
+        padding-inline: 10%;
+        padding-block-end: 2rem;
 
     }
 
     .course-info{
-
-        max-width: 30rem;
-        float: right;
-
         grid-area: course-info;
 
     }
 
     .module-container{
-
         grid-area: lessons;
 
     }
 
     .reviews{
         grid-area: reviews;
+    }
+
+    .course-info{
+
+        grid-template-areas: "name . ." "desc rating enrolled" "tags . .";
+        grid-template-columns: 6fr 2fr 1fr;
     }
 
 }
