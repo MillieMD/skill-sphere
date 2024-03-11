@@ -56,9 +56,4 @@ function createQuestionAndAnswer($quizId, $questionType, $questionText, $answerT
     $sql = "UPDATE questions SET answer_id = $last_idAnswer WHERE question_id = $last_id";
     $conn->query($sql);
 }
-
-createAnswer(20, "answer", TRUE, $conn);
-echo(createQuiz("test", $conn));
-
-
 ?>
