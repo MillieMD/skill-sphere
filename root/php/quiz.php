@@ -56,4 +56,54 @@ function createQuestionAndAnswer($quizId, $questionType, $questionText, $answerT
     $sql = "UPDATE questions SET answer_id = $last_idAnswer WHERE question_id = $last_id";
     $conn->query($sql);
 }
+
+/*  Selects all questions that belong to the quiz ID provided.
+    returns the IDs of questions in an array
+*/
+function getQuestions($quizId, $conn) {
+    $sql = "SELECT question_id FROM questions WHERE quiz_id = $quizId";
+    $result = $conn->query($sql);
+    $resultArray = array();
+    while ($row = $result -> fetch_assoc()) {
+        array_push($resultArray, $row["question_id"]);
+    }
+    return $resultArray;
+}
+/*
+    returns all answers for the provided question regardless of correctness
+    stores results in an array
+*/
+function getAnswer($questionId, $conn) {
+    $sql = "SELECT answer_id FROM answers WHERE question_id = $questionId";
+    $result = $conn->query($sql);
+    $resultArray = array();
+    while ($row = $result -> fetch_assoc()) {
+        array_push($resultArray, $row["answer_id"]);
+    }
+    return $resultArray;
+    
+}
+
+function checkAnswer($questionId, $conn) {
+
+}
+
+function startQuiz($quizId, $conn) {
+    $questions = array();
+    $questions = getQuestions($quizId, $conn);
+
+    while ($questions) {
+
+    } 
+}
+$answers =  getAnswer(20, $conn);
+echo $answers[1];
+
+/*
+$sql = "SELECT question_type FROM questions WHERE question_id = $questionId";
+    $questionType = $conn ->query($sql);
+    if ($questionType == "single Answer") {
+        return $result;
+    }
+*/
 ?>
