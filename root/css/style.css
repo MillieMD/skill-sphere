@@ -616,7 +616,7 @@ footer nav ul li{
     gap: 0.5rem;
 }
 
-.tag{
+#tags a{
     background-color: var(--clr-secondary-midtone);
     border: 1px solid var(--clr-main);
 
@@ -629,6 +629,8 @@ footer nav ul li{
 
 
 }
+
+/* TODO: full tag link styling */
 
 /* Module container is an accordian menu, module-content are the panels, module are the buttons */
 .module-container{
