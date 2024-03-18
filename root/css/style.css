@@ -37,8 +37,8 @@
         --clr-star: #ffbb00;
 
         /* Shadows */
-        --shdw-light: 0 0 8px 1px rgb(0 0 0 / 0.25);
-        --shdw-dark: 0.1rem 0.1rem 0.1rem 0.1rem rgb(0 0 0 / 0.33);
+        --shdw-light: 1 1 8px -8px rgb(0 0 0 / 0.25);
+        --shdw-dark: 1px 1px 10px -10px rgba(34,32,32,1);
     }
 
 }
@@ -48,8 +48,8 @@
     /* Dark mode colours */
     :root{
 
-        --clr-background: #150a03;
-        --clr-bg-midtone: #111111; /* Middle grey */
+        --clr-background: #222020;
+        --clr-bg-midtone: #333030; /* Middle grey */
 
         --clr-text: #fefefe;
         
@@ -62,8 +62,8 @@
         --clr-star: #ffbb00;
 
         /* Shadows */
-        --shdw-light: 0 0 8px 4px rgb(255 255 255 / 0.25);
-        --shdw-dark: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        /* --shdw-light: 0 0 8px 4px rgb(255 255 255 / 0.25);
+        --shdw-dark: rgba(255 255 255/ 0.1) 0px 4px 12px; */
         /* SOURCE: */
 }
 
@@ -820,6 +820,63 @@ input:placeholder-shown{
 
 input[type = "checkbox"]{
     accent-color: var(--clr-main);
+}
+
+textarea{
+    background-color: var(--clr-background);
+
+    border-radius: 0.5rem;
+    border: 2px solid var(--clr-text);
+
+    padding: 0.3rem;
+    margin-bottom: 1.5rem;
+
+    color: var(--clr-text);
+
+    caret-color: var(--clr-text);
+}
+
+textarea:placeholder-shown{
+    border: 2px dotted var(--clr-text);
+}
+
+/* COURSE CREATION */
+
+.course-creator{
+    display:grid;
+    margin: 0 auto;
+
+    row-gap: 1rem;
+}
+
+.course-creator #course-details{
+    background-color: var(--clr-bg-midtone);
+    padding: 1rem;
+    border-radius: 1rem;
+
+    display: grid;
+    grid-template-areas: "name ." "desc desc";
+}
+
+#course-detials #course-name{
+    grid-area: name;
+}
+
+#course-details #course-desc{
+    grid-area: desc;
+}
+
+.new-module{
+    background-color: var(--clr-bg-midtone);
+    padding: 1rem;
+    border-radius: 1rem;
+}
+
+.new-module .type-radio{
+    border: 2px black;
+
+    padding: 2rem;
+
 }
 
 
