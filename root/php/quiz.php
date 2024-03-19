@@ -81,23 +81,42 @@ function getAnswer($questionId, $conn) {
         array_push($resultArray, $row["answer_id"]);
     }
     return $resultArray;
-    
 }
 
 function checkAnswer($questionId, $conn) {
-
 }
 
 function startQuiz($quizId, $conn) {
     $questions = array();
     $questions = getQuestions($quizId, $conn);
-
+    /*
+        select question
+        ask for answer
+        user inputs answer
+        check answer 
+        remove question from array
+        select next question
+    */
     while ($questions) {
+        $currentQuestion = $questions[0];
+        $sql = "SELECT question_text FROM questions WHERE question_id = $currentQuestion";
+        $result = $conn->query($sql);
+        $row = $result -> fetch_assoc();
+        echo" ";
+        echo $row["question_text"];
+        $answer = getAnswer($questions[0], $conn);
+        // Take input using html form
+
+
+        array_splice($questions, 0, 1);
 
     } 
 }
+
 $answers =  getAnswer(20, $conn);
 echo $answers[1];
+
+startQuiz(13, $conn);
 
 /*
 $sql = "SELECT question_type FROM questions WHERE question_id = $questionId";
