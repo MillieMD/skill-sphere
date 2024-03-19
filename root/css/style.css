@@ -831,12 +831,10 @@ textarea:placeholder-shown{
 /* COURSE CREATION */
 
 .course-creator{
-    display:grid;
     margin: 0 auto;
-
     min-width: 40%;
 
-    row-gap: 1rem;
+
 }
 
 .course-creator #course-details{
@@ -846,21 +844,27 @@ textarea:placeholder-shown{
 
     display: grid;
     grid-template-areas: "name ." "desc desc";
+    row-gap: 1rem;
 }
 
-#course-detials #course-name{
+.course-creator #course-details #course-name{
     grid-area: name;
 }
 
-#course-details #course-desc{
+.course-creator #course-details #course-desc{
     grid-area: desc;
 }
 
 .new-module{
+    display: grid;
+    row-gap: 1rem;
+
     background-color: var(--clr-bg-midtone);
     padding: 1rem;
     border-radius: 1rem;
 }
+
+
 
 .new-module .type-radio{
     border: 2px black;

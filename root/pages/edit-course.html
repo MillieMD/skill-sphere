@@ -118,7 +118,7 @@
 
                 <!-- MODULE TYPE SELECTOR (radio buttons) -->
 
-                <div id = "way">
+                <div id = "type">
 
                     <label for = "module-type"> Text </label>
                     <input type="radio" name="module-type-0" value = "text" onclick = "setType('text', 0)" checked = "true" class = "type-radio">
@@ -129,18 +129,18 @@
 
                 </div>
 
-                <textarea  id="module-0-content" cols="80" rows="15" placeholder="Course content..."></textarea>
+                <textarea class = "content" id="module-0-content" placeholder="Course content..."></textarea>
                 
                 <!-- MODULE CONTENT -->
 
             </div>
 
+            <button id = "new-module-button" class="primary-button" onclick="addNewModule()" type = "button"> New Module </button>
+
+            <button class="secondary-button"> Save Course </button>
+
 
         </form>
-
-        <button class="primary-button" onclick="addNewModule()" type = "button"> New Module </button>
-
-        <button class="primary-button"> Save Course </button>
 
     </main>
 
@@ -195,8 +195,6 @@
                 case 'text':
 
                     newContent = document.createElement("textarea");
-                    newContent.setAttribute("cols", 80);
-                    newContent.setAttribute("rows", 15);
                     newContent.setAttribute("placeholder", "Course content...")
                     break;
 
@@ -244,7 +242,11 @@
             t.setAttribute("name", "module-type-"+moduleCount);
             t.setAttribute("value", "text");
             t.setAttribute("onclick", "setType('text', "+moduleCount+")");
-            t.setAttribute("clicked", "true");
+            t.setAttribute("checked", "true");
+
+            let tLabel = document.createElement("label");
+            tLabel.setAttribute("for", "module-type-"+moduleCount);
+            tLabel.innerHTML = "Text";
 
             let v = document.createElement("input");
             v.setAttribute("type", "radio");
@@ -252,15 +254,28 @@
             v.setAttribute("value", "video");
             v.setAttribute("onclick", "setType('video', "+moduleCount+")");
 
+            let vLabel = document.createElement("label");
+            vLabel.setAttribute("for", "module-type-"+moduleCount);
+            vLabel.innerHTML = "Video";
+
             let q = document.createElement("input");
             q.setAttribute("type", "radio");
             q.setAttribute("name", "module-type-"+moduleCount);
             q.setAttribute("value", "quiz");
             q.setAttribute("onclick", "setType('quiz', "+moduleCount+")");
+
+            let qLabel = document.createElement("label");
+            qLabel.setAttribute("for", "module-type-"+moduleCount);
+            qLabel.innerHTML = "Quiz";
             
+            type.append(tLabel);
             type.append(t);
+            type.append(vLabel);
             type.append(v);
+            type.append(qLabel);
             type.append(q);
+
+            type.id = "type";
 
             let content = document.createElement("div");
             content.id = "module-"+moduleCount+"-content";
@@ -269,7 +284,7 @@
             m.append(type);
             m.append(content);
 
-            form.append(m);
+            document.getElementById("new-module-button").insertAdjacentElement("beforebegin", m);
 
             setType("text", moduleCount);
 
