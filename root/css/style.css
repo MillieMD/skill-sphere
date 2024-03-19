@@ -105,6 +105,7 @@ body{
     min-height: 100%;
 
     background-color: var(--clr-background);
+    color: var(--clr-text);
 }
 
 img{
@@ -117,10 +118,6 @@ video{
 }
 
 /* == TYPOGRAPHY == */
-
-h1, h2, h3, h4, h5, p, small{
-    color: var(--clr-text)
-}
 
 h1, h2, h3, h4, h5 {
     font-weight: var(--fw-bold);
@@ -148,7 +145,6 @@ small {font-size: 0.833rem; }
 /* Links */
 
 a{
-    font-family: "Poppins";
     color:var(--clr-text);
 }
 
@@ -174,10 +170,6 @@ a:active{
 }
 
 /* == ICONS == */
-
-i{
-    color: var(--clr-text);
-}
 
 .fa-star{
     color: var(--clr-star);
@@ -335,7 +327,7 @@ nav ul{
 
     transform: translateY(-100%);
     background-color: var(--clr-background);
-    color:var(--clr-main);
+    color:var(--clr-main);  
 
     transition: transform 0.3s;
 
@@ -390,6 +382,7 @@ header div{
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: center;
 }
 
 header div * {
@@ -520,12 +513,6 @@ footer nav ul li{
     padding: 2vw;
 }
 
-
-.link-directory p{
-    color: var(--clr-text);
-}
-
-
 /* PROFILE */
 
 #user-info{
@@ -623,10 +610,6 @@ footer nav ul li{
 #tags a{
     background-color: var(--clr-secondary-midtone);
     border: 1px solid var(--clr-main);
-
-    color: var(--clr-text);
-
-    text-decoration: dotted var(--clr-main);
 
     margin: 0.25rem;
     padding: 0.1rem
@@ -798,6 +781,8 @@ footer nav ul li{
 form{
 
     width: fit-content;
+    display: grid;
+    row-gap: 1rem;
 
 }
 
@@ -808,7 +793,6 @@ input{
     border: 2px solid var(--clr-text);
 
     padding: 0.3rem;
-    margin-bottom: 1.5rem;
 
     color: var(--clr-text);
 
