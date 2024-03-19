@@ -1,0 +1,825 @@
+/* CONTENTS
+
+1. Colour, Font weight, Defaults 
+2. Typography (inc. Link styling)
+3. Icons
+4. Buttons 
+5. Sections 
+    5.1 General/ Utilities
+    5.1 Navigation
+    5.2 Header
+    5.3 Footer
+    5.4 Home Page Hero Image
+    5.5 Course cards
+    5.6 Link Directory 
+    5.7 Profile
+6. Inputs/Forms
+*/
+
+/* == DEFAULTS == */
+
+/* Light mode colours */
+@media (prefers-color-scheme: light){
+
+    :root{
+
+        --clr-background: #f5f5f5; /* Light grey */
+        --clr-bg-midtone: #fefefe; 
+
+        --clr-text: #150a03;
+
+        --clr-main: rgba(255, 123, 00, 1);/*#ff7b00;  Bright orange */
+        --clr-secondary-midtone: rgba(255, 123, 00, 0.5);
+        --clr-secondary-light: rgba(255, 123, 00, 0.25);/* Lighter orange*/
+
+        --clr-error: #9f1818; /* Red */
+        --clr-success: #03b0b6; /* Blue */
+        --clr-star: #ffbb00;
+
+        /* Shadows */
+        --shdw-light: 0 0 8px 1px rgb(0 0 0 / 0.25);
+        --shdw-dark: 0.1rem 0.1rem 0.1rem 0.1rem rgb(0 0 0 / 0.33);
+    }
+
+}
+
+@media (prefers-color-scheme: dark){
+    
+    /* Dark mode colours */
+    :root{
+
+        --clr-background: #150a03;
+        --clr-bg-midtone: #111111; /* Middle grey */
+
+        --clr-text: #fefefe;
+        
+        --clr-main: #ff7b00; /* Bright orange */
+        --clr-secondary-midtone: #ffa048af; /* Dark orange */
+        --clr-secondary-light: #ff7b0038; /* Darker orange*/
+
+        --clr-error: #9f1818; /* Red */
+        --clr-success: #72faff; /* Blue */
+        --clr-star: #ffbb00;
+
+        /* Shadows */
+        --shdw-light: 0 0 8px 4px rgb(255 255 255 / 0.25);
+        --shdw-dark: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+        /* SOURCE: */
+}
+
+}
+
+/* Font weights */
+:root{
+    
+    --fw-bold: 700;
+    --fw-reg: 400;
+    --fw-light: 200;
+}
+
+*, *:before, *::after{
+    box-sizing: border-box;
+
+    padding: 0;
+    margin: 0;
+}
+
+html {
+
+    height: 100%;
+
+    text-size-adjust:100%;
+    -webkit-text-size-adjust:100%;
+    -moz-text-size-adjust:100%;
+
+    overflow-x: hidden;
+
+    font-family: "Poppins";
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    min-height: 100%;
+
+    background-color: var(--clr-background);
+}
+
+img{
+    width:100%;
+    object-fit: contain;
+}
+
+video{
+    max-width: 100%;
+}
+
+/* == TYPOGRAPHY == */
+
+h1, h2, h3, h4, h5, p, small{
+    color: var(--clr-text)
+}
+
+h1, h2, h3, h4, h5 {
+    font-weight: var(--fw-bold);
+}
+
+/* Font scale factor: 1.250 */
+
+h1 {font-size: 2.489rem; }
+
+h2 {font-size: 2.074rem; }
+
+h3 {font-size: 1.728rem; }
+
+h4 {font-size: 1.440rem; }
+
+h5 {font-size: 1.200rem; }
+
+p {
+    font-size: 1rem; 
+
+}
+
+small {font-size: 0.833rem; }
+
+/* Links */
+
+a{
+    font-family: "Poppins";
+    color:var(--clr-text);
+}
+
+a:link{
+    text-decoration-style: dotted;
+    text-decoration-color: var(--clr-main);
+}
+
+a:visited{
+    text-decoration-style: dotted;
+    text-decoration-color: var(--clr-main);
+
+}
+
+a:hover{
+    text-decoration-style: solid;
+    text-decoration-color: var(--clr-success);
+}
+
+a:active{
+    text-decoration-style: solid;
+    text-decoration-color: var(--clr-success);
+}
+
+/* == ICONS == */
+
+.fa-star{
+    color: var(--clr-star);
+}
+
+/* == BUTTONS == */
+
+button{
+
+    border-radius: 0.1em;
+    padding: 0.5rem;
+
+    font-weight: var(--fw-bold);
+    
+    transition: all ease-in-out 0.2s;
+}
+
+button:hover{
+    transform: scale(1.1);
+
+}
+
+.primary-button{
+    
+    color: var(--clr-background);
+    background-color: var(--clr-main);
+    border: 2px solid transparent;
+}
+
+.primary-button:hover{
+    cursor: pointer;
+    background-color: var(--clr-success);
+}
+
+.secondary-button{
+
+    color: var(--clr-main);
+    background-color: var(--clr-bg-midtone);
+    border: 2px solid;
+}
+
+.secondary-button:hover{
+    cursor: pointer;
+    color: var(--clr-success);
+}
+
+.invisible-button{
+    border: none;
+    background-color: transparent;
+    color: var(--clr-main);
+}
+
+.invisible-button:hover{
+    cursor: pointer;
+    color: var(--clr-success);
+}
+
+
+/* === SECTIONS === */
+
+
+/* UTILITIES */
+
+.flex-row{
+    display: flex;
+    flex-direction: row;
+}
+
+.flex-col{
+    display: flex;
+    flex-direction: column;
+}
+
+.grid{
+    display: grid;
+    gap: 2rem;
+    padding: 1rem;
+}
+
+/* Devasting... attr() cannot be used to specify variables :( */
+@media screen and (min-width: 900px){
+
+    .grid[data-direction = "horizontal"]{
+        grid-template-columns: repeat(4, 1fr);
+
+    }
+
+    .grid[data-direction = "veritcal"]{
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+}
+
+.centre-self{
+    margin: 0 auto;
+}
+
+.centre-content{
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    vertical-align: middle;
+    
+    text-align: center;
+}
+
+/* Used for centering <p> */
+.limit-chars{
+    display: inline-block;
+    max-width: 80ch;
+}
+
+.card{
+
+    background-color: var(--clr-bg-midtone);
+    box-shadow: var(--shdw-dark);
+    border-radius: 1rem;
+
+    transition: all ease-in-out 0.2s;
+
+    padding: 1rem;
+
+}
+
+/* Card goes "up" */
+.card[hover = "true"]:hover{
+
+    transform: scale(1.1);
+    box-shadow: var(--shdw-light);
+
+}
+
+.stacked{
+    display: grid;
+}
+
+.stacked * {
+    grid-column: 1 / 2;
+    grid-row: 1/ 2;
+
+}
+
+/* NAVIGATION */
+
+nav ul{
+    list-style: none;
+    font-family: "Poppins";
+}
+
+.skip-link{
+    top:0;
+    left:0;
+    z-index: 100; /* Always be the top most element*/
+    position: absolute;
+
+    transform: translateY(-100%);
+    background-color: var(--clr-background);
+    color:var(--clr-main);
+
+    transition: transform 0.3s;
+
+    padding: 1rem 1rem; 
+}
+
+.skip-link:focus{
+    transform: translateY(0%);
+}
+
+/* HEADER */
+
+header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    z-index: 50;
+    position:sticky;
+    top: 0;
+
+    width: 100%;
+
+    background-color: var(--clr-bg-midtone);
+    box-shadow: var(--shdw-dark);
+}
+
+/* Change header on different screen sizes */
+#mobile-header{
+    display: flex;
+    padding: 1vw;
+}
+
+#desktop-header{
+    display: none;
+}
+
+@media screen and (min-width: 900px) {
+
+    #mobile-header{
+        display: none;
+    }
+    
+    #desktop-header{
+        display: flex;
+    }
+ 
+}
+
+header div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+header div * {
+    padding: 1rem;
+}
+
+.side-nav{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+
+    height: 100vh;
+    width: 73vw;
+
+    z-index: 75;
+    top: 0;
+    right: 0;
+    position: fixed;
+
+    background-color: var(--clr-background);
+
+    transform: translateX(100%);
+    transition: ease-in-out 0.5s;
+}
+
+.side-nav .side-nav-content{
+    display: flex;
+    flex-direction: column;
+    height:  100%;
+    justify-content: space-between;
+
+    padding: 5vw;
+}
+
+.dark-overlay{
+    display: none;
+    position: fixed;
+    height: 100%;
+    width: 100%;
+
+    z-index: 74; /* Just below side nav*/
+
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+/* FOOTER */
+
+footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+
+    width: 100%;
+    
+    padding: 2vw;
+
+    background-color: var(--clr-secondary-midtone);
+}
+
+footer nav ul li{
+    float: left;
+    padding: 2vw;
+}
+
+/* Home Page Banner */
+
+.hero-image{
+    height: 100vh;
+}
+
+.hero-image img{
+    height: 100%;
+    object-fit: cover; /* Crop image if too big */
+}
+
+.image-text-position-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: absolute;
+    top: 0;
+    z-index: 10;
+
+    width: 100%;
+    height: 100%;
+
+}
+
+.image-text-box{
+    justify-content: space-between;
+
+    max-width: 95%;
+    padding: 3rem;
+    margin: 1rem;
+
+}
+
+.image-text-box *{
+    padding: 0.75rem;
+}
+
+/* Course Cards */
+
+.course{
+    padding: 1rem;
+
+    transition: all ease-in-out 0.2s;
+
+}
+
+.course img {
+    aspect-ratio: 2/1;
+}
+
+.course .card-info{
+    background-color: var(--clr-bg-midtone);
+    align-self: end;
+}
+
+/* Directory */
+
+.link-directory{
+    background-color: var(--clr-secondary-light);
+    text-align: left;
+    padding: 2vw;
+}
+
+
+.link-directory p{
+    color: var(--clr-text);
+}
+
+
+/* PROFILE */
+
+#user-info{
+    height: fit-content;
+}
+
+.profile{
+    display: grid;
+    justify-items: center;
+    text-align: center;
+}
+
+@media screen and (min-width: 900px){
+    
+    .profile{
+        grid-template-columns: 1fr 2fr;
+        margin: 5vw;
+    }
+
+    .profile #user-info{
+        grid-row: span 2;
+    }
+    
+}
+
+.badge-container{
+    --badge-columns: 3;
+    display: grid;
+    grid-template-columns: repeat(var(--badge-columns), 1fr);
+    gap: 1vw;
+
+    margin: 1rem;
+
+}
+
+/* COURSE PAGE */
+
+.course-page{
+    padding: 5%;
+}
+
+.course-info{
+    display: grid;
+
+    background-color: var(--clr-secondary-light);
+    margin: 1rem;
+    padding: 2%;
+
+    border: 2px solid var(--clr-secondary-midtone);
+
+    grid-template-areas:  "name name name" "desc desc desc" "rating rating enrolled" "tags tags tags";
+
+}
+
+.course-info #course-name{
+    grid-area: name;
+}
+
+/* TODO: Limit number of characters then apply readmore */
+.course-info #desc{
+    grid-area: desc;
+
+
+
+}
+
+.course-info #rating{
+    grid-area: rating;
+
+    font-weight: var(--fw-light);
+
+}
+
+.course-info #enrolled{
+
+    font-size: 1.5rem;
+    font-weight: var(--fw-bold);
+
+    grid-area: enrolled;
+}
+
+.course-info #tags{
+
+    grid-area: tags;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    flex-wrap: wrap;
+
+    gap: 0.5rem;
+}
+
+#tags a{
+    background-color: var(--clr-secondary-midtone);
+    border: 1px solid var(--clr-main);
+
+    color: var(--clr-text);
+
+    text-decoration: dotted var(--clr-main);
+
+    margin: 0.25rem;
+    padding: 0.1rem
+
+
+}
+
+/* TODO: full tag link styling */
+
+/* Module container is an accordian menu, module-content are the panels, module are the buttons */
+.module-container{
+    background-color: var(--clr-bg-midtone);
+    border: 1px solid var(--clr-text); /* CHANGE */
+}
+
+.module-container .module{
+
+    border: 1px solid var(--clr-text);
+
+}
+
+.module-container .completed::before{
+    content: url("../img/check-solid.svg");
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    float: left;
+
+    margin: 0.2rem;
+}
+
+/* Chevron indicator from font-awesome */
+.module-container .module::after{
+    content: url("../img/chevron-down-solid.svg");
+    display: inline-block;
+    height: 1em;
+    width: 1em;
+    float: right;
+
+    transition: 0.5s ease-in-out;
+    margin: 0.2rem;
+}
+
+/* Rotate to point down on active module */
+.module-container .active-module::after{
+    transform: rotate(-90deg);
+
+}
+
+.module-content{
+    transition: all 0.3s ease-in-out;
+    overflow:hidden;
+    max-height: 0;
+}
+
+.review{
+
+    float: left;
+    text-align: left;
+
+    background-color: var(--clr-secondary-light);
+
+    min-width: 50%;
+
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 0.5rem;
+
+}
+
+/* Star rating mechanism */
+
+.star-rating {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.star-rating:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.star-rating:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+}
+.star-rating:not(:checked) > label:before {
+    content: url(../img/star-regular.svg);
+}
+.star-rating > input:checked ~ label {
+    color: #ffc700;    
+}
+.star-rating:not(:checked) > label:hover,
+.star-rating:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.star-rating > input:checked + label:hover,
+.star-rating > input:checked + label:hover ~ label,
+.star-rating > input:checked ~ label:hover,
+.star-rating > input:checked ~ label:hover ~ label,
+.star-rating > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+/* Desktop tweaks */
+@media screen and (min-width: 950px){
+
+    .course-page{
+
+        display: grid;
+        grid-template-areas: "course-info course-info" "lessons reviews";
+        grid-template-columns: 3fr 1fr;
+        row-gap: 1rem;
+        column-gap: 5rem;
+
+        align-items: start;
+
+        padding-inline: 10%;
+        padding-block-end: 2rem;
+
+    }
+
+    .course-info{
+        grid-area: course-info;
+
+    }
+
+    .module-container{
+        grid-area: lessons;
+
+    }
+
+    .reviews{
+        grid-area: reviews;
+    }
+
+    .course-info{
+
+        grid-template-areas: "name . ." "desc rating enrolled" "tags . .";
+        grid-template-columns: 6fr 2fr 1fr;
+    }
+
+}
+
+/* ABOUT */
+
+.team-carousel{
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: space-evenly;
+
+    gap: 3rem;
+
+}
+
+@media screen and (min-width: 900px){
+    .team-carousel{
+        flex-direction: row;
+    }
+}
+
+/* INPUTS */
+
+form{
+
+    width: fit-content;
+
+}
+
+input{
+    background-color: var(--clr-background);
+
+    border-radius: 0.5rem;
+    border: 2px solid var(--clr-text);
+
+    padding: 0.3rem;
+    margin-bottom: 1.5rem;
+
+    color: var(--clr-text);
+
+    caret-color: var(--clr-text);
+
+}
+
+input:placeholder-shown{
+
+    border: 2px dotted var(--clr-text);
+
+}
+
+input[type = "checkbox"]{
+    accent-color: var(--clr-main);
+}
+
+
