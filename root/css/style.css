@@ -834,7 +834,7 @@ textarea:placeholder-shown{
     display:grid;
     margin: 0 auto;
 
-    width: 40%;
+    min-width: 40%;
 
     row-gap: 1rem;
 }
