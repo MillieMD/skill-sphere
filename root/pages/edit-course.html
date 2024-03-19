@@ -121,11 +121,11 @@
                 <div id = "way">
 
                     <label for = "module-type"> Text </label>
-                    <input type="radio" name="module-type" value = "text" onclick = "setType('text', 0)" checked = "true" class = "type-radio">
+                    <input type="radio" name="module-type-0" value = "text" onclick = "setType('text', 0)" checked = "true" class = "type-radio">
                     <label for = "module-type"> Video </label>
-                    <input type = "radio" name = "module-type" value = "video" onclick = "setType('video', 0)" class = "type-radio">
+                    <input type = "radio" name = "module-type-0" value = "video" onclick = "setType('video', 0)" class = "type-radio">
                     <label for = "module-type"> Quiz </label>
-                    <input type="radio" name="module-type" value="quiz" onclick = "setType('quiz', 0)" class = "type-radio">
+                    <input type="radio" name="module-type-0" value="quiz" onclick = "setType('quiz', 0)" class = "type-radio">
 
                 </div>
 
@@ -241,20 +241,20 @@
 
             let t = document.createElement("input");
             t.setAttribute("type", "radio");
-            t.setAttribute("name", "module-type");
+            t.setAttribute("name", "module-type-"+moduleCount);
             t.setAttribute("value", "text");
             t.setAttribute("onclick", "setType('text', "+moduleCount+")");
             t.setAttribute("clicked", "true");
 
             let v = document.createElement("input");
             v.setAttribute("type", "radio");
-            v.setAttribute("name", "module-type");
+            v.setAttribute("name", "module-type-"+moduleCount);
             v.setAttribute("value", "video");
             v.setAttribute("onclick", "setType('video', "+moduleCount+")");
 
             let q = document.createElement("input");
             q.setAttribute("type", "radio");
-            q.setAttribute("name", "module-type");
+            q.setAttribute("name", "module-type-"+moduleCount);
             q.setAttribute("value", "quiz");
             q.setAttribute("onclick", "setType('quiz', "+moduleCount+")");
             
