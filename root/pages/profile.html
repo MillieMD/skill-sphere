@@ -187,6 +187,13 @@
 
                 </div>
 
+                <!-- BUTTON TO ADD NEW COURSE -->
+                <div class="card stacked centre-content" hover = "true" onclick = "newCourse()">
+
+                    <i class="fa-solid fa-plus fa-2xl"></i>
+
+                </div>
+
             </div>
 
         </section>
@@ -348,6 +355,18 @@
     <script src = "https://kit.fontawesome.com/d90c26d2f3.js" crossorigin="anonymous"></script>
     <!-- Reveals side nav on mobile -->
     <script src = "../js/mobileHeader.js"></script>
+
+    <script>
+
+        function newCourse(){
+
+            console.log("new course");
+
+            window.location.href = "edit-course.html";
+
+        }
+
+    </script>
 
     
 </body>

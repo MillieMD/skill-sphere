@@ -175,6 +175,10 @@ a:active{
 
 /* == ICONS == */
 
+i{
+    color: var(--clr-text);
+}
+
 .fa-star{
     color: var(--clr-star);
 }
