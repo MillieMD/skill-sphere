@@ -14,8 +14,11 @@
     <title> USERNAME's Profile </title>
     <link href = "../img/logo-small-light.svg" rel = "icon" media = "prefers-color-scheme: light">
     <link href = "../img/logo-small-dark.svg" rel = "icon" media = "prefers-color-scheme: dark">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" src="../js/Encryption.js"></script>
+    <script type="text/javascript"  src="../js/cookieControl.js"></script>
 </head>
-<body>
+<body onload="getCookie('Username', 'username'); getCookie('Joindate', 'datejoined')">
 
     <a href="#main" class="skip-link" id="skip-link" tabindex="0"> Skip to main content </a>
 
@@ -23,7 +26,7 @@
 
         <div>
 
-            <a href = "../index.html"><h1> Skill Sphere </h1></a>
+            <a href = "../index.php"><h1> Skill Sphere </h1></a>
 
             <a href = "#"> <button class = "secondary-button"> Browse Categories </button> </a>
 
@@ -42,7 +45,7 @@
 
     <header id = "mobile-header"> <!-- Header for sizes under : 950px-->
 
-        <a href = "../index.html"><h1> Skill Sphere </h1> </a>
+        <a href = "../index.php"><h1> Skill Sphere </h1> </a>
 
         <button class = "invisible-button" onclick = "showSideNav()">
             <i class="fa-solid fa-bars"></i>
@@ -78,13 +81,7 @@
 
             <nav>
 
-                <ul>
-
-                    <li> <a href = "profile.html"> View Profile </a> </li>
-                    <li> <a href = "login.html"> Log In </a> </li>
-                    <li> <a href = "register.html"> Register </a> </li>
-
-                </ul>
+ 
 
             </nav>
 
@@ -104,7 +101,7 @@
 
             <p> Enrolled in <strong> NUMBER </strong> courses </p>
 
-            <p> Joined in <strong> MONTH YEAR </strong></p>
+            <p id = "datejoined"> Joined in <strong> MONTH YEAR </strong></p>
 
             <div class = "badge-container" id = "badge container">
 
