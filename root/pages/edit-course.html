@@ -131,7 +131,7 @@
 
                 <textarea class = "content" id="module-0-content" placeholder="Course content..."></textarea>
                 
-                <!-- MODULE CONTENT -->
+                <button class = "secondary-button" onclick = "deleteModule(0)" type = "button"> Remove </button>
 
             </div>
 
@@ -187,6 +187,9 @@
             let oldContent = document.getElementById("module-"+moduleNo+"-content");
             oldContent.remove();
 
+            let deleteButton = document.getElementById("delete-module-"+moduleNo);
+            deleteButton.remove();
+
             let newContent;
 
             switch(type)
@@ -219,6 +222,17 @@
             newContent.id = "module-"+moduleNo+"-content";
 
             module.append(newContent);
+
+            deleteButton = document.createElement("button");
+            deleteButton.id = "delete-module-"+moduleNo;
+            deleteButton.classList.add("secondary-button");
+            deleteButton.innerHTML = "Remove module";
+            deleteButton.setAttribute("onclick", "deleteModule("+moduleNo+")");
+            deleteButton.setAttribute("type", "button");
+
+            module.append(deleteButton);
+
+            return false;
 
         }
 
@@ -280,13 +294,30 @@
             let content = document.createElement("div");
             content.id = "module-"+moduleCount+"-content";
 
+            let deleteButton = document.createElement("button");
+            deleteButton.id = "delete-module-"+moduleCount;
+            deleteButton.classList.add("secondary-button");
+            deleteButton.innerHTML = "Remove module";
+            deleteButton.setAttribute("onclick", "deleteModule("+moduleCount+")");
+            deleteButton.setAttribute("type", "button");
+
             m.append(name);
             m.append(type);
+            m.append(deleteButton);
             m.append(content);
+
 
             document.getElementById("new-module-button").insertAdjacentElement("beforebegin", m);
 
             setType("text", moduleCount);
+
+            return false;
+        }
+
+        function deleteModule(id)
+        {
+            let module = document.getElementById("module-"+id);
+            module.remove();
 
             return false;
         }
