@@ -810,6 +810,13 @@ input[type = "checkbox"]{
     accent-color: var(--clr-main);
 }
 
+
+input[type = "radio"]
+{
+    accent-color: var(--clr-main);
+}
+
+
 textarea{
     background-color: var(--clr-background);
 
@@ -864,13 +871,61 @@ textarea:placeholder-shown{
     border-radius: 1rem;
 }
 
-
-
 .new-module .type-radio{
     border: 2px black;
 
     padding: 2rem;
 
+
+/* QUIZ DISPLAY */
+
+.quiz-wrapper{
+    display: grid;
+    margin: 0 auto;
 }
+
+.quiz-question{
+    padding: 2rem;
+
+    counter-increment: question-number;
+}
+
+.quiz-question *{
+    padding: 0.5rem;
+}
+
+.quiz-question .question-title{
+
+    font-size: 1.8rem;
+
+}
+
+.quiz-question .question-title::before{
+    content: counter(question-number) ". ";
+    color: var(--clr-main);
+}
+
+.quiz-progress
+{
+    display:flex;
+    margin: 5rem;
+}
+
+.quiz-progress .quiz-tracker{
+    flex-grow: 1;
+    margin: 2rem;
+
+    accent-color: var(--clr-main);
+    background-color: var(--clr-bg-midtone);
+
+    border-radius: 1rem;
+    border: none;
+
+}
+
+.quiz-progress label{
+    align-self: center;
+}
+
 
 
