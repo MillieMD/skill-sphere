@@ -1,3 +1,113 @@
+<?php
+
+    require_once "../php/db.php";
+
+    $courses = array();
+    $title;
+
+    if(isset($_GET["category"]))
+    {
+
+        $id = $_GET["category"];
+
+        $sql = $db->prepare("SELECT courseNAME, courseID, AVG(rating) as rating, cat_name
+                            FROM CourseTemplate C 
+                            JOIN courseTagged CT ON CT.course_id = C.courseID
+                            JOIN tags T ON CT.tag_id = T.tag_id
+                            JOIN categories Ca ON T.category_id = Ca.cat_id
+                            LEFT JOIN reviews R ON R.course_id = C.courseID
+                            WHERE cat_id = ?
+                            GROUP BY C.courseID, cat_name;");
+        $sql->bind_param("i", $id);
+        $sql->execute();
+
+        $result = $sql->get_result();
+
+        if($result === FALSE){
+            echo("No courses found");
+        }else{
+
+            $currentid = -1;
+
+            while($row = $result->fetch_assoc())
+            {
+
+                if($currentid != $row["courseID"]){
+                    array_push($courses, $row);
+                    $currentid = $row["courseID"];
+                }
+
+                $title = $row["cat_name"];
+
+            }
+
+        }
+
+    }
+
+    if(isset($_GET["tag"]))
+    {
+
+        $id = $_GET["tag"];
+
+        $sql = $db->prepare("SELECT courseNAME, courseID, AVG(rating) as rating, T.name
+                            FROM CourseTemplate C 
+                            JOIN courseTagged CT ON CT.course_id = C.courseID
+                            JOIN tags T ON CT.tag_id = T.tag_id
+                            LEFT JOIN reviews R ON R.course_id = C.courseID
+                            WHERE T.tag_id = ?
+                            GROUP BY C.courseID, T.name");
+        $sql->bind_param("i", $id);
+        $sql->execute();
+
+        $result = $sql->get_result();
+
+        if($result === FALSE){
+            echo("No courses found");
+        }else{
+
+            $currentid = -1;
+
+            while($row = $result->fetch_assoc())
+            {
+                if($currentid < $row["courseID"]){
+                    array_push($courses, $row);
+                    $currentid = $row["courseID"];
+                }
+
+                $title = $row["name"];
+
+            }
+
+        }
+
+    }
+
+    if(!isset($_GET["category"]) && !isset($_GET["tag"]))
+    {
+
+        $title = "All";
+
+        $sql = $db->prepare("SELECT courseNAME, courseID, AVG(rating) as rating
+            FROM CourseTemplate C LEFT JOIN reviews R ON R.course_id = C.courseID
+            GROUP BY courseID;");
+
+        $sql->execute();
+
+        $result = $sql->get_result();
+
+        if(!$result === FALSE)
+        {
+
+            while($row = $result->fetch_assoc()){
+                array_push($courses, $row);
+            }
+        }
+
+    }
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -134,7 +244,7 @@
 
                 <?php
 
-                   require_once "db.php";
+                   require_once "../php/db.php";
 
                    $sql = $db->prepare("SELECT cat_id, cat_name FROM categories;");
                    $sql->execute();
@@ -146,123 +256,83 @@
                     echo("
                     <a href='browse.php?category=".$row["cat_id"]."'>".$row["cat_name"]."</a>
                     
-                    ")
+                    ");
 
                    }
                 
                 
                 ?>
 
-                <a href="browse">Business</a>
-                <a href="">Art</a>
-                <a href="">Literature</a>
-                <a href="">Mathematics</a>
-
             </div>
 
-            <div id="tags">
+            <?php
 
-                <h4> Tags within CATEGORY </h4>
+                if(isset($_GET["category"])){
 
-            <!-- Tags within current category -->
-                <a href = ""> Python </a>
-                <a href = ""> Programming </a>
+                    $sql = $db->prepare("SELECT tags.name, tags.tag_id
+                                        FROM tags JOIN categories ON (categories.cat_id = tags.category_id)
+                                        WHERE tags.category_id = ?;");
+                    $sql->bind_param("i", $id);
 
-            </div>
+                    $sql->execute();
 
+                    $result = $sql->get_result();
+
+                    echo("<div id='tags'>
+                    <h4> Refine your search further with tags: </h4> ");
+
+                    if($result === FALSE)
+                    {
+                        echo("No tags found for this category...");
+                    }else{
+
+                        while ($row = $result->fetch_assoc())
+                        {
+                            echo("<a href = 'browse.php?tag=".$row["tag_id"]."'>".$row["name"]."</a>");
+                        }
+                    }
+                    echo("</div>");
+                }
+            
+            ?>
 
         </aside>
 
         <section id="results" class = "results">
 
-            <h2> CATEGORY/TAG NAME courses </h2>
+        <h2> <?php echo($title) ?> courses </h2>
 
-            <div class = "grid" data-direction = "horizontal"> 
+        <div  class = "grid" data-direction = "horizontal">
 
-            <div class="course card stacked" hover = true id = "course-id">
-                <div id = "course-info" class = "card-info">
+        <?php
 
-                    <h3 id = "course-name"> Course Name </h3>
-                    <div id = "course-rating">
+                foreach($courses as $course){
 
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i> <!-- fa-solid for full stars -->
-                        <i class="fa-regular fa-star"></i> 
-                        <i class="fa-regular fa-star"></i> <!-- fa-regular for empty stars -->
+                    echo("
+                    <a href = 'course.php?course=".$course["courseID"]."' class='course card stacked' hover = 'true' id = ".$course["courseID"].">
 
-                    </div>
-                </div>
+                    <div id = 'course-info' class = 'card-info'>
 
-            </div>
+                        <h3 id = 'course-name'> ".$course["courseNAME"]." </h3>
+                        <div id = 'course-rating'>");
+                                                    
+                            for($i = 0; $i < $course["rating"]; $i++){
 
-            <div class="course card stacked" hover = true id = "course-id">
-                <div id = "course-info" class = "card-info">
+                                echo("<i class='fa-solid fa-star'></i>");
+                            }
 
-                    <h3 id = "course-name"> Course Name </h3>
-                    <div id = "course-rating">
+                            for($i; $i < 5; $i++){
+                                echo("<i class='fa-regular fa-star'></i>");
+                            }
+                            
+                            
+                        echo("</div> </div> </a>");
 
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i> <!-- fa-solid for full stars -->
-                        <i class="fa-regular fa-star"></i> 
-                        <i class="fa-regular fa-star"></i> <!-- fa-regular for empty stars -->
+                }
+        
+        ?>
 
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="course card stacked" hover = true id = "course-id">
-                <div id = "course-info" class = "card-info">
-
-                    <h3 id = "course-name"> Course Name </h3>
-                    <div id = "course-rating">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i> <!-- fa-solid for full stars -->
-                        <i class="fa-regular fa-star"></i> 
-                        <i class="fa-regular fa-star"></i> <!-- fa-regular for empty stars -->
-
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="course card stacked" hover = true id = "course-id">
-                <div id = "course-info" class = "card-info">
-
-                    <h3 id = "course-name"> Course Name </h3>
-                    <div id = "course-rating">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i> <!-- fa-solid for full stars -->
-                        <i class="fa-regular fa-star"></i> 
-                        <i class="fa-regular fa-star"></i> <!-- fa-regular for empty stars -->
-
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="course card stacked" hover = true id = "course-id">
-                <div id = "course-info" class = "card-info">
-
-                    <h3 id = "course-name"> Course Name </h3>
-                    <div id = "course-rating">
-
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i> <!-- fa-solid for full stars -->
-                        <i class="fa-regular fa-star"></i> 
-                        <i class="fa-regular fa-star"></i> <!-- fa-regular for empty stars -->
-
-                    </div>
-                </div>
-
-            </div>
+        </div>
 
         </section>
 
