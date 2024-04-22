@@ -36,8 +36,15 @@
 
         <div> 
 
-            <a href = "login.html"><button class = "secondary-button" tabindex="-1"> Log in </button></a>
-            <a href = "register.html"><button class = "primary-button" tabindex="-1"> Register </button></a>
+        <?php
+            if(isset($_COOKIE['id'])){
+                echo ('<a href = "pages/course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
+                echo ('<a href = "pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>');
+            }else{
+                echo ('<a href = "pages/login.php"><button class = "secondary-button" tabindex="-1"> Log in </button></a>');
+                echo ('<a href = "pages/register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>');
+            }
+        ?>
 
         </div>
 
@@ -83,9 +90,28 @@
 
                 <ul>
 
-                    <li> <a href = "profile.html"> View Profile </a> </li>
-                    <li> <a href = "login.html"> Log In </a> </li>
-                    <li> <a href = "register.html"> Register </a> </li>
+                <li> 
+                    <?php 
+                   
+                   if(isset($_COOKIE['id'])){
+                       echo ('<a href = "pages/course.php"> Create Course </a>');
+                   }else{
+                       echo ('<a href = "pages/login.php"> Log In </a>');
+                   }
+                   
+                   ?> 
+                   </li>
+                    <li> 
+                    <?php 
+                   
+                   if(isset($_COOKIE['id'])){
+                       echo ('<a href = "pages/profile.php"> View Profile </a>');
+                   }else{
+                       echo ('<a href = "pages/register.php"> Register </a>');
+                   }
+                   
+                   ?>                        
+                    </li>
 
                 </ul>
 
@@ -99,80 +125,39 @@
 
     <main id = "main">
 
-        <form class = "quiz-wrapper"> 
+        <section id="register">
 
-            <div id = "question-0" class = "card quiz-question">
+            <form class = "flex-col card centre-content centre-self">
 
-                <div class = "question-title">
+                <h1> Create Account </h1>
 
-                    Which answer is correct?
+                <label for = "email"> <p> Email: </p> </label>
+                <input type = "email" name = "email"  class = "text-input" id = "email" placeholder="email@email.com">
 
-                </div>
+                <label for = "username"> <p> Username: </p> </label>
+                <input type = "text" name = "username"  class = "text-input" id = "username" placeholder = "Username">
 
-                <div class="answer-option">
+                <label for = "pass"> <p> Password: </p> </label>
+                <input type="password" name="pass" class = "text-input" id = "pass" placeholder="Password">
 
-                    <input type="radio" name="answer-0" id="answer-0" value = "optionA">
-                    <label for="answer-0"> Option A</label>
+                <label for = "pass"> <p> Confirm Password: </p> </label>
+                <input type="password" name="pass" class = "text-input" id = "confirm-pass" placeholder="Confirm Password">
 
-                </div>
+                <span>
+                <input type = "checkbox" id = "terms" name = "terms">
+                <label for="terms"> <p>I have read and agree to the <a href = terms-conditions.html> Terms & Conditions </a> </p></label>
+                </span>
 
-                <div class="answer-option">
+                <p id = "warning" clas = "warning"></p>
 
-                    <input type="radio" name="answer-0" id="answer-1" value = "optionB">
-                    <label for="answer-1"> Option B</label>
+                <button type = "button" onclick = "registerChecks()" class = "primary-button"> Create Account </button>
+                <!-- loginChecks() is located injs/ clientSideAccountValidation.js -->
 
-                </div>
+                <p> Already have an account? <a href = "login.php"> Log in</a></p>
 
-                <div class="answer-option">
+            </form>
 
-                    <input type="radio" name="answer-0" id="answer-2" value = "optionC">
-                    <label for="answer-2"> Option C</label>
-
-                </div>
-
-            </div>
-
-            <div id = "question-1" class = "card quiz-question" style = "display:none">
-
-                <div class = "question-title">
-
-                    Which option is correct?
-
-                </div>
-
-                <div class="answer-option">
-
-                    <input type="radio" name="answer-1" id="answer-0" value = "optionD">
-                    <label for="answer-0"> Option D</label>
-
-                </div>
-
-                <div class="answer-option">
-
-                    <input type="radio" name="answer-1" id="answer-1" value = "optionE">
-                    <label for="answer-1"> Option E</label>
-
-                </div>
-
-                <div class="answer-option">
-
-                    <input type="radio" name="answer-1" id="answer-2" value = "optionF">
-                    <label for="answer-2"> Option F</label>
-
-                </div>
-
-            </div>
-
-            <button class = "primary-button" type = "button"> Next Question </button>
-
-        </form>
-
-        <div class = "quiz-progress">
-
-            <label for="quiz-progress"> Question 1 of 10</label>
-            <progress id = "quiz-progress" class = "quiz-tracker" max = "10" value = "1"> Question 1 of 10 </progress>
-    
-            </div>
+        </section>
 
     </main>
 
@@ -184,7 +169,7 @@
 
             <ul>
 
-                <li><a href = "about.html"> <p> About </p> </a> </li>
+                <li><a href = "about.php"> <p> About </p> </a> </li>
                 <li><a href = "contact"> <p> Contact Us </p> </a> </li>
                 <a><li> Copyright </li></a>
                 <a><li> Privacy Policy </li></a>
@@ -201,11 +186,6 @@
     <script src = "https://kit.fontawesome.com/d90c26d2f3.js" crossorigin="anonymous"></script>
     <!-- Reveals side nav on mobile -->
     <script src = "../js/mobileHeader.js"></script>
-
-    <!-- TODO: -->
-    <!-- Quiz loading from database -->
-    <!-- Next Question function: -->
-    <!-- JS function that moves the style =  "display: inline;" -->
 
     
 </body>

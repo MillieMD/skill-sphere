@@ -32,8 +32,15 @@
 
         <div> 
 
-            <a href = "login.html"><button class = "secondary-button" tabindex="-1"> Log in </button></a>
-            <a href = "register.html"><button class = "primary-button" tabindex="-1"> Register </button></a>
+            <?php
+                if(isset($_COOKIE['id'])){
+                    echo ('<a href = "pages/course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
+                    echo ('<a href = "pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>');
+                }else{
+                    echo ('<a href = "pages/login.php"><button class = "secondary-button" tabindex="-1"> Log in </button></a>');
+                    echo ('<a href = "pages/register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>');
+                }
+            ?>
 
         </div>
 
@@ -79,9 +86,28 @@
 
                 <ul>
 
-                    <li> <a href = "profile.html"> View Profile </a> </li>
-                    <li> <a href = "login.html"> Log In </a> </li>
-                    <li> <a href = "register.html"> Register </a> </li>
+                <li> 
+                    <?php 
+                   
+                   if(isset($_COOKIE['id'])){
+                       echo ('<a href = "pages/course.php"> Create Course </a>');
+                   }else{
+                       echo ('<a href = "pages/login.php"> Log In </a>');
+                   }
+                   
+                   ?> 
+                   </li>
+                    <li> 
+                    <?php 
+                   
+                   if(isset($_COOKIE['id'])){
+                       echo ('<a href = "pages/profile.php"> View Profile </a>');
+                   }else{
+                       echo ('<a href = "pages/register.php"> Register </a>');
+                   }
+                   
+                   ?>                        
+                    </li>
 
                 </ul>
 
@@ -166,7 +192,7 @@
 
             <ul>
 
-                <li><a href = "about.html"> <p> About </p> </a> </li>
+                <li><a href = "about.php"> <p> About </p> </a> </li>
                 <li><a href = "contact"> <p> Contact Us </p> </a> </li>
                 <li><a> Copyright </a> </li>
                 <li><a> Privacy Policy </a> </li>

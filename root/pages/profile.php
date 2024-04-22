@@ -36,8 +36,15 @@
 
         <div> 
 
-            <a href = "login.html"><button class = "secondary-button"> Log in </button></a>
-            <a href = "register.html"><button class = "primary-button"> Register </button></a>
+            <?php
+                if(isset($_COOKIE['id'])){
+                    echo ('<a href = "pages/course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
+                    echo ('<a href = "pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>');
+                }else{
+                    echo ('<a href = "pages/login.php"><button class = "secondary-button" tabindex="-1"> Log in </button></a>');
+                    echo ('<a href = "pages/register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>');
+                }
+            ?>
 
         </div>
 
@@ -81,7 +88,28 @@
 
             <nav>
 
- 
+            <li> 
+                    <?php 
+                   
+                   if(isset($_COOKIE['id'])){
+                       echo ('<a href = "pages/course.php"> Create Course </a>');
+                   }else{
+                       echo ('<a href = "pages/login.php"> Log In </a>');
+                   }
+                   
+                   ?> 
+                   </li>
+                    <li> 
+                    <?php 
+                   
+                   if(isset($_COOKIE['id'])){
+                       echo ('<a href = "pages/profile.php"> View Profile </a>');
+                   }else{
+                       echo ('<a href = "pages/register.php"> Register </a>');
+                   }
+                   
+                   ?>                        
+                    </li>
 
             </nav>
 
@@ -335,7 +363,7 @@
 
             <ul>
 
-                <li><a href = "pages/about.html"> <p> About </p> </a> </li>
+                <li><a href = "pages/about.php"> <p> About </p> </a> </li>
                 <li><a href = "pages/contact"> <p> Contact Us </p> </a> </li>
                 <a><li> Copyright </li></a>
                 <a><li> Privacy Policy </li></a>
@@ -359,7 +387,7 @@
 
             console.log("new course");
 
-            window.location.href = "edit-course.html";
+            window.location.href = "edit-course.php";
 
         }
 
