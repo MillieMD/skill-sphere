@@ -27,7 +27,7 @@
             <a href = "index.php"><h1> Skill Sphere </h1></a>
 
             <!-- Button underneath link is not in tab order, so keyboard users aren't focusing same element twice -->
-            <a href = "#"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a> 
+            <a href = "pages/browse.php"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a> 
 
             <input type = "text" class = "search-bar" placeholder="Search for courses...">
 
@@ -75,7 +75,7 @@
 
                     <ul>
 
-                        <li> <a href = "#"> Browse Categories </a> </li>
+                        <li> <a href = "pages/browse.php"> Browse Categories </a> </li>
 
                     </ul>
 
@@ -256,13 +256,23 @@
         </section>
 
         <!-- Hidden if user is not logged in -->
-        <section id="your-courses" class = "centre-content">
 
-            <h2> Your Courses </h2>
+        <?php
+        
+            if(isset($_COOKIE["Username"]))
+            {
+
+                echo("<section id='your-courses' class = 'centre-content'>
+
+                <h2> Your Courses </h2>");
+
+            }
+        
+        ?>
 
             <div  class = "grid" data-direction = "horizontal">
 
-                <div class="course card stacked" hover = "true" id = "course-id">
+                <a href = "pages/course.php?course=1" class="course card stacked" hover = "true" id = "course-id">
 
                     <img src= "img/courses/course-name.jpg">
 

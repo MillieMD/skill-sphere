@@ -12,16 +12,18 @@
 
     $existCheck = mysqli_query($db, "SELECT * FROM users WHERE username = '".$userName."'");
     if($existCheck != null){
-        $user = mysqli_fetch_row($existCheck);
-        if($user[1] == $passWord){
+        $user = mysqli_fetch_assoc($existCheck);
+
+        if($user["password"] == $passWord){
             //set logged in as true and redirect to profile page
-
-
             setcookie("Username", $userName, 0, "/");
-            setcookie("Email", $user[2], 0, "/");
-            setcookie("Joindate", $user[5], 0, "/");
-            setcookie("id", $user[7], 0, "/");
-            echo "LOGGED_IN";
+
+            setcookie("Email", $user["email"], 0, "/");
+            setcookie("Joindate", $user["joinDate"], 0, "/");
+            setcookie("id", $user["id"], 0, "/");
+
+            echo("Successfully logged in");
+
             
         }else{
             //failed to log in due to wrong password
