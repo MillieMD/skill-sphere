@@ -273,16 +273,13 @@
                 
                     include '../php/retrieveReviews.php';
 
-                    $NUMN_REVIEWS = 3;
-                    $reviews = getReviews($_GET['id'], $NUM_REVIEWS);
-
-                    for($reviews as $current)
+                    foreach($reviews as $current)
                     {
                         echo("
                         
                         <div class='review'>
     
-                        '.$current['username'].'
+                        ".$current["username"]."
     
                         <div class='rating'>
 
@@ -302,7 +299,7 @@
         
                         <div class='review-content'>
         
-                            '.$current['content'].'
+                            ".$current['content']."
         
                         </div>
     
@@ -318,64 +315,7 @@
                         ");
                     }
 
-                
                 ?>
-    
-                <div class='review'>
-    
-                    Username
-
-                    <div class='rating'>
-    
-                        <i class='fa-solid fa-star'></i>
-                        <i class='fa-solid fa-star'></i>
-                        <i class='fa-solid fa-star'></i>
-                        <i class='fa-solid fa-star'></i>
-                        <i class='fa-solid fa-star'></i>
-    
-                    </div>
-    
-                    <div class='review-content'>
-    
-                        I liked it
-    
-                    </div>
-
-                    <button type='button' class = 'invisible-button'>
-
-                        <i class='fa-regular fa-flag'></i> Report this review
-
-                    </button>
-    
-                </div>
-    
-                <div class='review'>
-    
-                    Username 2
-    
-                    <div class='rating'>
-    
-                        <i class='fa-solid fa-star'></i>
-                        <i class='fa-solid fa-star'></i>
-                        <i class='fa-regular fa-star'></i>
-                        <i class='fa-regular fa-star'></i>
-                        <i class='fa-regular fa-star'></i>
-    
-                    </div>
-    
-                    <div class='review-content'>
-    
-                        I didn't
-    
-                    </div>
-
-                    <button type='button' class = 'invisible-button'>
-
-                        <i class='fa-regular fa-flag'></i> Report this review
-
-                    </button>
-    
-                </div>
     
                 <form class = 'flex-col centre-self'> 
 
