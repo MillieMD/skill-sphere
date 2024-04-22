@@ -1,7 +1,7 @@
 <script type="text/javascript" src="../js/cookieControl.js"></script>
 <?php
 
-    include "db.php";
+    require_once "db.php";
 
     $userName = $_POST['userName'];
     $passWord = $_POST['passWord'];

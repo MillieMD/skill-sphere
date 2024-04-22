@@ -8,7 +8,7 @@
 
     //keep the login credentials the same, please dont steal my data lol
     
-    include "db.php";
+    require_once "db.php";
     
     $userName = $_POST['userName'];
     $passWord = $_POST['passWord'];
@@ -24,6 +24,8 @@
     setcookie("Username", $userName, 0, "/");
     setcookie("Email", $user[2], 0, "/");
     setcookie("Joindate", $user[5], 0, "/");
+    setcookie("id", $user[6], 0, "/");
+
     $db -> close();
     
 ?>

@@ -8,7 +8,6 @@
                         FROM reviews, CourseTemplate
                         JOIN users ON (users.user_id = CourseTemplate.courseAUTHOR)
                         WHERE courseID = 1;");
-    //$sql->bind_param("i", 1); // Add course ID here
     $sql->execute();
     $result = $sql->get_result();
 
@@ -20,7 +19,7 @@
     
     $row = $result->fetch_assoc();
     $courseName = $row["courseNAME"];
-    $courseID = $row["courseID"];
+    $courseID = 1;
     $rating = $row["courseRATING"];
     $numRatings = $row["numRATINGS"];
 
@@ -378,7 +377,7 @@
 
                             <h4> Leave a review </h4>
         
-                            <!-- <div class='star-rating'> -->
+                            <div class='star-rating'>
         
                                 <input type='radio' name='rate' id='five' value = '5'>
                                 <label for='five'></label>
@@ -391,7 +390,7 @@
                                 <input type='radio' name='rate' id='one' value = '1'>
                                 <label for='one'></label>
         
-                            <!-- </div> -->
+                            </div>
         
                             <label for = 'comment'> Leave a comment: </label>
                             <input type = 'textarea' maxlength = '100' name = 'comment' placeholder = 'Add a comment!'>

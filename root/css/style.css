@@ -682,40 +682,42 @@ footer nav ul li{
 
 /* Star rating mechanism */
 
-.star-rating {
+.star-rating{
+    border: none;
     float: left;
-    height: 46px;
-    padding: 0 10px;
 }
-.star-rating:not(:checked) > input {
-    position:absolute;
-    top:-9999px;
+
+.star-rating input{
+    display: none;
 }
-.star-rating:not(:checked) > label {
-    float:right;
-    width:1em;
-    overflow:hidden;
-    white-space:nowrap;
-    cursor:pointer;
-    font-size:30px;
+.star-rating label::before{
+    margin: 5px;
+    font-family: "Font Awesome 5 Free";
+    display: inline-block;
+    content: '\f005';
 }
-.star-rating:not(:checked) > label:before {
-    content: url(../img/star-regular.svg);
+
+.star-rating label { 
+    color: #ddd; 
+    float: right; 
 }
-.star-rating > input:checked ~ label {
-    color: #ffc700;    
-}
-.star-rating:not(:checked) > label:hover,
-.star-rating:not(:checked) > label:hover ~ label {
-    color: #deb217;  
-}
-.star-rating > input:checked + label:hover,
-.star-rating > input:checked + label:hover ~ label,
+
+.star-rating > input:checked ~ label, /* show gold star when clicked */
+.star-rating:not(:checked) > label:hover, /* hover current star */
+.star-rating:not(:checked) > label:hover ~ label { color: #FFD700;  } /* hover previous stars in list */
+
+.star-rating > input:checked + label:hover, /* hover current star when changing rating */
 .star-rating > input:checked ~ label:hover,
-.star-rating > input:checked ~ label:hover ~ label,
-.star-rating > label:hover ~ input:checked ~ label {
-    color: #c59b08;
+.star-rating > label:hover ~ input:checked ~ , /* lighten current selection */
+.star-rating > input:checked ~ label:hover ~  { content: '\f006'; color: #FFED85;  } 
+
+.star-rating input:checked + label:hover > label::before{
+
+    font-family: "Font Awesome 5 Free";
+    content: '\f007';
+
 }
+
 
 /* Desktop tweaks */
 @media screen and (min-width: 950px){
@@ -876,6 +878,7 @@ textarea:placeholder-shown{
 
     padding: 2rem;
 
+}
 
 /* QUIZ DISPLAY */
 
