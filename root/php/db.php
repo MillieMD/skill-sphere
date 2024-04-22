@@ -1,12 +1,10 @@
-<?
+<?php
+    require_once "config.php";
 
-    include "config.php";
+    $db = new mysqli($host, $username, $password, $database);
 
-    $db = new mysqli($host, $username, $password, $db);
-
-    if($db->connect_error)
-    {
-        header("Location: ../pages/error.html");
+    if($db->connect_error){
+        die("ERROR:".$db->connect_error); 
     }
 
 ?>
