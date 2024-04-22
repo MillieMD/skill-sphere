@@ -1,3 +1,31 @@
+<?php
+    // NEED: course name, course desc, tags,  num enrolled, num ratings, avg score
+
+    require_once "../php/db.php";
+
+    // Retrieved here is: name, author, rating information
+    $sql = $db->prepare("SELECT courseNAME, users.username, AVG(rating) as courseRATING, COUNT(rating) as numRATINGS
+                        FROM reviews, CourseTemplate
+                        JOIN users ON (users.user_id = CourseTemplate.courseAUTHOR)
+                        WHERE courseID = 1;");
+    //$sql->bind_param("i", 1); // Add course ID here
+    $sql->execute();
+    $result = $sql->get_result();
+
+    if($result === FALSE)
+    {
+        header("Location: error.html");
+        exit;
+    }
+    
+    $row = $result->fetch_assoc();
+    $courseName = $row["courseNAME"];
+    $courseID = $row["courseID"];
+    $rating = $row["courseRATING"];
+    $numRatings = $row["numRATINGS"];
+
+?>
+
 <!DOCTYPE html>
 <html lang='en'>
 <head>
@@ -119,7 +147,7 @@
 
             <div class = 'course-info' id='course-info'>
                 
-                <h2 id='course-name'> Python for Beginners </h2>
+                <h2 id='course-name'> <?php echo($courseName); ?> </h2>
 
                 <div id='desc'>
 
@@ -131,15 +159,21 @@
                 
                 <div id='rating'>
 
-                    <i class='fa-solid fa-star'></i>
-                    <i class='fa-solid fa-star'></i>
-                    <i class='fa-solid fa-star'></i>
-                    <i class='fa-regular fa-star'></i>
-                    <i class='fa-regular fa-star'></i>
+                   <?php
+                   
+                        for($j = 0; $j < $rating; $j++){
+                            echo("<i class='fa-solid fa-star'></i>");
+                        }
+
+                        for($j; $j < 5; $j++){
+                            echo("<i class='fa-regular fa-star'></i>");
+                        }
+                   
+                   ?>
 
                     <br>
 
-                    <p> 700 ratings </p>
+                    <p> <?php echo($numRatings. " ratings"); ?> </p>
 
                 </div>
 
@@ -333,7 +367,6 @@
                         
                         ");
                     }
-
                 ?>
 
                 <?php
@@ -363,7 +396,7 @@
                             <label for = 'comment'> Leave a comment: </label>
                             <input type = 'textarea' maxlength = '100' name = 'comment' placeholder = 'Add a comment!'>
         
-                            <input type = 'hidden' name = 'course_id' value = '0'>
+                            <input type = 'hidden' name = 'course_id' value = '".$courseID."'>
         
                             <button type='submit' class = 'secondary-button'> Send Review </button>
     
