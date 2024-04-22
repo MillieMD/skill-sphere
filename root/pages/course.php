@@ -3,11 +3,20 @@
 
     require_once "../php/db.php";
 
+    if(!isset($_GET["course"]))
+    {
+        header("Location: ../index.php");
+    }
+
+    $courseID = $_GET["course"];
+
     // Retrieved here is: name, author, rating information
     $sql = $db->prepare("SELECT courseNAME, users.username, AVG(rating) as courseRATING, COUNT(rating) as numRATINGS
-                        FROM reviews, CourseTemplate
+                        FROM CourseTemplate
                         JOIN users ON (users.user_id = CourseTemplate.courseAUTHOR)
-                        WHERE courseID = 1;");
+                        LEFT JOIN reviews ON (reviews.course_id = CourseTemplate.courseID)
+                        WHERE courseID = 2;");
+    //$sql->bind_param("i", $courseID);
     $sql->execute();
     $result = $sql->get_result();
 
@@ -19,7 +28,6 @@
     
     $row = $result->fetch_assoc();
     $courseName = $row["courseNAME"];
-    $courseID = 1;
     $rating = $row["courseRATING"];
     $numRatings = $row["numRATINGS"];
 
@@ -323,7 +331,21 @@
 
                 <?php
                 
-                    include '../php/retrieveReviews.php';
+                    require_once "db.php";
+
+                    $NUM_REVIEWS = 3;
+                
+                    $sql = $db->prepare("SELECT users.username as username, reviews.rating as rating, reviews.content as content FROM reviews JOIN users ON (reviews.user_id = users.user_id) WHERE course_id = ? LIMIT ?;");
+                    $sql->bind_param("ii", $course_id, $NUM_REVIEWS);
+                    $sql->execute();
+                
+                    $reviews = $sql->get_result();
+                
+                    if($result === FALSE)
+                    {
+                        //header("Location: ../pages/error.html");
+                        //exit;
+                    }
 
                     foreach($reviews as $current)
                     {

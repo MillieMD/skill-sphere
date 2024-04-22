@@ -930,5 +930,38 @@ textarea:placeholder-shown{
     align-self: center;
 }
 
+/* Browse page */
+
+.browse{
+
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    padding-inline: 4rem;
+
+}
+
+.browse aside
+{
+    border-right: dotted 2px var(--clr-text);
+}
+
+#categories a{
+    list-style-type: none;
+    display: inline-block;
+
+    margin: 0.25rem;
+
+    font-size: 1.25em;
+
+    border: solid 1px var(--clr-main);
+    background-color: var(--clr-secondary-midtone);
+}
+
+
+.browse .results
+{
+    padding-inline: 3rem;
+}
+
 
 
