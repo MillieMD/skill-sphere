@@ -15,6 +15,7 @@ function registerChecks(){
     let username = document.getElementById("username").value;
     let password = document.getElementById("pass").value;
     let confirm = document.getElementById("confirm-pass").value;
+    
 
     correctness = valuePresent(email) && valuePresent(username) && passMatch(password.value, confirm.value);
     console.log("warning is = " + warning);
@@ -44,7 +45,7 @@ function registerChecks(){
             success : function (result) {
                 console.log(result.toString().split(">")[2]);
                 if(result.toString().split(">")[2] == "\nLOGGED_IN"){
-                    window.location.replace("https://selene.hud.ac.uk/u2265397/root/pages/profile.html");
+                    window.location.replace("https://selene.hud.ac.uk/u2265397/root/pages/profile.php");
                 }else{
                     let warningText =  document.getElementById("warning");
                     warningText.innerHTML = result;
@@ -101,7 +102,7 @@ function loginChecks(){
             success : function (result) {
                 console.log(result.toString().split(">")[2]);
                 if(result.toString().split(">")[2] == "\nLOGGED_IN"){
-                    window.location.replace("https://selene.hud.ac.uk/u2265397/root/pages/profile.html");
+                    window.location.replace("https://selene.hud.ac.uk/u2265397/root/pages/profile.php");
                 }else{
                     let warningText =  document.getElementById("warning");
                     warningText.innerHTML = result;

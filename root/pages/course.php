@@ -119,7 +119,7 @@
                     <?php 
                    
                    if(isset($_COOKIE['id'])){
-                       echo ('<a href = "pages/course.php"> Create Course </a>');
+                       echo ('<a href = "pages/edit-course.php"> Create Course </a>');
                    }else{
                        echo ('<a href = "pages/login.php"> Log In </a>');
                    }
@@ -149,18 +149,34 @@
     <div class = 'dark-overlay' id = 'overlay'></div>
 
     <main id = 'main'>
+        <?php
+            $courseID = $_GET['courseID'];
+
+            $sql = "SELECT * FROM CourseTemplate WHERE courseID = '".$courseID."'";
+            $result = mysqli_query($db, $sql);
+            $courseData = mysqli_fetch_row($result);
+
+            $sql = "SELECT * FROM userEnrolled WHERE course_id = '".$courseID."'";
+            $result = mysqli_query($db, $sql);
+            $amountEnrolled = mysqli_num_rows($result);
+
+            $sql = "SELECT * FROM modules WHERE courseID = '".$courseID."'";
+            $modules = mysqli_query($db, $sql);
+            
+            
+
+
+        ?>
+
+
 
         <section id='course' class = 'course-page centre-content centre-self'>
 
             <div class = 'course-info' id='course-info'>
                 
-                <h2 id='course-name'> <?php echo($courseName); ?> </h2>
+                <h2 id='course-name'> <?php echo $courseData[1]; ?> </h2>
 
-                <div id='desc'>
-
-                    An introductory python course. Teaches you the basics of python data types, operators, functions and much more to get you started on your programming journey!
-
-                </div>
+                <div id='desc'><?php echo $courseData[3]; ?></div>
 
                 
                 
@@ -184,11 +200,7 @@
 
                 </div>
 
-                <div id='enrolled'>
-
-                    5.7k
-
-                </div>
+                <div id='enrolled'><?php echo($amountEnrolled);  ?> others have enrolled!</div>
 
                 <div id='tags'>
 
@@ -215,107 +227,38 @@
 
                 <div class = 'module-container'>
 
-                    <div class = 'module completed' id = 'module-0'>
+                    <?php
+                    $i = 0;
+                    while($row = $modules->fetch_assoc()) 
+                     { 
+                        $i++;
+                        switch($row['moduleTYPE']){
+                        
+                            case "Text":
+                                echo ("<div class = 'module' id = module-".$i.">".$row['moduleNAME']."</div>");
+                                echo ("<div class = 'module-content' id = module-".$i."-content>".$row['moduleCONTENTS']."</div>");
+                                break;
+                            case "Video":
+                                echo ("<div class = 'module' id = module-".$i.">".$row['moduleNAME']."</div>");
+                                echo ("<div class = 'module-content' id = module-".$i."-content>".$row['moduleCONTENTS']."</div>");
+                                break;
+                            case "Quiz":
+                                echo ("<div class = 'module' id = module-".$i.">".$row['moduleNAME']."</div>");
+                                echo ("<div class = 'module-content' id = 'module-".$i."-content><div class = quiz-info>Quiz Placeholder Text</div>");
+                                echo ("<button class = 'primary-button'>Take Quiz</button></div>");
 
-                        Lesson 1 - Sample Video
+                        }
+                     } 
 
-                    </div>
 
-                    <div class = 'module-content' id = 'module-0-content'>
 
-                        <video src = ../vid/sample.mp4 controls controlslist='play timeline volume'></video>
+                    ?>
 
-                    </div>
 
-                    <div class = 'module' id = 'module-1'>
 
-                        Lesson 2 - Sample Quiz
 
-                    </div>
 
-                    <div class = 'module-content' id = 'module-1-content'>
 
-                        <div class='quiz-info'>
-
-                            This quiz will assess your knowledge from module 1
-
-                        </div>
-
-                        <button class = 'primary-button'> Take Quiz </button>
-
-                    </div>
-
-                    <div class = 'module' id = 'module-2'>
-
-                        Lesson 3- Test 3
-
-                    </div>
-
-                    <div class = 'module-content' id = 'module-2-content'>
-
-                        It all works!
-
-                    </div>
-
-                    <div class = 'module' id = 'module-3'>
-
-                        Lesson 3- Test 3
-
-                    </div>
-
-                    <div class = 'module-content' id = 'module-3-content'>
-
-                        It all works!
-
-                    </div>
-
-                    <div class = 'module' id = 'module-4'>
-
-                        Lesson 3- Test 3
-
-                    </div>
-
-                    <div class = 'module-content' id = 'module-4-content'>
-
-                        It all works!
-
-                    </div>
-
-                    <div class = 'module' id = 'module-5'>
-
-                        Lesson 3- Test 3
-
-                    </div>
-
-                    <div class = 'module-content' id = 'module-5-content'>
-
-                        It all works!
-
-                    </div>
-
-                    <div class = 'module' id = 'module-6'>
-
-                        Lesson 3- Test 3
-
-                    </div>
-
-                    <div class = 'module-content' id = 'module-6-content'>
-
-                        It all works!
-
-                    </div>
-
-                    <div class = 'module' id = 'module-7'>
-
-                        Lesson 3- Test 3
-
-                    </div>
-
-                    <div class = 'module-content' id = 'module-7-content'>
-
-                        It all works!
-
-                    </div>
 
                 </div>
 
@@ -460,6 +403,17 @@
     <script src = '../js/mobileHeader.js'></script>
 
     <script>
+
+            
+ 
+
+        function deleteModule(id)
+        {
+            let module = document.getElementById("module-"+id);
+            module.remove();
+
+            return false;
+        }
         
         const modules = document.getElementsByClassName('module');
 

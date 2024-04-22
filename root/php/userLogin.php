@@ -17,11 +17,13 @@
         if($user["password"] == $passWord){
             //set logged in as true and redirect to profile page
             setcookie("Username", $userName, 0, "/");
+
             setcookie("Email", $user["email"], 0, "/");
             setcookie("Joindate", $user["joinDate"], 0, "/");
             setcookie("id", $user["id"], 0, "/");
 
             echo("Successfully logged in");
+
             
         }else{
             //failed to log in due to wrong password

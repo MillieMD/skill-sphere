@@ -16,16 +16,24 @@
     $date = $_POST['date'];
     $num = 0;
 
+    $sql="SELECT * FROM users";
+    $result = mysqli_query($db, $sql);
+    $count = mysqli_num_rows($result);
+    
+
     //run password hashing script here
-    mysqli_query($db, "INSERT INTO users VALUES ('".$userName."','".$passWord."','".$email."','".$num."','".$num."',STR_TO_DATE('".$date."','%d/%m/%Y'))");
+    mysqli_query($db, "INSERT INTO users VALUES ('".$userName."','".$passWord."','".$email."','".$num."','".$num."',STR_TO_DATE('".$date."','%d/%m/%Y'), STR_TO_DATE('".$date."','%d/%m/%Y'), '".$count."')");
     $existCheck = mysqli_query($db, "SELECT * FROM users WHERE username = '".$userName."'");
     $user = mysqli_fetch_assoc($existCheck);
 
     echo "LOGGED_IN";
     setcookie("Username", $userName, 0, "/");
+
+
     setcookie("Email", $user["email"], 0, "/");
     setcookie("Joindate", $user["joinDate"], 0, "/");
     setcookie("id", $user["id"], 0, "/");
+
 
     $db -> close();
     
