@@ -33,8 +33,8 @@
 
         <div> 
 
-            <a href = 'login.html'><button class = 'secondary-button' tabindex='-1'> Log in </button></a>
-            <a href = 'register.html'><button class = 'primary-button' tabindex='-1'> Register </button></a>
+            <a href = 'login.php'><button class = 'secondary-button' tabindex='-1'> Log in </button></a>
+            <a href = 'register.php'><button class = 'primary-button' tabindex='-1'> Register </button></a>
 
         </div>
 
@@ -80,9 +80,28 @@
 
                 <ul>
 
-                    <li> <a href = 'profile.html'> View Profile </a> </li>
-                    <li> <a href = 'login.html'> Log In </a> </li>
-                    <li> <a href = 'register.html'> Register </a> </li>
+                <li> 
+                    <?php 
+                   
+                   if(isset($_COOKIE['id'])){
+                       echo ('<a href = "pages/course.php"> Create Course </a>');
+                   }else{
+                       echo ('<a href = "pages/login.php"> Log In </a>');
+                   }
+                   
+                   ?> 
+                   </li>
+                    <li> 
+                    <?php 
+                   
+                   if(isset($_COOKIE['id'])){
+                       echo ('<a href = "pages/profile.php"> View Profile </a>');
+                   }else{
+                       echo ('<a href = "pages/register.php"> Register </a>');
+                   }
+                   
+                   ?>                        
+                    </li>
 
                 </ul>
 
@@ -316,32 +335,42 @@
                     }
 
                 ?>
+
+                <?php
+                
+                    if(isset($_COOKIE["id"]))
+                    {
+                        echo("
+                        <form class = 'flex-col centre-self' action = '../php/sendReview.php' method = 'POST'> 
+
+                            <h4> Leave a review </h4>
+        
+                            <!-- <div class='star-rating'> -->
+        
+                                <input type='radio' name='rate' id='five' value = '5'>
+                                <label for='five'></label>
+                                <input type='radio' name='rate' id='four' value = '4'>
+                                <label for='four'></label>
+                                <input type='radio' name='rate' id='three' value = '3'>
+                                <label for='three'></label>
+                                <input type='radio' name='rate' id='two' value = '2'>
+                                <label for='two'></label>
+                                <input type='radio' name='rate' id='one' value = '1'>
+                                <label for='one'></label>
+        
+                            <!-- </div> -->
+        
+                            <label for = 'comment'> Leave a comment: </label>
+                            <input type = 'textarea' maxlength = '100' name = 'comment' placeholder = 'Add a comment!'>
+        
+                            <input type = 'hidden' name = 'course_id' value = '0'>
+        
+                            <button type='submit' class = 'secondary-button'> Send Review </button>
     
-                <form class = 'flex-col centre-self'> 
-
-                    <h4> Leave a review </h4>
-
-                    <div class='star-rating'>
-
-                        <input type='radio' name='rate' id='five' value = '5'>
-                        <label for='five'></label>
-                        <input type='radio' name='rate' id='four' value = '4'>
-                        <label for='four'></label>
-                        <input type='radio' name='rate' id='three' value = '3'>
-                        <label for='three'></label>
-                        <input type='radio' name='rate' id='two' value = '2'>
-                        <label for='two'></label>
-                        <input type='radio' name='rate' id='one' value = '1'>
-                        <label for='one'></label>
-
-                    </div>
-
-                    <label for = 'comment'> Leave a comment: </label>
-                    <input type = 'textarea' maxlength = '100' name = 'comment' placeholder = 'Add a comment!'>
-
-                    <button type='submit' class = 'secondary-button'> Send Review </button>
-
-                </form>
+                        </form> ");
+                    }
+                
+                ?>
 
             </div>
 
@@ -358,7 +387,7 @@
 
             <ul>
 
-                <li><a href = 'about.html'> <p> About </p> </a> </li>
+                <li><a href = 'about.php'> <p> About </p> </a> </li>
                 <li><a href = 'contact'> <p> Contact Us </p> </a> </li>
                 <a><li> Copyright </li></a>
                 <a><li> Privacy Policy </li></a>

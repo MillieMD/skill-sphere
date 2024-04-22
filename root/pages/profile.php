@@ -4,19 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="css/style.css"> <!-- Main style sheet -->
+    <link rel="stylesheet" href="../css/style.css"> <!-- Main style sheet -->
 
     <!-- Poppins Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
 
-    <title> Earn as you learn with Skill Sphere </title>
-    <link href = "img/logo-small-dark.svg" rel = "icon" media = "prefers-color-scheme: light">
-    <link href = "img/logo-small-light.svg" rel = "icon" media = "prefers-color-scheme: dark">
+    <title> USERNAME's Profile </title>
+    <link href = "../img/logo-small-light.svg" rel = "icon" media = "prefers-color-scheme: light">
+    <link href = "../img/logo-small-dark.svg" rel = "icon" media = "prefers-color-scheme: dark">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="../js/Encryption.js"></script>
+    <script type="text/javascript"  src="../js/cookieControl.js"></script>
 </head>
-<body>
+<body onload="getCookie('Username', 'username'); getCookie('Joindate', 'datejoined')">
 
     <a href="#main" class="skip-link" id="skip-link" tabindex="0"> Skip to main content </a>
 
@@ -24,16 +26,16 @@
 
         <div>
 
-            <a href = "index.php"><h1> Skill Sphere </h1></a>
+            <a href = "../index.php"><h1> Skill Sphere </h1></a>
 
-            <!-- Button underneath link is not in tab order, so keyboard users aren't focusing same element twice -->
-            <a href = "#"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a> 
+            <a href = "#"> <button class = "secondary-button"> Browse Categories </button> </a>
 
             <input type = "text" class = "search-bar" placeholder="Search for courses...">
 
         </div>
 
         <div> 
+
             <?php
                 if(isset($_COOKIE['id'])){
                     echo ('<a href = "pages/course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
@@ -43,13 +45,14 @@
                     echo ('<a href = "pages/register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>');
                 }
             ?>
+
         </div>
 
     </header>
 
     <header id = "mobile-header"> <!-- Header for sizes under : 950px-->
 
-        <a href = "index.php"><h1> Skill Sphere </h1> </a>
+        <a href = "../index.php"><h1> Skill Sphere </h1> </a>
 
         <button class = "invisible-button" onclick = "showSideNav()">
             <i class="fa-solid fa-bars"></i>
@@ -85,9 +88,7 @@
 
             <nav>
 
-                <ul>
-
-                    <li> 
+            <li> 
                     <?php 
                    
                    if(isset($_COOKIE['id'])){
@@ -110,8 +111,6 @@
                    ?>                        
                     </li>
 
-                </ul>
-
             </nav>
 
         </div>
@@ -120,151 +119,42 @@
 
     <div class = "dark-overlay" id = "overlay"></div>
 
-    <main id = "main">
+    <main id = "main" class = "profile">
 
-        <section class = "hero-image" id = "sign-up-banner">
-            <img src="img/desert.png" alt="">
-            <!-- desert-dark.png from pexels.com, by Walid Ahmad -->
-            <!-- desert-light.png from pexels.com, by  Pixabay -->
+        <section id="user-info" class = "card">
 
-            <div class = "image-text-position-wrapper">
+            <img src="../img/profile.png" alt="profile picture">
 
-                <div class = "image-text-box card centre-content flex-col">
-        
-                    <h2> Earn money while you learn new skills </h2>
-        
-                    <?php 
-                   
-                    if(isset($_COOKIE['Username'])){
-                        echo ('<a href = "pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>');
-                    }else{
-                        echo ('<a href = "pages/register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>');
-                    }
-                    
-                    ?>
- 
-                    <small> 
-                    <?php 
-                   
-                   if(isset($_COOKIE['Username'])){
-                       echo ('<a href = "pages/course.php"> Create Course </a>');
-                   }else{
-                       echo ('<a href = "pages/login.php"> Log In </a>');
-                   }
-                   
-                   ?>
-                        
-                    
-                   </small>
-        
-                </div>
+            <h1 id = "username"> USERNAME </h1>
 
-            </div>
-    
-        </section>
+            <p> Enrolled in <strong> NUMBER </strong> courses </p>
 
-        <section id="recommended-courses" class = "centre-content">
+            <p id = "datejoined"> Joined in <strong> MONTH YEAR </strong></p>
 
-            <h2> Recommended For You </h2>
+            <div class = "badge-container" id = "badge container">
 
-            <div  class = "grid" data-direction = "horizontal">
+                <!-- TODO: Badges need to be images in final version - these divs are placeholders -->
 
-                <div class="course card stacked" hover = "true" id = "course-id">
-
-                    <img src= "img/courses/course-name.jpg">
-
-                    <div id = "course-info" class = "card-info">
-
-                        <h3 id = "course-name"> Course Name </h3>
-                        <div id = "course-rating">
-
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i> <!-- fa-solid for full stars -->
-                            <i class="fa-regular fa-star"></i> 
-                            <i class="fa-regular fa-star"></i> <!-- fa-regular for empty stars -->
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="course card stacked" hover = "true" id = "course-id">
-
-                    <img src= "img/courses/course-name.jpg">
-
-                    <div id = "course-info" class = "card-info">
-
-                        <h3 id = "course-name"> Course Name </h3>
-                        <div id = "course-rating">
-
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="course card stacked" hover = "true" id = "course-id">
-
-                    <img src= "img/courses/course-name.jpg">
-
-                    <div id = "course-info" class = "card-info">
-
-                        <h3 id = "course-name"> Course Name </h3>
-                        <div id = "course-rating">
-
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="course card stacked" hover = "true" id = "course-id">
-
-                    <img src= "img/courses/course-name.jpg">
-
-                    <div id = "course-info" class = "card-info">
-
-                        <h3 id = "course-name"> Course Name </h3>
-                        <div id = "course-rating">
-                            
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-
-                        </div>
-                    </div>
-
-                </div>
+                <div style = "border-radius: 50%; background-color: orange; aspect-ratio: 1/1;"> 1 </div>
+                <div style = "border-radius: 50%; background-color: orange;"> 2 </div>
+                <div style = "border-radius: 50%; background-color: orange;"> 3</div>
 
             </div>
 
-            <a href = "#"> Browse All Courses </a>
-
         </section>
 
-        <!-- Hidden if user is not logged in -->
-        <section id="your-courses" class = "centre-content">
+        <!-- Horizontal divider on desktop, vertical on mobile -->
 
-            <h2> Your Courses </h2>
+        <!-- 2 wide on desktop, 1 wide on mobile -->
+        <section id="user-courses">
 
-            <div  class = "grid" data-direction = "horizontal">
+            <h2> USERNAME's Courses </h2>
 
-                <div class="course card stacked" hover = "true" id = "course-id">
+            <div  class ="grid" data-direction = "veritcal">
 
-                    <img src= "img/courses/course-name.jpg">
+                <div class="course card stacked" hover = "true">
+
+                    <img src= "../img/courses/course-name.jpg">
 
                     <div id = "course-info" class = "card-info">
 
@@ -282,29 +172,9 @@
 
                 </div>
 
-                <div class="course card stacked" hover = "true" id = "course-id">
+                <div class="course card stacked" hover = "true">
 
-                    <img src= "img/courses/course-name.jpg">
-
-                    <div id = "course-info" class = "card-info">
-
-                        <h3 id = "course-name"> Course Name </h3>
-                        <div id = "course-rating">
-                                                    
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="course card stacked" hover = "true" id = "course-id">
-
-                    <img src= "img/courses/course-name.jpg">
+                    <img src= "../img/courses/course-name.jpg">
 
                     <div id = "course-info" class = "card-info">
 
@@ -322,15 +192,15 @@
 
                 </div>
 
-                <div class="course card stacked" hover = "true" id = "course-id">
+                <div class="course card stacked" hover = "true">
 
-                    <img src= "img/courses/course-name.jpg">
+                    <img src= "../img/courses/course-name.jpg">
 
                     <div id = "course-info" class = "card-info">
 
                         <h3 id = "course-name"> Course Name </h3>
                         <div id = "course-rating">
-                
+                                                    
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
@@ -339,90 +209,155 @@
                             
                         </div>
                     </div>
+
+                </div>
+
+                <!-- BUTTON TO ADD NEW COURSE -->
+                <div class="card stacked centre-content" hover = "true" onclick = "newCourse()">
+
+                    <i class="fa-solid fa-plus fa-2xl"></i>
 
                 </div>
 
             </div>
 
-            <a href = "#"> View Profile</a>
-            <!-- Takes user to their own profile - link to be added using php -->
-
-
         </section>
 
-        <section id="link-directory" class = "link-directory">
+        <section id="enrolled-courses">
 
-            <h3> Not sure where to start? </h3>
+            <h2> Enrolled Courses </h2>
 
-            <div class = "grid" data-direction = "horizontal">
+            <div  class ="grid" data-direction = "veritcal">
 
-            <nav>
+                <div class="course card stacked" hover = "true">
 
-                <h4> Tech Courses </h4>
+                    <img src= "../img/courses/course-name.jpg">
 
-                <ul>
+                    <div id = "course-info" class = "card-info">
 
-                    <li> <a href = "#"> <p> Python </p> </a> </li>
-                    <li> <a href = "#"> <p>  Java </p> </a> </li>
-                    <li> <a href = "#"> <p> C# </p> </a> </li>
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
+                                                    
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            
+                        </div>
+                    </div>
 
-                </ul>
+                </div>
 
-            </nav>
+                <div class="course card stacked" hover = "true">
 
-            <nav>
+                    <img src= "../img/courses/course-name.jpg">
 
-                <h4> Business Courses </h4>
+                    <div id = "course-info" class = "card-info">
 
-                <ul>
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
+                                                    
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            
+                        </div>
+                    </div>
 
-                    <li> <a href = "#"> <p> Finance </p> </a> </li>
-                    <li> <a href = "#"> <p>  Management </p> </a> </li>
+                </div>
 
-                </ul>
+                <div class="course card stacked" hover = "true">
 
-            </nav>
+                    <img src= "../img/courses/course-name.jpg">
 
-            <nav>
+                    <div id = "course-info" class = "card-info">
 
-                <h4> Creative Courses </h4>
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
+                                                    
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            
+                        </div>
+                    </div>
 
-                <ul>
+                </div>
 
-                    <li> <a href = "#"> <p>  Watercolour Painting </p> </a> </li>
-                    <li> <a href = "#"> <p>  Still life Drawing </p> </a> </li>
-                    <li> <a href = "#"> <p>  Oil Painting </p> </a> </li>
-                    <li> <a href = "#"> <p>  Art History </p> </a> </li>
-                    <li> <a href = "#"> <p>  Creative Writing </p> </a> </li>
+                <div class="course card stacked" hover = "true">
 
-                </ul>
+                    <img src= "../img/courses/course-name.jpg">
 
-            </nav>
+                    <div id = "course-info" class = "card-info">
 
-            <nav>
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
+                                                    
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            
+                        </div>
+                    </div>
 
-                <h4> Skill Paths </h4>
+                </div>
 
-                <ul>
+                <div class="course card stacked" hover = "true">
 
-                    <li> <a href = "#"> <p>  Graphic Artist </p> </a> </li>
-                    <li> <a href = "#"> <p>  Front-End Developer </p> </a> </li>
-                    <li> <a href = "#"> <p>  Games Programming </p> </a> </li>
+                    <img src= "../img/courses/course-name.jpg">
 
-                </ul>
+                    <div id = "course-info" class = "card-info">
 
-            </nav>
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
+                                                    
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="course card stacked" hover = "true">
+
+                    <img src= "../img/courses/course-name.jpg">
+
+                    <div id = "course-info" class = "card-info">
+
+                        <h3 id = "course-name"> Course Name </h3>
+                        <div id = "course-rating">
+                                                    
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            
+                        </div>
+                    </div>
+
+                </div>
 
         </div>
-
-
+            
         </section>
 
     </main>
 
     <footer>
 
-        <a href = "index.php"><h3> Skill Sphere </h3></a>
+        <h3> Skill Sphere </h3>
 
         <nav>
 
@@ -430,9 +365,9 @@
 
                 <li><a href = "pages/about.php"> <p> About </p> </a> </li>
                 <li><a href = "pages/contact"> <p> Contact Us </p> </a> </li>
-                <li><a> Copyright </a> </li>
-                <li><a> Privacy Policy </a> </li>
-                <li><a> Sitemap </a> </li>
+                <a><li> Copyright </li></a>
+                <a><li> Privacy Policy </li></a>
+                <a><li> Sitemap </li></a>
 
             </ul>
 
@@ -440,9 +375,24 @@
 
     </footer>
 
+    <!-- Basic Client Side Validation -->
+    <script src = "../js/clientSideAccountValidation.js"> </script>
     <script src = "https://kit.fontawesome.com/d90c26d2f3.js" crossorigin="anonymous"></script>
     <!-- Reveals side nav on mobile -->
-    <script src = "js/mobileHeader.js"></script>
+    <script src = "../js/mobileHeader.js"></script>
+
+    <script>
+
+        function newCourse(){
+
+            console.log("new course");
+
+            window.location.href = "edit-course.php";
+
+        }
+
+    </script>
+
     
 </body>
 </html>
