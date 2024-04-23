@@ -27,7 +27,7 @@
             <a href = "index.php"><h1> Skill Sphere </h1></a>
 
             <!-- Button underneath link is not in tab order, so keyboard users aren't focusing same element twice -->
-            <a href = "#"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a> 
+            <a href = "pages/browse.php"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a> 
 
             <input type = "text" class = "search-bar" placeholder="Search for courses...">
 
@@ -35,12 +35,12 @@
 
         <div> 
             <?php
-                if(isset($_COOKIE['id'])){
-                    echo ('<a href = "pages/edit-course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
-                    echo ('<a href = "pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>');
-                }else{
-                    echo ('<a href = "pages/login.php"><button class = "secondary-button" tabindex="-1"> Log in </button></a>');
-                    echo ('<a href = "pages/register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>');
+                if (isset($_COOKIE['id'])) {
+                    echo '<a href = "pages/editcourse.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>';
+                    echo '<a href = "pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>';
+                } else {
+                    echo '<a href = "pages/login.php"><button class = "secondary-button" tabindex="-1"> Log in </button></a>';
+                    echo '<a href = "pages/register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>';
                 }
             ?>
         </div>
@@ -75,7 +75,7 @@
 
                     <ul>
 
-                        <li> <a href = "#"> Browse Categories </a> </li>
+                        <li> <a href = "pages/browse.php"> Browse Categories </a> </li>
 
                     </ul>
 
@@ -88,25 +88,25 @@
                 <ul>
 
                     <li> 
-                    <?php 
-                   
-                   if(isset($_COOKIE['id'])){
-                       echo ('<a href = "pages/edit-course.php"> Create Course </a>');
-                   }else{
-                       echo ('<a href = "pages/login.php"> Log In </a>');
+                    <?php
+
+                   if (isset($_COOKIE['id'])) {
+                       echo '<a href = "pages/editcourse.php"> Create Course </a>';
+                   } else {
+                       echo '<a href = "pages/login.php"> Log In </a>';
                    }
-                   
+
                    ?> 
                    </li>
                     <li> 
-                    <?php 
-                   
-                   if(isset($_COOKIE['id'])){
-                       echo ('<a href = "pages/profile.php"> View Profile </a>');
-                   }else{
-                       echo ('<a href = "pages/register.php"> Register </a>');
+                    <?php
+
+                   if (isset($_COOKIE['id'])) {
+                       echo '<a href = "pages/profile.php"> View Profile </a>';
+                   } else {
+                       echo '<a href = "pages/register.php"> Register </a>';
                    }
-                   
+
                    ?>                        
                     </li>
 
@@ -133,25 +133,25 @@
         
                     <h2> Earn money while you learn new skills </h2>
         
-                    <?php 
-                   
-                    if(isset($_COOKIE['Username'])){
-                        echo ('<a href = "pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>');
-                    }else{
-                        echo ('<a href = "pages/register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>');
+                    <?php
+
+                    if (isset($_COOKIE['Username'])) {
+                        echo '<a href = "pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>';
+                    } else {
+                        echo '<a href = "pages/register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>';
                     }
-                    
+
                     ?>
  
                     <small> 
-                    <?php 
-                   
-                   if(isset($_COOKIE['Username'])){
-                       echo ('<a href = "pages/edit-course.php"> Create Course </a>');
-                   }else{
-                       echo ('<a href = "pages/login.php"> Log In </a>');
+                    <?php
+
+                   if (isset($_COOKIE['Username'])) {
+                       echo '<a href = "pages/editcourse.php"> Create Course </a>';
+                   } else {
+                       echo '<a href = "pages/login.php"> Log In </a>';
                    }
-                   
+
                    ?>
                         
                     
@@ -256,13 +256,20 @@
         </section>
 
         <!-- Hidden if user is not logged in -->
-        <section id="your-courses" class = "centre-content">
 
-            <h2> Your Courses </h2>
+        <?php
+
+            if (isset($_COOKIE['Username'])) {
+                echo "<section id='your-courses' class = 'centre-content'>
+
+                <h2> Your Courses </h2>";
+            }
+
+        ?>
 
             <div  class = "grid" data-direction = "horizontal">
 
-                <div class="course card stacked" hover = "true" id = "course-id">
+                <a href = "pages/course.php?course=1" class="course card stacked" hover = "true" id = "course-id">
 
                     <img src= "img/courses/course-name.jpg">
 

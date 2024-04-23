@@ -1,27 +1,33 @@
 <?php
     // NEED: course name, course desc, tags,  num enrolled, num ratings, avg score
 
-    require_once "../php/db.php";
+    require_once '../php/db.php';
+
+    if (!isset($_GET['course'])) {
+        header('Location: ../index.php');
+    }
+
+    $courseID = $_GET['course'];
 
     // Retrieved here is: name, author, rating information
-    $sql = $db->prepare("SELECT courseNAME, users.username, AVG(rating) as courseRATING, COUNT(rating) as numRATINGS
-                        FROM reviews, CourseTemplate
+    $sql = $db->prepare('SELECT courseNAME, users.username, AVG(rating) as courseRATING, COUNT(rating) as numRATINGS
+                        FROM CourseTemplate
                         JOIN users ON (users.user_id = CourseTemplate.courseAUTHOR)
-                        WHERE courseID = 1;");
+                        LEFT JOIN reviews ON (reviews.course_id = CourseTemplate.courseID)
+                        WHERE courseID = 2;');
+    //$sql->bind_param("i", $courseID);
     $sql->execute();
     $result = $sql->get_result();
 
-    if($result === FALSE)
-    {
-        header("Location: error.html");
+    if ($result === false) {
+        header('Location: error.html');
         exit;
     }
-    
+
     $row = $result->fetch_assoc();
-    $courseName = $row["courseNAME"];
-    $courseID = 1;
-    $rating = $row["courseRATING"];
-    $numRatings = $row["numRATINGS"];
+    $courseName = $row['courseNAME'];
+    $rating = $row['courseRATING'];
+    $numRatings = $row['numRATINGS'];
 
 ?>
 
@@ -108,25 +114,25 @@
                 <ul>
 
                 <li> 
-                    <?php 
-                   
-                   if(isset($_COOKIE['id'])){
-                       echo ('<a href = "pages/edit-course.php"> Create Course </a>');
-                   }else{
-                       echo ('<a href = "pages/login.php"> Log In </a>');
+                    <?php
+
+                   if (isset($_COOKIE['id'])) {
+                       echo '<a href = "../pages/editcourse.php"> Create Course </a>';
+                   } else {
+                       echo '<a href = "../pages/login.php"> Log In </a>';
                    }
-                   
+
                    ?> 
                    </li>
                     <li> 
-                    <?php 
-                   
-                   if(isset($_COOKIE['id'])){
-                       echo ('<a href = "pages/profile.php"> View Profile </a>');
-                   }else{
-                       echo ('<a href = "pages/register.php"> Register </a>');
+                    <?php
+
+                   if (isset($_COOKIE['id'])) {
+                       echo '<a href = "../pages/profile.php"> View Profile </a>';
+                   } else {
+                       echo '<a href = "../pages/register.php"> Register </a>';
                    }
-                   
+
                    ?>                        
                     </li>
 
@@ -142,7 +148,7 @@
 
     <main id = 'main'>
         <?php
-            $courseID = $_GET['courseID'];
+            $courseID = $_GET["course"];
 
             $sql = "SELECT * FROM CourseTemplate WHERE courseID = '".$courseID."'";
             $result = mysqli_query($db, $sql);
@@ -154,8 +160,7 @@
 
             $sql = "SELECT * FROM modules WHERE courseID = '".$courseID."'";
             $modules = mysqli_query($db, $sql);
-            
-            
+
 
 
         ?>
@@ -175,24 +180,24 @@
                 <div id='rating'>
 
                    <?php
-                   
-                        for($j = 0; $j < $rating; $j++){
-                            echo("<i class='fa-solid fa-star'></i>");
+
+                        for ($j = 0; $j < $rating; ++$j) {
+                            echo "<i class='fa-solid fa-star'></i>";
                         }
 
-                        for($j; $j < 5; $j++){
-                            echo("<i class='fa-regular fa-star'></i>");
+                        for ($j; $j < 5; ++$j) {
+                            echo "<i class='fa-regular fa-star'></i>";
                         }
-                   
+
                    ?>
 
                     <br>
 
-                    <p> <?php echo($numRatings. " ratings"); ?> </p>
+                    <p> <?php echo $numRatings.' ratings'; ?> </p>
 
                 </div>
 
-                <div id='enrolled'><?php echo($amountEnrolled);  ?> others have enrolled!</div>
+                <div id='enrolled'><?php echo $amountEnrolled; ?> others have enrolled!</div>
 
                 <div id='tags'>
 
@@ -221,28 +226,23 @@
 
                     <?php
                     $i = 0;
-                    while($row = $modules->fetch_assoc()) 
-                     { 
-                        $i++;
-                        switch($row['moduleTYPE']){
-                        
+                    while ($row = $modules->fetch_assoc()) {
+                        ++$i;
+                        switch ($row['moduleTYPE']) {
                             case "Text":
-                                echo ("<div class = 'module' id = module-".$i.">".$row['moduleNAME']."</div>");
-                                echo ("<div class = 'module-content' id = module-".$i."-content>".$row['moduleCONTENTS']."</div>");
+                                echo "<div class = 'module' id = module-".$i.">".$row['moduleNAME']."</div>";
+                                echo "<div class = 'module-content' id = module-".$i."-content>".$row['moduleCONTENTS']."</div>";
                                 break;
                             case "Video":
-                                echo ("<div class = 'module' id = module-".$i.">".$row['moduleNAME']."</div>");
-                                echo ("<div class = 'module-content' id = module-".$i."-content>".$row['moduleCONTENTS']."</div>");
+                                echo "<div class = 'module' id = module-".$i.">".$row['moduleNAME']."</div>";
+                                echo "<div class = 'module-content' id = module-".$i."-content>".$row['moduleCONTENTS']."</div>";
                                 break;
                             case "Quiz":
-                                echo ("<div class = 'module' id = module-".$i.">".$row['moduleNAME']."</div>");
-                                echo ("<div class = 'module-content' id = 'module-".$i."-content><div class = quiz-info>Quiz Placeholder Text</div>");
-                                echo ("<button class = 'primary-button'>Take Quiz</button></div>");
-
+                                echo "<div class = 'module' id = module-".$i.">".$row['moduleNAME']."</div>";
+                                echo "<div class = 'module-content' id = 'module-".$i."-content><div class = quiz-info>Quiz Placeholder Text</div>";
+                                echo "<button class = 'primary-button'>Take Quiz</button></div>";
                         }
-                     } 
-
-
+                    }
 
                     ?>
 
@@ -265,31 +265,42 @@
                 <!-- TODO: add review graph-->
 
                 <?php
-                
-                    include '../php/retrieveReviews.php';
 
-                    foreach($reviews as $current)
-                    {
-                        echo("
+                    require_once 'db.php';
+
+                    $NUM_REVIEWS = 3;
+
+                    $sql = $db->prepare("SELECT users.username as username, reviews.rating as rating, reviews.content as content FROM reviews JOIN users ON (reviews.user_id = users.user_id) WHERE course_id = ? LIMIT ?;");
+                    $sql->bind_param('ii', $course_id, $NUM_REVIEWS);
+                    $sql->execute();
+
+                    $reviews = $sql->get_result();
+
+                    if ($result === false) {
+                        //header("Location: ../../pages/error.html");
+                        //exit;
+                    }
+
+                    foreach ($reviews as $current) {
+                        echo "
                         
                         <div class='review'>
     
-                        ".$current["username"]."
+                        ".$current['username']."
     
                         <div class='rating'>
 
-                        ");
+                        ";
 
-                        for($j = 0; $j < $current["rating"]; $j++){
-                            echo("<i class='fa-solid fa-star'></i>");
+                        for ($j = 0; $j < $current['rating']; ++$j) {
+                            echo "<i class='fa-solid fa-star'></i>";
                         }
 
-                        for($j; $j < 5; $j++)
-                        {
-                            echo("<i class='fa-regular fa-star'></i>");
+                        for ($j; $j < 5; ++$j) {
+                            echo "<i class='fa-regular fa-star'></i>";
                         }
 
-                        echo("
+                        echo "
                         </div>
         
                         <div class='review-content'>
@@ -307,15 +318,14 @@
                     </div>
                         
                         
-                        ");
+                        ";
                     }
                 ?>
 
                 <?php
-                
-                    if(isset($_COOKIE["id"]))
-                    {
-                        echo("
+
+                    if (isset($_COOKIE['id'])) {
+                        echo "
                         <form class = 'flex-col centre-self' action = '../php/sendReview.php' method = 'POST'> 
 
                             <h4> Leave a review </h4>
@@ -342,9 +352,9 @@
         
                             <button type='submit' class = 'secondary-button'> Send Review </button>
     
-                        </form> ");
+                        </form> ";
                     }
-                
+
                 ?>
 
             </div>
