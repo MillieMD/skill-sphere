@@ -28,11 +28,9 @@
 
     echo "LOGGED_IN";
     setcookie("Username", $userName, 0, "/");
-
-
     setcookie("Email", $user["email"], 0, "/");
-    setcookie("Joindate", $user["joinDate"], 0, "/");
-    setcookie("id", $user["id"], 0, "/");
+    setcookie("Joindate", $user["dateJoined"], 0, "/");
+    setcookie("id", $user["user_id"], 0, "/");
 
 
     $db -> close();
