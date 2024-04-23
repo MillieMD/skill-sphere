@@ -32,7 +32,7 @@ for($i = 0; i < count($MODULE_NAME); $i++){
     $result = mysqli_query($db, "SELECT * FROM modules");
     $modulecount = mysqli_num_rows($result) + 1;
 
-    $sql = "INSERT INTO modules VALUES('".$modulecount."','".$coursecount."','".$MODULE_NAME[$i]."','".$MODULE_TYPE[$i]."','".$MODULE_CONTENT[i]."')";
+    $sql = "INSERT INTO modules VALUES('".$modulecount."','".$coursecount."','".$MODULE_NAME[$i]."','".$MODULE_TYPE[$i]."','".$MODULE_CONTENT[$i]."')";
     mysqli_query($db, $sql);
 }
 

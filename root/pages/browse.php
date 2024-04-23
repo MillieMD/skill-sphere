@@ -1,90 +1,105 @@
 <?php
 
+    require_once "../php/db.php";
 
-    require_once '../php/db.php';
-
-    $courses = [];
+    $courses = array();
     $title;
 
-    if (isset($_GET['category'])) {
-        $id = $_GET['category'];
+    if(isset($_GET["category"]))
+    {
 
-        $sql = $db->prepare('SELECT courseNAME, courseID, AVG(rating) as rating, cat_name
+        $id = $_GET["category"];
 
+        $sql = $db->prepare("SELECT courseNAME, courseID, AVG(rating) as rating, cat_name
                             FROM CourseTemplate C 
                             JOIN courseTagged CT ON CT.course_id = C.courseID
                             JOIN tags T ON CT.tag_id = T.tag_id
                             JOIN categories Ca ON T.category_id = Ca.cat_id
                             LEFT JOIN reviews R ON R.course_id = C.courseID
                             WHERE cat_id = ?
-                            GROUP BY C.courseID, cat_name;');
-        $sql->bind_param('i', $id);
-
+                            GROUP BY C.courseID, cat_name;");
+        $sql->bind_param("i", $id);
         $sql->execute();
 
         $result = $sql->get_result();
-        if ($result === false) {
-            echo 'No courses found';
-        } else {
+
+        if($result === FALSE){
+            echo("No courses found");
+        }else{
+
             $currentid = -1;
 
-            while ($row = $result->fetch_assoc()) {
-                if ($currentid != $row['courseID']) {
+            while($row = $result->fetch_assoc())
+            {
+
+                if($currentid != $row["courseID"]){
                     array_push($courses, $row);
-                    $currentid = $row['courseID'];
+                    $currentid = $row["courseID"];
                 }
 
-                $title = $row['cat_name'];
+                $title = $row["cat_name"];
+
             }
+
         }
+
     }
 
-    if (isset($_GET['tag'])) {
-        $id = $_GET['tag'];
+    if(isset($_GET["tag"]))
+    {
 
-        $sql = $db->prepare('SELECT courseNAME, courseID, AVG(rating) as rating, T.name
+        $id = $_GET["tag"];
 
+        $sql = $db->prepare("SELECT courseNAME, courseID, AVG(rating) as rating, T.name
                             FROM CourseTemplate C 
                             JOIN courseTagged CT ON CT.course_id = C.courseID
                             JOIN tags T ON CT.tag_id = T.tag_id
                             LEFT JOIN reviews R ON R.course_id = C.courseID
                             WHERE T.tag_id = ?
-
-                            GROUP BY C.courseID, T.name');
-        $sql->bind_param('i', $id);
-
+                            GROUP BY C.courseID, T.name");
+        $sql->bind_param("i", $id);
         $sql->execute();
 
         $result = $sql->get_result();
 
-        if ($result === false) {
-            echo 'No courses found';
-        } else {
+        if($result === FALSE){
+            echo("No courses found");
+        }else{
+
             $currentid = -1;
 
-            while ($row = $result->fetch_assoc()) {
-                if ($currentid < $row['courseID']) {
+            while($row = $result->fetch_assoc())
+            {
+                if($currentid < $row["courseID"]){
                     array_push($courses, $row);
-                    $currentid = $row['courseID'];
+                    $currentid = $row["courseID"];
                 }
 
-                $title = $row['name'];
+                $title = $row["name"];
+
             }
+
         }
+
     }
 
-    if (!isset($_GET['category']) && !isset($_GET['tag'])) {
-        $title = 'All';
+    if(!isset($_GET["category"]) && !isset($_GET["tag"]))
+    {
 
-        $sql = $db->prepare('SELECT courseNAME, courseID, AVG(rating) as rating
+        $title = "All";
+
+        $sql = $db->prepare("SELECT courseNAME, courseID, AVG(rating) as rating
             FROM CourseTemplate C LEFT JOIN reviews R ON R.course_id = C.courseID
-            GROUP BY courseID;');
+            GROUP BY courseID;");
 
         $sql->execute();
 
         $result = $sql->get_result();
-        if (!$result === false) {
-            while ($row = $result->fetch_assoc()) {
+
+        if(!$result === FALSE)
+        {
+
+            while($row = $result->fetch_assoc()){
                 array_push($courses, $row);
             }
         }
@@ -123,7 +138,7 @@
 
             <a href = "../index.php"><h1> Skill Sphere </h1></a>
 
-            <a href = "#"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a>
+            <a href = "browse.php"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a>
 
             <input type = "text" class = "search-bar" placeholder="Search for courses...">
 
@@ -132,14 +147,12 @@
         <div> 
 
         <?php
-
-            if (isset($_COOKIE['id'])) {
-                echo '<a href = "course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>';
-                echo '<a href = "profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>';
-            } else {
-                echo '<a href = "login.php"><button class = "secondary-button" tabindex="-1"> Log in </button></a>';
-                echo '<a href = "register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>';
-
+            if(isset($_COOKIE['id'])){
+                echo ('<a href = "course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
+                echo ('<a href = "profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>');
+            }else{
+                echo ('<a href = "login.php"><button class = "secondary-button" tabindex="-1"> Log in </button></a>');
+                echo ('<a href = "register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>');
             }
         ?>
 
@@ -175,7 +188,7 @@
 
                     <ul>
 
-                        <li> <a href = "#"> Browse Categories </a> </li>
+                        <li> <a href = "browse.php"> Browse Categories </a> </li>
 
                     </ul>
 
@@ -188,26 +201,25 @@
                 <ul>
 
                 <li> 
-                    <?php
-
-                   if (isset($_COOKIE['id'])) {
-                       echo '<a href = "course.php"> Create Course </a>';
-                   } else {
-                       echo '<a href = "login.php"> Log In </a>';
+                    <?php 
+                   
+                   if(isset($_COOKIE['id'])){
+                       echo ('<a href = "course.php"> Create Course </a>');
+                   }else{
+                       echo ('<a href = "login.php"> Log In </a>');
                    }
-
+                   
                    ?> 
                    </li>
                     <li> 
-                    <?php
-
-                   if (isset($_COOKIE['id'])) {
-                       echo '<a href = "profile.php"> View Profile </a>';
-                   } else {
-                       echo '<a href = "register.php"> Register </a>';
+                    <?php 
+                   
+                   if(isset($_COOKIE['id'])){
+                       echo ('<a href = "profile.php"> View Profile </a>');
+                   }else{
+                       echo ('<a href = "register.php"> Register </a>');
                    }
-
-
+                   
                    ?>                        
                     </li>
 
@@ -232,90 +244,92 @@
 
                 <?php
 
-                   require_once '../php/db.php';
+                   require_once "../php/db.php";
 
-                   $sql = $db->prepare('SELECT cat_id, cat_name FROM categories;');
-
+                   $sql = $db->prepare("SELECT cat_id, cat_name FROM categories;");
                    $sql->execute();
 
                    $result = $sql->get_result();
 
-                   while ($row = $result->fetch_assoc()) {
-                       echo "
-                    <a href='browse.php?category=".$row['cat_id']."'>".$row['cat_name'].'</a>
+                   while($row = $result->fetch_assoc()){
+
+                    echo("
+                    <a href='browse.php?category=".$row["cat_id"]."'>".$row["cat_name"]."</a>
                     
-                    ';
+                    ");
+
                    }
-
-
+                
+                
                 ?>
 
             </div>
 
             <?php
 
+                if(isset($_GET["category"])){
 
-                if (isset($_GET['category'])) {
-                    $sql = $db->prepare('SELECT tags.name, tags.tag_id
+                    $sql = $db->prepare("SELECT tags.name, tags.tag_id
                                         FROM tags JOIN categories ON (categories.cat_id = tags.category_id)
-                                        WHERE tags.category_id = ?;');
-                    $sql->bind_param('i', $id);
-
+                                        WHERE tags.category_id = ?;");
+                    $sql->bind_param("i", $id);
 
                     $sql->execute();
 
                     $result = $sql->get_result();
 
+                    echo("<div id='tags'>
+                    <h4> Refine your search further with tags: </h4> ");
 
-                    echo "<div id='tags'>
-                    <h4> Refine your search further with tags: </h4> ";
+                    if($result === FALSE)
+                    {
+                        echo("No tags found for this category...");
+                    }else{
 
-                    if ($result === false) {
-                        echo 'No tags found for this category...';
-                    } else {
-                        while ($row = $result->fetch_assoc()) {
-                            echo "<a href = 'browse.php?tag=".$row['tag_id']."'>".$row['name'].'</a>';
+                        while ($row = $result->fetch_assoc())
+                        {
+                            echo("<a href = 'browse.php?tag=".$row["tag_id"]."'>".$row["name"]."</a>");
                         }
                     }
-                    echo '</div>';
+                    echo("</div>");
                 }
-
-
+            
             ?>
 
         </aside>
 
         <section id="results" class = "results">
 
-
-        <h2> <?php echo $title; ?> courses </h2>
-
+        <h2> <?php echo($title) ?> courses </h2>
 
         <div  class = "grid" data-direction = "horizontal">
 
         <?php
 
+                foreach($courses as $course){
 
-                foreach ($courses as $course) {
-                    echo "
-                    <a href = 'course.php?course=".$course['courseID']."' class='course card stacked' hover = 'true' id = ".$course['courseID'].">
+                    echo("
+                    <a href = 'course.php?courseID=".$course["courseID"]."' class='course card stacked' hover = 'true' id = ".$course["courseID"].">
 
                     <div id = 'course-info' class = 'card-info'>
 
-                        <h3 id = 'course-name'> ".$course['courseNAME']." </h3>
-                        <div id = 'course-rating'>";
+                        <h3 id = 'course-name'> ".$course["courseNAME"]." </h3>
+                        <div id = 'course-rating'>");
+                                                    
+                            for($i = 0; $i < $course["rating"]; $i++){
 
-                    for ($i = 0; $i < $course['rating']; ++$i) {
-                        echo "<i class='fa-solid fa-star'></i>";
-                    }
+                                echo("<i class='fa-solid fa-star'></i>");
+                            }
 
-                    for ($i; $i < 5; ++$i) {
-                        echo "<i class='fa-regular fa-star'></i>";
-                    }
+                            for($i; $i < 5; $i++){
+                                echo("<i class='fa-regular fa-star'></i>");
+                            }
+                            
+                            
+                        echo("</div> </div> </a>");
 
-                    echo '</div> </div> </a>';
                 }
-
+        
         ?>
 
         </div>
