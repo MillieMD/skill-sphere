@@ -138,7 +138,7 @@
 
             <a href = "../index.php"><h1> Skill Sphere </h1></a>
 
-            <a href = "#"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a>
+            <a href = "browse.php"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a>
 
             <input type = "text" class = "search-bar" placeholder="Search for courses...">
 
@@ -188,7 +188,7 @@
 
                     <ul>
 
-                        <li> <a href = "#"> Browse Categories </a> </li>
+                        <li> <a href = "browse.php"> Browse Categories </a> </li>
 
                     </ul>
 
@@ -309,7 +309,7 @@
                 foreach($courses as $course){
 
                     echo("
-                    <a href = 'course.php?course=".$course["courseID"]."' class='course card stacked' hover = 'true' id = ".$course["courseID"].">
+                    <a href = 'course.php?courseID=".$course["courseID"]."' class='course card stacked' hover = 'true' id = ".$course["courseID"].">
 
                     <div id = 'course-info' class = 'card-info'>
 

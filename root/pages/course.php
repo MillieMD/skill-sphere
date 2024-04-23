@@ -445,6 +445,7 @@
             })
         }
 
+
         function saveCourse(id, courseID)
         {
             $.ajax({
@@ -456,6 +457,7 @@
                 }
             });
         }
+
         
 
     </script>
