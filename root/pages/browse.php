@@ -1,5 +1,6 @@
 <?php
 
+
     require_once '../php/db.php';
 
     $courses = [];
@@ -9,6 +10,7 @@
         $id = $_GET['category'];
 
         $sql = $db->prepare('SELECT courseNAME, courseID, AVG(rating) as rating, cat_name
+
                             FROM CourseTemplate C 
                             JOIN courseTagged CT ON CT.course_id = C.courseID
                             JOIN tags T ON CT.tag_id = T.tag_id
@@ -17,10 +19,10 @@
                             WHERE cat_id = ?
                             GROUP BY C.courseID, cat_name;');
         $sql->bind_param('i', $id);
+
         $sql->execute();
 
         $result = $sql->get_result();
-
         if ($result === false) {
             echo 'No courses found';
         } else {
@@ -41,13 +43,16 @@
         $id = $_GET['tag'];
 
         $sql = $db->prepare('SELECT courseNAME, courseID, AVG(rating) as rating, T.name
+
                             FROM CourseTemplate C 
                             JOIN courseTagged CT ON CT.course_id = C.courseID
                             JOIN tags T ON CT.tag_id = T.tag_id
                             LEFT JOIN reviews R ON R.course_id = C.courseID
                             WHERE T.tag_id = ?
+
                             GROUP BY C.courseID, T.name');
         $sql->bind_param('i', $id);
+
         $sql->execute();
 
         $result = $sql->get_result();
@@ -78,12 +83,12 @@
         $sql->execute();
 
         $result = $sql->get_result();
-
         if (!$result === false) {
             while ($row = $result->fetch_assoc()) {
                 array_push($courses, $row);
             }
         }
+
     }
 
 ?>
@@ -127,12 +132,14 @@
         <div> 
 
         <?php
+
             if (isset($_COOKIE['id'])) {
                 echo '<a href = "course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>';
                 echo '<a href = "profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>';
             } else {
                 echo '<a href = "login.php"><button class = "secondary-button" tabindex="-1"> Log in </button></a>';
                 echo '<a href = "register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>';
+
             }
         ?>
 
@@ -200,6 +207,7 @@
                        echo '<a href = "register.php"> Register </a>';
                    }
 
+
                    ?>                        
                     </li>
 
@@ -227,6 +235,7 @@
                    require_once '../php/db.php';
 
                    $sql = $db->prepare('SELECT cat_id, cat_name FROM categories;');
+
                    $sql->execute();
 
                    $result = $sql->get_result();
@@ -238,11 +247,13 @@
                     ';
                    }
 
+
                 ?>
 
             </div>
 
             <?php
+
 
                 if (isset($_GET['category'])) {
                     $sql = $db->prepare('SELECT tags.name, tags.tag_id
@@ -250,9 +261,11 @@
                                         WHERE tags.category_id = ?;');
                     $sql->bind_param('i', $id);
 
+
                     $sql->execute();
 
                     $result = $sql->get_result();
+
 
                     echo "<div id='tags'>
                     <h4> Refine your search further with tags: </h4> ";
@@ -267,17 +280,21 @@
                     echo '</div>';
                 }
 
+
             ?>
 
         </aside>
 
         <section id="results" class = "results">
 
+
         <h2> <?php echo $title; ?> courses </h2>
+
 
         <div  class = "grid" data-direction = "horizontal">
 
         <?php
+
 
                 foreach ($courses as $course) {
                     echo "

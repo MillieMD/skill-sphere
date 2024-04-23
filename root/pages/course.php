@@ -9,12 +9,21 @@
 
     $courseID = $_GET['course'];
 
+    if(!isset($_GET["course"]))
+    {
+        header("Location: ../index.php");
+    }
+
+    $courseID = $_GET["course"];
+
     // Retrieved here is: name, author, rating information
+
     $sql = $db->prepare('SELECT courseNAME, users.username, AVG(rating) as courseRATING, COUNT(rating) as numRATINGS
                         FROM CourseTemplate
                         JOIN users ON (users.user_id = CourseTemplate.courseAUTHOR)
                         LEFT JOIN reviews ON (reviews.course_id = CourseTemplate.courseID)
                         WHERE courseID = 2;');
+
     //$sql->bind_param("i", $courseID);
     $sql->execute();
     $result = $sql->get_result();
@@ -28,6 +37,7 @@
     $courseName = $row['courseNAME'];
     $rating = $row['courseRATING'];
     $numRatings = $row['numRATINGS'];
+
 
 ?>
 

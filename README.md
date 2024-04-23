@@ -15,7 +15,7 @@ Once you've finished a course, you can give it a review and rate it to let other
 Skill Sphere is currently in development, once it's up and runnig you can expect:
 
 ### Courses 
-**[Not Implemented]**  
+**[1/2 Implemented]**  
 Courses are user created content, consisting of “modules” which are either a video lesson and description, or a quiz. Once a user has created a course, they may edit the number, order and content of the modules or delete the course entirely.
 
 Courses are tagged to allow users to search for relevant courses easier.
@@ -29,7 +29,7 @@ Users may review and rate courses out of five stars, to help other users make in
 As part of a course a user may take a quiz to assess their understanding. These quizzes can be 1+ questions long and can consist of either multiple choice or short write in questions.
 
 ### Search Filtering 
-**[Not Implemented]**  
+**[Implemented]**  
 Users can search by name, or categories, for courses they would like to enrol on. Categories are larger groupings of tags, for example “Technology” may be a larger category containing the tags “Python” and “Electronics”.
 
 Users can filter the search results by rating, number of learners.
@@ -61,7 +61,7 @@ We are always open to suggestions, and aim to constantly improve the site as we 
 ## Technologies
 
 Front-end: HTML, CSS, JavaScript  
-Back-end: mySQL Database, SQL
+Back-end: mySQL Database, SQL, PHP
 
 ## Roles
 Collaborator | Role

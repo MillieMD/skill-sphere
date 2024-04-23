@@ -259,11 +259,13 @@
 
         <?php
 
+
             if (isset($_COOKIE['Username'])) {
                 echo "<section id='your-courses' class = 'centre-content'>
 
                 <h2> Your Courses </h2>";
             }
+
 
         ?>
 
