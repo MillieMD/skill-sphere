@@ -118,9 +118,9 @@
                     <?php 
                    
                    if(isset($_COOKIE['id'])){
-                       echo ('<a href = "pages/edit-course.php"> Create Course </a>');
+                       echo ('<a href = "../pages/editcourse.php"> Create Course </a>');
                    }else{
-                       echo ('<a href = "pages/login.php"> Log In </a>');
+                       echo ('<a href = "../pages/login.php"> Log In </a>');
                    }
                    
                    ?> 
@@ -129,9 +129,9 @@
                     <?php 
                    
                    if(isset($_COOKIE['id'])){
-                       echo ('<a href = "pages/profile.php"> View Profile </a>');
+                       echo ('<a href = "../pages/profile.php"> View Profile </a>');
                    }else{
-                       echo ('<a href = "pages/register.php"> Register </a>');
+                       echo ('<a href = "../pages/register.php"> Register </a>');
                    }
                    
                    ?>                        

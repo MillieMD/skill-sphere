@@ -34,11 +34,11 @@
 
             <?php
                 if(isset($_COOKIE['id'])){
-                    echo ('<a href = "pages/course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
-                    echo ('<a href = "pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>');
+                    echo ('<a href = "../pages/editcourse.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
+                    echo ('<a href = "../pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>');
                 }else{
-                    echo ('<a href = "pages/login.php"><button class = "secondary-button" tabindex="-1"> Log in </button></a>');
-                    echo ('<a href = "pages/register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>');
+                    echo ('<a href = "../pages/login.php"><button class = "secondary-button" tabindex="-1"> Log in </button></a>');
+                    echo ('<a href = "../pages/register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>');
                 }
             ?>
 
@@ -90,9 +90,9 @@
                     <?php 
                    
                    if(isset($_COOKIE['id'])){
-                       echo ('<a href = "pages/course.php"> Create Course </a>');
+                       echo ('<a href = "../pages/editcourse.php"> Create Course </a>');
                    }else{
-                       echo ('<a href = "pages/login.php"> Log In </a>');
+                       echo ('<a href = "../pages/login.php"> Log In </a>');
                    }
                    
                    ?> 
@@ -101,9 +101,9 @@
                     <?php 
                    
                    if(isset($_COOKIE['id'])){
-                       echo ('<a href = "pages/profile.php"> View Profile </a>');
+                       echo ('<a href = "../pages/profile.php"> View Profile </a>');
                    }else{
-                       echo ('<a href = "pages/register.php"> Register </a>');
+                       echo ('<a href = "../pages/register.php"> Register </a>');
                    }
                    
                    ?>                        

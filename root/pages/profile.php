@@ -38,8 +38,8 @@
 
             <?php
                 if(isset($_COOKIE['id'])){
-                    echo ('<a href = "pages/course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
-                    echo ('<a href = "pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>');
+                    echo ('<a href = "../pages/editcourse.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
+                    echo ('<a href = "../pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>');
                 }else{
                     echo ('<a href = "pages/login.php"><button class = "secondary-button" tabindex="-1"> Log in </button></a>');
                     echo ('<a href = "pages/register.php"><button class = "primary-button" tabindex="-1"> Register </button></a>');
@@ -92,7 +92,7 @@
                     <?php 
                    
                    if(isset($_COOKIE['id'])){
-                       echo ('<a href = "pages/course.php"> Create Course </a>');
+                       echo ('<a href = "../pages/editcourse.php"> Create Course </a>');
                    }else{
                        echo ('<a href = "pages/login.php"> Log In </a>');
                    }
@@ -185,7 +185,7 @@
                     while($row = $results->fetch_assoc())
                     {
                         echo("
-                        <a href = 'pages/course.php?courseID=".$row["courseID"]."' class='course card stacked' hover = 'true' id = ".$row["courseID"].">
+                        <a href = '../pages/course.php?courseID=".$row["courseID"]."' class='course card stacked' hover = 'true' id = ".$row["courseID"].">
     
                         <img src = '../img/courses/course-name.jpg'>
     
@@ -247,7 +247,7 @@
                         while($row = $results->fetch_assoc())
                         {
                             echo("
-                            <a href = 'pages/course.php?courseID=".$row["courseID"]."' class='course card stacked' hover = 'true' id = ".$row["courseID"].">
+                            <a href = '../pages/course.php?courseID=".$row["courseID"]."' class='course card stacked' hover = 'true' id = ".$row["courseID"].">
         
                             <img src = '../img/courses/course-name.jpg'>
         
@@ -288,8 +288,8 @@
 
             <ul>
 
-                <li><a href = "pages/about.php"> <p> About </p> </a> </li>
-                <li><a href = "pages/contact"> <p> Contact Us </p> </a> </li>
+                <li><a href = "../pages/about.php"> <p> About </p> </a> </li>
+                <li><a href = "../pages/contact"> <p> Contact Us </p> </a> </li>
                 <a><li> Copyright </li></a>
                 <a><li> Privacy Policy </li></a>
                 <a><li> Sitemap </li></a>
@@ -312,7 +312,7 @@
 
             console.log("new course");
 
-            window.location.href = "edit-course.php";
+            window.location.href = "editcourse.php";
 
         }
 
