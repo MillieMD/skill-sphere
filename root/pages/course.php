@@ -199,7 +199,7 @@
 
                 </div>
 
-                <div id='enrolled'><?php echo($amountEnrolled);  ?> others have enrolled!</div>
+                <div id='enrolled'><?php echo($amountEnrolled);  ?> saves</div>
 
                 <div id='tags'>
 
@@ -227,6 +227,14 @@
 
 
                 </div>
+
+                <?php
+                    if(isset($_COOKE["id"]))
+                    {
+                        echo("<div id = 'save-now'> <button class = 'primary-button' onclick = 'saveCourse(".$_COOKIE['id'].", ".$_GET['courseID'].")'> Save This Course </button> </div>");
+                    }
+                
+                ?>
 
             </div>
 
@@ -427,12 +435,29 @@
                 var content = this.nextElementSibling;
                 if (content.style.maxHeight) {
                     content.style.maxHeight = null;
+                    content.style.padding = 0;
                 } else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
+                    content.style.padding = "1rem 1rem 1rem 1rem";
+                    content.style.maxHeight = 'calc(2rem + ' + content.scrollHeight + 'px)';
+                    
                 } 
 
             })
         }
+
+
+        function saveCourse(id, courseID)
+        {
+            $.ajax({
+                url: '../php/save.php',
+                type: 'POST',
+                data: {
+                    'user_id' : id,
+                    'course_id': courseID,
+                }
+            });
+        }
+
         
 
     </script>

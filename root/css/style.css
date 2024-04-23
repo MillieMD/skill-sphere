@@ -563,7 +563,7 @@ footer nav ul li{
 
     border: 2px solid var(--clr-secondary-midtone);
 
-    grid-template-areas:  "name name name" "desc desc desc" "rating rating enrolled" "tags tags tags";
+    grid-template-areas:  "name name name" "desc desc desc" "rating rating enrolled" "tags tags save";
 
 }
 
@@ -592,6 +592,11 @@ footer nav ul li{
     font-weight: var(--fw-bold);
 
     grid-area: enrolled;
+}
+
+.course-info #save-now{
+    grid-area: save;
+
 }
 
 .course-info #tags{
@@ -663,6 +668,7 @@ footer nav ul li{
     transition: all 0.3s ease-in-out;
     overflow:hidden;
     max-height: 0;
+
 }
 
 .review{
@@ -753,7 +759,7 @@ footer nav ul li{
 
     .course-info{
 
-        grid-template-areas: "name . ." "desc rating enrolled" "tags . .";
+        grid-template-areas: "name . ." "desc rating enrolled" "tags . save";
         grid-template-columns: 6fr 2fr 1fr;
     }
 
