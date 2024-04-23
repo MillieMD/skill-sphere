@@ -202,7 +202,7 @@
                     foreach($courses as $course)
                     {
                         echo("
-                        <a href = 'pages/course.php?course=".$course["courseID"]."' class='course card stacked' hover = 'true' id = ".$course["courseID"].">
+                        <a href = 'pages/course.php?courseID=".$course["courseID"]."' class='course card stacked' hover = 'true' id = ".$course["courseID"].">
 
                         <img src = 'img/courses/course-name.jpg'>
     
@@ -276,7 +276,7 @@
                 foreach($courses as $course)
                 {
                     echo("
-                    <a href = 'pages/course.php?course=".$course["courseID"]."' class='course card stacked' hover = 'true' id = ".$course["courseID"].">
+                    <a href = 'pages/course.php?courseID=".$course["courseID"]."' class='course card stacked' hover = 'true' id = ".$course["courseID"].">
 
                     <img src = 'img/courses/course-name.jpg'>
 

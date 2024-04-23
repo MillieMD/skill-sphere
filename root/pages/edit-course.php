@@ -14,7 +14,6 @@
     <title> Skill Sphere - Log In </title>
     <link href = "../img/logo-small-light.svg" rel = "icon" media = "prefers-color-scheme: light">
     <link href = "../img/logo-small-dark.svg" rel = "icon" media = "prefers-color-scheme: dark">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
 
@@ -26,7 +25,7 @@
 
             <a href = "../index.php"><h1> Skill Sphere </h1></a>
 
-            <a href = "#"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a>
+            <a href = "browse.php"> <button class = "secondary-button" tabindex="-1"> Browse Categories </button> </a>
 
             <input type = "text" class = "search-bar" placeholder="Search for courses...">
 
@@ -36,7 +35,7 @@
 
             <?php
                 if(isset($_COOKIE['id'])){
-                    echo ('<a href = "pages/edit-course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
+                    echo ('<a href = "pages/course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
                     echo ('<a href = "pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>');
                 }else{
                     echo ('<a href = "pages/login.php"><button class = "secondary-button" tabindex="-1"> Log in </button></a>');
@@ -76,7 +75,7 @@
 
                     <ul>
 
-                        <li> <a href = "#"> Browse Categories </a> </li>
+                        <li> <a href = "browse.php"> Browse Categories </a> </li>
 
                     </ul>
 
@@ -92,7 +91,7 @@
                     <?php 
                    
                    if(isset($_COOKIE['id'])){
-                       echo ('<a href = "pages/edit-course.php"> Create Course </a>');
+                       echo ('<a href = "pages/course.php"> Create Course </a>');
                    }else{
                        echo ('<a href = "pages/login.php"> Log In </a>');
                    }
@@ -141,7 +140,7 @@
 
                 <!-- MODULE NAME -->
 
-                <input type = "text" id = "module-0-name" placeholder="Module Name">
+                <input type = "text" id = "module-name" placeholder="Module Name">
 
                 <!-- MODULE TYPE SELECTOR (radio buttons) -->
 
@@ -164,7 +163,7 @@
 
             <button id = "new-module-button" class="primary-button" onclick="addNewModule()" type = "button"> New Module </button>
 
-            <button class="secondary-button" onclick = "submitModule()"> Save Course </button>
+            <button class="secondary-button"> Save Course </button>
 
 
         </form>
@@ -184,7 +183,7 @@
                 <a><li> Copyright </li></a>
                 <a><li> Privacy Policy </li></a>
                 <a><li> Sitemap </li></a>
-                   
+
             </ul>
 
         </nav>
@@ -201,62 +200,6 @@
 
         let moduleCount = 0;
         let form = document.getElementById("create-course");
-        let modtype = ["text","text","text","text","text"];
-
-
-
-        function submitModule(){
-
-        let modnames = [];
-        let modconts = [];
-
-
-            for(let i = 0; i < 5; i++){
-                console.log("attempt");
-                try{
-                    modnames.push(document.getElementById("module-"+i+"-name").value);
-                    modconts.push(document.getElementById("module-"+i+"-content").value);
-                    console.log("success");
-
-                }catch(error){
-                    console.log("fail");
-                    break;
-                }
-            }
-        
-
-        console.log(modnames);
-        console.log(modconts);
-        console.log(document.getElementById("course-name").value);
-        console.log(document.getElementById("course-desc").value);
-
-
-
-
-                $.ajax({
-            url : '../php/courseControl.php',
-            type : 'POST',
-            data : {
-                "date" : new Date().toLocaleDateString(),
-                "courseName" : document.getElementById("course-name").value,
-                "courseDesc" : document.getElementById("course-desc").value,
-                "modulenames" : modnames,
-                "modulecontents" : modconts,
-                "moduletypes" : modtype               
-            },
-            success : function (result) {               
-               console.log(result);
-            },
-            error : function () {
-               console.log ('error');
-            }
-        });
-        return;
-
-    }
-
-
-
 
         function setType(type, moduleNo)
         {
@@ -281,7 +224,7 @@
                 case 'text':
 
                     newContent = document.createElement("textarea");
-                    newContent.setAttribute("placeholder", "Course content...");
+                    newContent.setAttribute("placeholder", "Course content...")
                     break;
 
                 case 'video':
@@ -329,7 +272,6 @@
             m.id = "module-"+moduleCount;
 
             let name = document.createElement("input");
-            name.setAttribute("id", "module-" + moduleCount + "-name");
             name.setAttribute("type", "text");
             name.setAttribute("placeholder", "Module Name");
 
