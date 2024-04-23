@@ -113,7 +113,7 @@ img{
     object-fit: contain;
 }
 
-video{
+iframe{
     max-width: 100%;
 }
 

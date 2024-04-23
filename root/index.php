@@ -36,7 +36,7 @@
         <div> 
             <?php
                 if(isset($_COOKIE['id'])){
-                    echo ('<a href = "pages/edit-course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
+                    echo ('<a href = "pages/course.php"><button class = "secondary-button" tabindex="-1"> Create Course </button></a>');
                     echo ('<a href = "pages/profile.php"><button class = "primary-button" tabindex="-1"> Profile </button></a>');
                 }else{
                     echo ('<a href = "pages/login.php"><button class = "secondary-button" tabindex="-1"> Log in </button></a>');
@@ -91,7 +91,7 @@
                     <?php 
                    
                    if(isset($_COOKIE['id'])){
-                       echo ('<a href = "pages/edit-course.php"> Create Course </a>');
+                       echo ('<a href = "pages/course.php"> Create Course </a>');
                    }else{
                        echo ('<a href = "pages/login.php"> Log In </a>');
                    }
@@ -147,7 +147,7 @@
                     <?php 
                    
                    if(isset($_COOKIE['Username'])){
-                       echo ('<a href = "pages/edit-course.php"> Create Course </a>');
+                       echo ('<a href = "pages/course.php"> Create Course </a>');
                    }else{
                        echo ('<a href = "pages/login.php"> Log In </a>');
                    }
@@ -165,93 +165,69 @@
 
         <section id="recommended-courses" class = "centre-content">
 
-            <h2> Recommended For You </h2>
+            <h2> Top Courses </h2>
+
+                   <!-- Top courses by rating -->
+
+            <?php
+            
+                require_once "php/db.php";
+
+                $sql = $db->prepare("SELECT courseID, courseNAME, AVG(rating) as rating
+                                    FROM CourseTemplate 
+                                    LEFT JOIN reviews ON (reviews.course_id = CourseTemplate.courseID)
+                                    GROUP BY courseID
+                                    ORDER BY rating DESC
+                                    LIMIT 4;");
+                $sql->execute();
+
+                $result = $sql->get_result();
+
+                $courses = array();
+
+                if($result != FALSE)
+                {
+                    while($row = $result->fetch_assoc())
+                    {
+                       array_push($courses, $row);
+                    }
+                }
+            
+            ?>
 
             <div  class = "grid" data-direction = "horizontal">
 
-                <div class="course card stacked" hover = "true" id = "course-id">
+                <?php
 
-                    <img src= "img/courses/course-name.jpg">
+                    foreach($courses as $course)
+                    {
+                        echo("
+                        <a href = 'pages/course.php?courseID=".$course["courseID"]."' class='course card stacked' hover = 'true' id = ".$course["courseID"].">
 
-                    <div id = "course-info" class = "card-info">
-
-                        <h3 id = "course-name"> Course Name </h3>
-                        <div id = "course-rating">
-
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i> <!-- fa-solid for full stars -->
-                            <i class="fa-regular fa-star"></i> 
-                            <i class="fa-regular fa-star"></i> <!-- fa-regular for empty stars -->
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="course card stacked" hover = "true" id = "course-id">
-
-                    <img src= "img/courses/course-name.jpg">
-
-                    <div id = "course-info" class = "card-info">
-
-                        <h3 id = "course-name"> Course Name </h3>
-                        <div id = "course-rating">
-
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="course card stacked" hover = "true" id = "course-id">
-
-                    <img src= "img/courses/course-name.jpg">
-
-                    <div id = "course-info" class = "card-info">
-
-                        <h3 id = "course-name"> Course Name </h3>
-                        <div id = "course-rating">
-
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="course card stacked" hover = "true" id = "course-id">
-
-                    <img src= "img/courses/course-name.jpg">
-
-                    <div id = "course-info" class = "card-info">
-
-                        <h3 id = "course-name"> Course Name </h3>
-                        <div id = "course-rating">
-                            
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-
-                        </div>
-                    </div>
-
-                </div>
+                        <img src = 'img/courses/course-name.jpg'>
+    
+                        <div id = 'course-info' class = 'card-info'>
+    
+                            <h3 id = 'course-name'> ".$course["courseNAME"]." </h3>
+                            <div id = 'course-rating'>");
+                                                        
+                                for($i = 0; $i < $course["rating"]; $i++){
+    
+                                    echo("<i class='fa-solid fa-star'></i>");
+                                }
+    
+                                for($i; $i < 5; $i++){
+                                    echo("<i class='fa-regular fa-star'></i>");
+                                }
+                                
+                            echo("</div> </div> </a>");
+                    }
+                
+                ?>
 
             </div>
 
-            <a href = "#"> Browse All Courses </a>
+            <a href = "pages/browse.php"> Browse All Courses </a>
 
         </section>
 
@@ -266,95 +242,66 @@
 
                 <h2> Your Courses </h2>");
 
+                $sql = $db->prepare("SELECT courseID, courseNAME, AVG(rating) as rating
+                                    FROM CourseTemplate 
+                                    JOIN userEnrolled ON (CourseTemplate.courseID = userEnrolled.course_id)
+                                    LEFT JOIN reviews ON (reviews.course_id = CourseTemplate.courseID)
+                                    WHERE userEnrolled.user_id = ?
+                                    GROUP BY courseID
+                                    ORDER BY rating DESC
+                                    LIMIT 4;");
+                $sql->bind_param("i", $_COOKIE["id"]);
+                $sql->execute();
+
+                $result = $sql->get_result();
+
+                $courses = array();
+
+                if($result != FALSE)
+                {
+                    while($row = $result->fetch_assoc())
+                    {
+                        array_push($courses, $row);
+                    }
+                }
+
             }
         
         ?>
 
             <div  class = "grid" data-direction = "horizontal">
 
-                <a href = "pages/course.php?course=1" class="course card stacked" hover = "true" id = "course-id">
+            <?php
 
-                    <img src= "img/courses/course-name.jpg">
+                foreach($courses as $course)
+                {
+                    echo("
+                    <a href = 'pages/course.php?courseID=".$course["courseID"]."' class='course card stacked' hover = 'true' id = ".$course["courseID"].">
 
-                    <div id = "course-info" class = "card-info">
+                    <img src = 'img/courses/course-name.jpg'>
 
-                        <h3 id = "course-name"> Course Name </h3>
-                        <div id = "course-rating">
+                    <div id = 'course-info' class = 'card-info'>
+
+                        <h3 id = 'course-name'> ".$course["courseNAME"]." </h3>
+                        <div id = 'course-rating'>");
                                                     
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
+                            for($i = 0; $i < $course["rating"]; $i++){
+
+                                echo("<i class='fa-solid fa-star'></i>");
+                            }
+
+                            for($i; $i < 5; $i++){
+                                echo("<i class='fa-regular fa-star'></i>");
+                            }
                             
-                        </div>
-                    </div>
+                        echo("</div> </div> </a>");
+                }
 
-                </div>
-
-                <div class="course card stacked" hover = "true" id = "course-id">
-
-                    <img src= "img/courses/course-name.jpg">
-
-                    <div id = "course-info" class = "card-info">
-
-                        <h3 id = "course-name"> Course Name </h3>
-                        <div id = "course-rating">
-                                                    
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="course card stacked" hover = "true" id = "course-id">
-
-                    <img src= "img/courses/course-name.jpg">
-
-                    <div id = "course-info" class = "card-info">
-
-                        <h3 id = "course-name"> Course Name </h3>
-                        <div id = "course-rating">
-                                                    
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="course card stacked" hover = "true" id = "course-id">
-
-                    <img src= "img/courses/course-name.jpg">
-
-                    <div id = "course-info" class = "card-info">
-
-                        <h3 id = "course-name"> Course Name </h3>
-                        <div id = "course-rating">
-                
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            <i class="fa-solid fa-star"></i>
-                            
-                        </div>
-                    </div>
-
-                </div>
+            ?>
 
             </div>
 
-            <a href = "#"> View Profile</a>
+            <a href = "pages/profile.php"> View Profile</a>
             <!-- Takes user to their own profile - link to be added using php -->
 
 
