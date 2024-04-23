@@ -3,20 +3,19 @@
 
     require_once "../php/db.php";
 
-    if(!isset($_GET["course"]))
+    if(!isset($_GET["courseID"]))
     {
         header("Location: ../index.php");
     }
 
-    $courseID = $_GET["course"];
+    $courseID = $_GET["courseID"];
 
     // Retrieved here is: name, author, rating information
     $sql = $db->prepare("SELECT courseNAME, users.username, AVG(rating) as courseRATING, COUNT(rating) as numRATINGS
                         FROM CourseTemplate
                         JOIN users ON (users.user_id = CourseTemplate.courseAUTHOR)
                         LEFT JOIN reviews ON (reviews.course_id = CourseTemplate.courseID)
-                        WHERE courseID = 2;");
-    //$sql->bind_param("i", $courseID);
+                        WHERE courseID = ".$courseID.";");
     $sql->execute();
     $result = $sql->get_result();
 
@@ -60,7 +59,7 @@
 
             <a href = '../index.php'><h1> Skill Sphere </h1></a>
 
-            <a href = '#'> <button class = 'secondary-button' tabindex='-1'> Browse Categories </button> </a>
+            <a href = 'browse.php'> <button class = 'secondary-button' tabindex='-1'> Browse Categories </button> </a>
 
             <input type = 'text' class = 'search-bar' placeholder='Search for courses...'>
 
@@ -103,7 +102,7 @@
 
                     <ul>
 
-                        <li> <a href = '#'> Browse Categories </a> </li>
+                        <li> <a href = 'browse.php'> Browse Categories </a> </li>
 
                     </ul>
 
@@ -200,24 +199,42 @@
 
                 </div>
 
-                <div id='enrolled'><?php echo($amountEnrolled);  ?> others have enrolled!</div>
+                <div id='enrolled'><?php echo($amountEnrolled);  ?> saves</div>
 
                 <div id='tags'>
 
-                    <a href = '#'>
-                        Technology
-                    </a>
+                        <?php
 
-                    <a href = '#'>
-                        Programming
-                    </a>
+                            $sql = $db->prepare("SELECT tags.tag_id as id, tags.name as tag 
+                                                FROM tags
+                                                JOIN courseTagged ON courseTagged.tag_id = tags.tag_id 
+                                                WHERE courseTagged.course_id = ?");
+                            $sql->bind_param("i", $courseID);
+                            $sql->execute();
+                            
+                            $result = $sql->get_result();
 
-                    <a href = '#'>
-                        Python
-                    </a>
+                            if($result != FALSE)
+                            {
+                                while($row = $result->fetch_assoc())
+                                {
+                                    echo("<a href = 'browse.php?tag=".$row["id"]."'> ".$row["tag"]." </a> ");
+                                }
+                            }
+                        
+                        
+                        ?>
 
 
                 </div>
+
+                <?php
+                    if(isset($_COOKE["id"]))
+                    {
+                        echo("<div id = 'save-now'> <button class = 'primary-button' onclick = 'saveCourse(".$_COOKIE['id'].", ".$_GET['courseID'].")'> Save This Course </button> </div>");
+                    }
+                
+                ?>
 
             </div>
 
@@ -230,7 +247,7 @@
                     <?php
                     $i = 0;
                     while($row = $modules->fetch_assoc()) 
-                     { 
+                    { 
                         $i++;
                         switch($row['moduleTYPE']){
                         
@@ -240,7 +257,7 @@
                                 break;
                             case "Video":
                                 echo ("<div class = 'module' id = module-".$i.">".$row['moduleNAME']."</div>");
-                                echo ("<div class = 'module-content' id = module-".$i."-content>".$row['moduleCONTENTS']."</div>");
+                                echo ("<div class = 'module-content' id = module-".$i."-content> <iframe src = ".$row['moduleCONTENTS']." title = ".$row['moduleNAME']."></iframe> </div>");
                                 break;
                             case "Quiz":
                                 echo ("<div class = 'module' id = module-".$i.">".$row['moduleNAME']."</div>");
@@ -250,15 +267,7 @@
                         }
                      } 
 
-
-
                     ?>
-
-
-
-
-
-
 
                 </div>
 
@@ -274,62 +283,61 @@
 
                 <?php
                 
-                    require_once "db.php";
+                    require_once "../php/db.php";
 
                     $NUM_REVIEWS = 3;
                 
                     $sql = $db->prepare("SELECT users.username as username, reviews.rating as rating, reviews.content as content FROM reviews JOIN users ON (reviews.user_id = users.user_id) WHERE course_id = ? LIMIT ?;");
-                    $sql->bind_param("ii", $course_id, $NUM_REVIEWS);
+                    $sql->bind_param("ii", $courseID, $NUM_REVIEWS);
                     $sql->execute();
                 
-                    $reviews = $sql->get_result();
-                
-                    if($result === FALSE)
-                    {
-                        //header("Location: ../pages/error.html");
-                        //exit;
-                    }
+                    $results = $sql->get_result();
 
-                    foreach($reviews as $current)
-                    {
-                        echo("
-                        
-                        <div class='review'>
-    
-                        ".$current["username"]."
-    
-                        <div class='rating'>
+                    if($results->num_rows > 0){
 
-                        ");
-
-                        for($j = 0; $j < $current["rating"]; $j++){
-                            echo("<i class='fa-solid fa-star'></i>");
-                        }
-
-                        for($j; $j < 5; $j++)
+                        while($row = $results->fetch_assoc())
                         {
-                            echo("<i class='fa-regular fa-star'></i>");
+
+                            echo("
+                            
+                            <div class='review'>
+        
+                            ".$row["username"]."
+        
+                            <div class='rating'>
+
+                            ");
+
+                            for($j = 0; $j < $row["rating"]; $j++){
+                                echo("<i class='fa-solid fa-star'></i>");
+                            }
+
+                            for($j; $j < 5; $j++)
+                            {
+                                echo("<i class='fa-regular fa-star'></i>");
+                            }
+
+                            echo("
+                            </div>
+            
+                            <div class='review-content'>
+            
+                                ".$row['content']."
+            
+                            </div>
+        
+                            <button type='button' class = 'invisible-button'>
+        
+                                <i class='fa-regular fa-flag'></i> Report this review
+        
+                            </button>
+            
+                        </div>
+                            
+                            
+                            ");
                         }
 
-                        echo("
-                        </div>
-        
-                        <div class='review-content'>
-        
-                            ".$current['content']."
-        
-                        </div>
-    
-                        <button type='button' class = 'invisible-button'>
-    
-                            <i class='fa-regular fa-flag'></i> Report this review
-    
-                        </button>
-        
-                    </div>
-                        
-                        
-                        ");
                     }
                 ?>
 
@@ -360,7 +368,7 @@
                             <label for = 'comment'> Leave a comment: </label>
                             <input type = 'textarea' maxlength = '100' name = 'comment' placeholder = 'Add a comment!'>
         
-                            <input type = 'hidden' name = 'course_id' value = '".$courseID."'>
+                            <input type = 'hidden' name = 'course_id' value = '".$_GET["courseID"]."'>
         
                             <button type='submit' class = 'secondary-button'> Send Review </button>
     
@@ -414,7 +422,6 @@
 
             return false;
         }
-        
         const modules = document.getElementsByClassName('module');
 
         for(let i = 0; i < modules.length; i ++){
@@ -428,13 +435,28 @@
                 var content = this.nextElementSibling;
                 if (content.style.maxHeight) {
                     content.style.maxHeight = null;
+                    content.style.padding = 0;
                 } else {
-                    content.style.maxHeight = content.scrollHeight + 'px';
+                    content.style.padding = "1rem 1rem 1rem 1rem";
+                    content.style.maxHeight = 'calc(2rem + ' + content.scrollHeight + 'px)';
+                    
                 } 
 
             })
         }
 
+        function saveCourse(id, courseID)
+        {
+            $.ajax({
+                url: '../php/save.php',
+                type: 'POST',
+                data: {
+                    'user_id' : id,
+                    'course_id': courseID,
+                }
+            });
+        }
+        
 
     </script>
 
